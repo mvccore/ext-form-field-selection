@@ -1,0 +1,48 @@
+{
+	"name": "mvccore/ext-form-field-selection",
+	"type": "library",
+	"description": "MvcCore - Extension - Form - Field - Selection - form field types - select, country select, checkbox, radio button and checkboxes group.",
+	"keywords": [
+		"mvc", 
+		"mvccore", 
+		"framework", 
+		"extension", 
+		"plugin", 
+		"plug-in", 
+		"ext", 
+		"mvccore", 
+		"form", 
+		"forms", 
+		"webform", 
+		"html5", 
+		"input", 
+		"inputs", 
+		"select", 
+		"selects", 
+		"country",
+		"countires",
+		"states",
+		"country select",
+		"checkbox",
+		"checkboxes",
+		"checkbox group",
+		"groups",
+		"radio",
+		"radios",
+		"radiobutton",
+		"switch"
+	],
+	"license": ["BSD-3-Clause"],
+	"authors": [{
+		"name": "Tom Flidr",
+		"homepage": "https://github.com/tomFlidr"
+	}],
+	"require": {
+		"php": ">=5.3.0",
+		"mvccore/mvccore": "^4.3.1"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	},
+	"minimum-stability": "stable"
+}
