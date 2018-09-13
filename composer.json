@@ -1,7 +1,7 @@
 {
 	"name": "mvccore/ext-form-field-selection",
 	"type": "library",
-	"description": "MvcCore - Extension - Form - Field - Selection - form field types - select, country select, checkbox, radio button and checkboxes group.",
+	"description": "MvcCore - Extension - Form - Field - Selection - form field types - select, country select, checkbox, radio button, color and checkboxes group.",
 	"keywords": [
 		"mvc", 
 		"mvccore", 
@@ -30,7 +30,9 @@
 		"radio",
 		"radios",
 		"radiobutton",
-		"switch"
+		"switch",
+		"color",
+		"colors"
 	],
 	"license": ["BSD-3-Clause"],
 	"authors": [{
