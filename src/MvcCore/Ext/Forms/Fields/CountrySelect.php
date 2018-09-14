@@ -196,7 +196,7 @@ class CountrySelect
 	 * Create new form country `<select>` control instance.
 	 * If there is record under `filter` key in `$cfg` array argument,
 	 * it's used for method $field->FilterOptions();` method.
-	 * @param array $cfg Config array with public properties and it's 
+	 * @param array $cfg Config array with protected properties and it's 
 	 *					 values which you want to configure, presented 
 	 *					 in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
