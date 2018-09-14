@@ -43,7 +43,6 @@ composer require mvccore/ext-form-field-selection
 	- `Submit()`		- called on every instance when form is submitted
 
 ## Examples
-- [**Example - CD Collection (mvccore/example-cdcol)**](https://github.com/mvccore/example-cdcol)
 - [**Application - Questionnaires (mvccore/app-questionnaires)**](https://github.com/mvccore/app-questionnaires)
 
 ## Basic Example
