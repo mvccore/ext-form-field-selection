@@ -54,7 +54,7 @@ $form = (new \MvcCore\Ext\Form($controller))->SetId('job_hunting');
 $jobQual = new \MvcCore\Ext\Forms\Fields\Select;
 $jobQual
 	->SetName('job_qualification')
-	->SetLabel('Job Qualificatio: n')
+	->SetLabel('Job Qualificatio:')
 	->SetOptions([
 		'junior'	=> 'Junior Developer',
 		'senior'	=> 'Senior developer',
