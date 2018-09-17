@@ -63,6 +63,18 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup
 	}
 
 	/**
+	 * Return field specific data for validator.
+	 * @param array $fieldPropsDefaultValidValues 
+	 * @return array
+	 */
+	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
+		return [
+			'multiple'		=> FALSE, 
+			'options'		=> & $this->options, 
+		];
+	}
+
+	/**
 	 * Create new form `<input type="radio">` control instance.
 	 * @param array $cfg Config array with public properties and it's 
 	 *					 values which you want to configure, presented 

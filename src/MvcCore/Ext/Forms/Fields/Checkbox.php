@@ -20,11 +20,11 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   some control chars by default. But validator `SafeString` 
  *				   doesn't prevent SQL injects and more.
  */
-class Checkbox 
-	extends		\MvcCore\Ext\Forms\Field
-	implements	\MvcCore\Ext\Forms\Fields\IVisibleField, 
-				\MvcCore\Ext\Forms\Fields\ILabel, 
-				\MvcCore\Ext\Forms\Fields\IChecked
+class		Checkbox 
+extends		\MvcCore\Ext\Forms\Field
+implements	\MvcCore\Ext\Forms\Fields\IVisibleField, 
+			\MvcCore\Ext\Forms\Fields\ILabel, 
+			\MvcCore\Ext\Forms\Fields\IChecked
 {
 	use \MvcCore\Ext\Forms\Field\Props\VisibleField;
 	use \MvcCore\Ext\Forms\Field\Props\Label;

@@ -23,9 +23,9 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   default and it's own validator to check minimum or 
  *				   maximum count of selected options.
  */
-class CheckboxGroup 
-	extends		\MvcCore\Ext\Forms\FieldsGroup 
-	implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
+class		CheckboxGroup 
+extends		\MvcCore\Ext\Forms\FieldsGroup 
+implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 {
 	use \MvcCore\Ext\Forms\Field\Props\MinMaxOptions;
 	
@@ -143,6 +143,20 @@ class CheckboxGroup
 		// add minimum/maximum options count validator if necessary
 		$this->setFormMinMaxOptions();
 		return $this;
+	}
+
+	/**
+	 * Return field specific data for validator.
+	 * @param array $fieldPropsDefaultValidValues 
+	 * @return array
+	 */
+	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
+		return [
+			'multiple'		=> TRUE, 
+			'options'		=> & $this->options, 
+			'minOptions'	=> $this->minOptions,
+			'maxOptions'	=> $this->maxOptions,
+		];
 	}
 
 	/**

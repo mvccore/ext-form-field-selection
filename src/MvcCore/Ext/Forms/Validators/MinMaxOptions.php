@@ -38,6 +38,15 @@ class MinMaxOptions extends ValueInOptions
 	];
 
 	/**
+	 * Field specific values (camel case) and their validator default values.
+	 * @var array
+	 */
+	protected static $fieldSpecificProperties = [
+		'minOptions'	=> NULL, 
+		'maxOptions'	=> NULL, 
+	];
+
+	/**
 	 * Set up field instance, where is validated value by this 
 	 * validator durring submit before every `Validate()` method call.
 	 * This method is also called once, when validator instance is separately 
@@ -46,30 +55,11 @@ class MinMaxOptions extends ValueInOptions
 	 * @return \MvcCore\Ext\Forms\Validator|\MvcCore\Ext\Forms\IValidator
 	 */
 	public function & SetField (\MvcCore\Ext\Forms\IField & $field) {
-		parent::SetField($field);
-		if (!$field instanceof \MvcCore\Ext\Forms\Fields\IMinMaxOptions) 
-			$this->throwNewInvalidArgumentException(
-				"Field doesn't implement interface `\\MvcCore\\Ext\\Forms\\Fields\\IMinMaxOptions`."
-			);
-		
-		$fieldMinOptions = $field->GetMinOptions();
-		if ($fieldMinOptions !== NULL) {
-			// if validator is added as string - get min property from field:
-			$this->minOptions = $fieldMinOptions;
-		} else if ($this->minOptions !== NULL && $fieldMinOptions === NULL) {
-			// if this validator is added into field as instance - check field if it has min attribute defined:
-			$field->SetMinOptions($this->minOptions);
-		}
-
-		$fieldMaxOptions = $field->GetMaxOptions();
-		if ($fieldMaxOptions !== NULL) {
-			// if validator is added as string - get max property from field:
-			$this->maxOptions = $fieldMaxOptions;
-		} else if ($this->maxOptions !== NULL && $fieldMaxOptions === NULL) {
-			// if this validator is added into field as instance - check field if it has max attribute defined:
-			$field->SetMaxOptions($this->maxOptions);
-		}
-
+		$this->field = & $field;
+		$this->setUpFieldProps(array_merge(
+			self::$fieldSpecificProperties,
+			parent::$fieldSpecificProperties
+		));
 		return $this;
 	}
 	

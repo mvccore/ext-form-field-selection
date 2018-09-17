@@ -18,9 +18,11 @@ namespace MvcCore\Ext\Forms\Validators;
  */
 class		ValueInOptions 
 extends		\MvcCore\Ext\Forms\Validator
-implements	\MvcCore\Ext\Forms\Fields\IMultiple
+implements	\MvcCore\Ext\Forms\Fields\IMultiple,
+			\MvcCore\Ext\Forms\Fields\IOptions
 {
 	use \MvcCore\Ext\Forms\Field\Props\Multiple;
+	use \MvcCore\Ext\Forms\Field\Props\Options;
 
 	/**
 	 * Error message index(es).
@@ -37,44 +39,13 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple
 	];
 
 	/**
-	 * Field has to implement for this validator two methods:
-	 * - `GetAllOptionsKeys()` - To get all keys from options array as `\string[]`
-	 * - `GetMultiple()` - To get boolean flag if there could be more submitted options or not.
-	 * @var \MvcCore\Ext\Forms\Fields\IOptions
+	 * Field specific values (camel case) and their validator default values.
+	 * @var array
 	 */
-	protected $field = NULL;
-
-	/**
-	 * Set up field instance, where is validated value by this 
-	 * validator durring submit before every `Validate()` method call.
-	 * Check if given field implements `\MvcCore\Ext\Forms\Fields\IOptions`
-	 * and `\MvcCore\Ext\Forms\Fields\IMultiple`.
-	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\Forms\IForm $form 
-	 * @return \MvcCore\Ext\Forms\Validator|\MvcCore\Ext\Forms\IValidator
-	 */
-	public function & SetField (\MvcCore\Ext\Forms\IField & $field) {
-		if (!$field instanceof \MvcCore\Ext\Forms\Fields\IOptions) 
-			$this->throwNewInvalidArgumentException(
-				'If field has configured `ValueInOptions` validator, it has to implement '
-				.'interface `\\MvcCore\\Ext\\Forms\\Fields\\IOptions`.'
-			);
-		if (!$field instanceof \MvcCore\Ext\Forms\Fields\IMultiple) 
-			$this->throwNewInvalidArgumentException(
-				'If field has configured `ValueInOptions` validator, it has to implement '
-				.'interface `\\MvcCore\\Ext\\Forms\\Fields\\IMultiple`.'
-			);
-
-		$fieldMultiple = $field->GetMultiple();
-		if ($fieldMultiple !== NULL) {
-			// if validator is added as string - get multiple property from field:
-			$this->multiple = $fieldMultiple;
-		} else if ($this->multiple !== NULL && $fieldMultiple === NULL) {
-			// if this validator is added into field as instance - check field if it has multiple attribute defined:
-			$field->SetMultiple($this->multiple);
-		}
-		
-		return parent::SetField($field);
-	}
+	protected static $fieldSpecificProperties = [
+		'multiple'	=> NULL, 
+		'options'	=> NULL, 
+	];
 
 	/**
 	 * Return array with only submitted values from options keys
@@ -122,10 +93,9 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple
 				? [$rawSubmittedValue] 
 				: [];
 		}
-		$allOptionKeys = $this->field->GetAllOptionsKeys();
 		foreach ($rawSubmittedValues as & $rawSubmittedValueItem) {
 			$rawSubmittedValueItemStr = (string) $rawSubmittedValueItem;
-			if (in_array($rawSubmittedValueItem, $allOptionKeys)) {
+			if (array_key_exists($rawSubmittedValueItemStr, $this->options)) {
 				if ($this->multiple) {
 					$result[] = $rawSubmittedValueItemStr;
 				} else {

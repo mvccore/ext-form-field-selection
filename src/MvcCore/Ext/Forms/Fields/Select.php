@@ -20,13 +20,13 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   validator to check if submitted value is presented in 
  *				   configured options by default.
  */
-class Select 
-	extends		\MvcCore\Ext\Forms\Field 
-	implements	\MvcCore\Ext\Forms\Fields\IVisibleField, 
-				\MvcCore\Ext\Forms\Fields\ILabel,
-				\MvcCore\Ext\Forms\Fields\IMultiple, 
-				\MvcCore\Ext\Forms\Fields\IOptions, 
-				\MvcCore\Ext\Forms\Fields\IMinMaxOptions
+class		Select 
+extends		\MvcCore\Ext\Forms\Field 
+implements	\MvcCore\Ext\Forms\Fields\IVisibleField, 
+			\MvcCore\Ext\Forms\Fields\ILabel,
+			\MvcCore\Ext\Forms\Fields\IMultiple, 
+			\MvcCore\Ext\Forms\Fields\IOptions, 
+			\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 {
 	use \MvcCore\Ext\Forms\Field\Props\VisibleField;
 	use \MvcCore\Ext\Forms\Field\Props\Label;
@@ -129,6 +129,20 @@ class Select
 		);
 		// add minimum/maximum options count validator if necessary
 		$this->setFormMinMaxOptions();
+	}
+
+	/**
+	 * Return field specific data for validator.
+	 * @param array $fieldPropsDefaultValidValues 
+	 * @return array
+	 */
+	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
+		return [
+			'multiple'		=> $this->multiple, 
+			'options'		=> & $this->options, 
+			'minOptions'	=> $this->minOptions,
+			'maxOptions'	=> $this->maxOptions,
+		];
 	}
 
 	/**
