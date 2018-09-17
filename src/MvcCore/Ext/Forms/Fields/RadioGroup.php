@@ -68,10 +68,11 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
-		return [
+		$result = [
 			'multiple'		=> FALSE, 
 			'options'		=> & $this->options, 
 		];
+		return $result;
 	}
 
 	/**

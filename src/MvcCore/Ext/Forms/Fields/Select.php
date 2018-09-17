@@ -137,12 +137,13 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
-		return [
+		$result = [
 			'multiple'		=> $this->multiple, 
 			'options'		=> & $this->options, 
 			'minOptions'	=> $this->minOptions,
 			'maxOptions'	=> $this->maxOptions,
 		];
+		return $result;
 	}
 
 	/**

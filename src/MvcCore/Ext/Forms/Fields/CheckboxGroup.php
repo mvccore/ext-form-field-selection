@@ -151,12 +151,13 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
-		return [
+		$result = [
 			'multiple'		=> TRUE, 
 			'options'		=> & $this->options, 
 			'minOptions'	=> $this->minOptions,
 			'maxOptions'	=> $this->maxOptions,
 		];
+		return $result;
 	}
 
 	/**
