@@ -145,7 +145,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @param string $countryCode 
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
 	 */
-	public function SetValue ($countryCode) {
+	public function & SetValue ($countryCode) {
 		$this->value = strtoupper($countryCode);
 		return $this;
 	}

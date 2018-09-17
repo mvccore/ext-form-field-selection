@@ -40,7 +40,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Render label on right side from `<input type="checkbox" />` element.
 	 * @var string
 	 */
-	protected $labelSide = \MvcCore\Ext\Forms\IField::LABEL_SIDE_RIGHT;
+	#protected $labelSide = \MvcCore\Ext\Forms\IField::LABEL_SIDE_RIGHT;
 
 	/**
 	 * Validators: 
@@ -71,6 +71,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return \MvcCore\Ext\Forms\Fields\Checkbox|\MvcCore\Ext\Forms\IField
 	 */
 	public function __construct(array $cfg = []) {
+		$this->labelSide = \MvcCore\Ext\Forms\IField::LABEL_SIDE_RIGHT;
 		parent::__construct($cfg);
 		static::$templates = (object) array_merge(
 			(array) parent::$templates, 
