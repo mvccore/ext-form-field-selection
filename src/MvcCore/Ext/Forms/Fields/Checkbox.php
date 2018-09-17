@@ -107,7 +107,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$viewClass = $this->form->GetViewClass();
 		if ($this->checked === NULL) 
 			$this->checked = static::GetCheckedByValue($this->value);
-		$valueStr = htmlspecialchars($this->value, ENT_QUOTES);
+		$valueStr = htmlspecialchars_decode(htmlspecialchars($this->value, ENT_QUOTES), ENT_QUOTES);
 		if (!$valueStr) 
 			$valueStr = 'true';
 		if ($this->checked) 

@@ -262,7 +262,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			$result .= $this->renderControlOptionsAdvanced(
 				NULL, [
 					'value'	=> '',
-					'text'	=> htmlspecialchars($this->nullOptionText, ENT_QUOTES),
+					'text'	=> htmlspecialchars_decode(htmlspecialchars($this->nullOptionText, ENT_QUOTES), ENT_QUOTES),
 					'attrs'	=> ['disabled' => 'disabled']
 				], $valueTypeIsArray
 			);
@@ -300,9 +300,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			: $this->value === $value ;
 		$formViewClass = $this->form->GetViewClass();
 		return $formViewClass::Format(static::$templates->option, [
-			'value'		=> htmlspecialchars($value, ENT_QUOTES),
+			'value'		=> htmlspecialchars_decode(htmlspecialchars($value, ENT_QUOTES), ENT_QUOTES),
 			'selected'	=> $selected ? ' selected="selected"' : '',
-			'text'		=> htmlspecialchars($text, ENT_QUOTES),
+			'text'		=> htmlspecialchars_decode(htmlspecialchars($text, ENT_QUOTES), ENT_QUOTES),
 			'class'		=> '', // to fill prepared template control place for attribute class with empty string
 			'attrs'		=> '', // to fill prepared template control place for other attributes with empty string
 		]);
@@ -375,11 +375,11 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			? ' ' . $formViewClass::RenderAttrs($optionData['attrs']) 
 			: '';
 		return $formViewClass::Format(static::$templates->option, [
-			'value'		=> htmlspecialchars($valueToRender, ENT_QUOTES),
+			'value'		=> htmlspecialchars_decode(htmlspecialchars($valueToRender, ENT_QUOTES), ENT_QUOTES),
 			'selected'	=> $selected ? ' selected="selected"' : '',
 			'class'		=> $classStr,
 			'attrs'		=> $attrsStr,
-			'text'		=> htmlspecialchars($optionData['text'], ENT_QUOTES),
+			'text'		=> htmlspecialchars_decode(htmlspecialchars($optionData['text'], ENT_QUOTES), ENT_QUOTES),
 		]);
 	}
 }

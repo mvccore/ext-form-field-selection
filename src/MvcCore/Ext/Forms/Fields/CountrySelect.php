@@ -223,7 +223,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 			$result .= $this->renderControlOptionsAdvanced(
 				'', [
 					'value'	=> '',
-					'text'	=> htmlspecialchars($this->nullOptionText, ENT_QUOTES),
+					'text'	=> htmlspecialchars_decode(htmlspecialchars($this->nullOptionText, ENT_QUOTES), ENT_QUOTES),
 					'class'	=> 'country-none',
 					'attrs'	=> ['disabled' => 'disabled']
 				], $valueTypeIsArray
@@ -233,8 +233,8 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 			// advanced configuration with key, text, cs class, and any other attributes for single option tag
 			$result .= $this->renderControlOptionsAdvanced($key, [
 				'class'	=> 'country-' . strtolower($key),
-				'text'	=> htmlspecialchars($value, ENT_QUOTES),
-				'value'	=> htmlspecialchars($key, ENT_QUOTES),
+				'text'	=> htmlspecialchars_decode(htmlspecialchars($value, ENT_QUOTES), ENT_QUOTES),
+				'value'	=> htmlspecialchars_decode(htmlspecialchars($key, ENT_QUOTES), ENT_QUOTES),
 			], $valueTypeIsArray);
 		}
 		return $result;
