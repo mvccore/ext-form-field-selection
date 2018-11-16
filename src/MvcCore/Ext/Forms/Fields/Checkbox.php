@@ -85,7 +85,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Do not use this method event if you don't develop any form field.
 	 * - Set up field render mode if not defined.
 	 * - Translate label text if necessary.
-	 * - Set up tabindex if necessary.
+	 * - Set up tab-index if necessary.
 	 * @return void
 	 */
 	public function PreDispatch () {

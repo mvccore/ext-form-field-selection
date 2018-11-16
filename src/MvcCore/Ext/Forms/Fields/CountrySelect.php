@@ -39,7 +39,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	/**
 	 * All existing country codes and english state names.
 	 * Keys are country codes in upper case, values are english state names.
-	 * this array is automaticly used to render all select options. If there 
+	 * this array is automatically used to render all select options. If there 
 	 * is configured any filtering to filter displayed countries, only selected
 	 * states are rendered. Use method `$field->FilterOptions();` or constructor
 	 * `$cfg` array with record `filter` as array with upper case country codes 
@@ -141,7 +141,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	}
 
 	/**
-	 * Set country code value. Given country code will be automaticly converted to uppercase.
+	 * Set country code value. Given country code will be automatically converted to upper case.
 	 * @param string $countryCode 
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
 	 */
@@ -162,7 +162,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	/**
 	 * Set all existing country codes as array with keys as upper cased 
 	 * country codes and values as not translated english state names.
-	 * Given value will be automaticly used as select options, if there 
+	 * Given value will be automatically used as select options, if there 
 	 * will not be configured any filtering to filter displayed countries.
 	 * @param array $allOptions 
 	 */
@@ -171,10 +171,10 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	}
 
 	/**
-	 * Filter displayed countries to not show everytime all eisting 
-	 * countries in the world. Given country codes will be automaticly
+	 * Filter displayed countries to not show every time all existing 
+	 * countries in the world. Given country codes will be automatically
 	 * converted to upper case.
-	 * @param \string[] $countryCodes Array of country codes strings to rendere only, not to render all existing states.
+	 * @param \string[] $countryCodes Array of country codes strings to rendered only, not to render all existing states.
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
 	 */
 	public function & FilterOptions ($countryCodes = []) {

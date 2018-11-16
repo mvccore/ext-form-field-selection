@@ -15,7 +15,7 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: define getters and setters for field property `checked`
- *				   and method `GetCheckedByValue()` to automaticly get 
+ *				   and method `GetCheckedByValue()` to automatically get 
  *				   `checked` boolean from any field value.
  * Interface for classes:
  * - `\MvcCore\Ext\Forms\Fields\Checkbox`
@@ -24,7 +24,7 @@ interface IChecked
 {
 	/**
 	 * Set `TRUE` to rendered field as checked, `FALSE` otherwise.
-	 * If not set, checked flag will be automaticly resolved by field value
+	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked
 	 * @param bool $checked 
@@ -34,7 +34,7 @@ interface IChecked
 
 	/**
 	 * Get `TRUE` if field is rendered as checked, `FALSE` otherwise.
-	 * If not set, checked flag will be automaticly resolved by field value
+	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked
 	 * @return bool|NULL

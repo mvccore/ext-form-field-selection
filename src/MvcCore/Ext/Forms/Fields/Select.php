@@ -153,7 +153,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Set up field properties before rendering process.
 	 * - Set up field render mode if not defined.
 	 * - Translate label text if necessary.
-	 * - Set up tabindex if necessary.
+	 * - Set up tab-index if necessary.
 	 * - Translate all options if necessary, including null option text if necessary.
 	 * @return void
 	 */
@@ -288,7 +288,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	
 	/**
 	 * Render select `<option>` tag with inner visible text and attributes: `value` and
-	 * `selected` (optionaly) by given `$value` string for value to select and `$text` 
+	 * `selected` (optionally) by given `$value` string for value to select and `$text` 
 	 * string for visible text.
 	 * @param string|NULL $value 
 	 * @param string $text 
@@ -348,7 +348,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 
 	/**
 	 * Render select `<option>` tag with inner visible text and attributes: `value`, 
-	 * `selected` (optionaly), `class` (optionaly) and any other optional attributes if configured
+	 * `selected` (optionally), `class` (optionally) and any other optional attributes if configured
 	 * by given `$value` string and `$optionData` array with additional option configuration data.
 	 * @param string|NULL $value 
 	 * @param mixed $optionData 

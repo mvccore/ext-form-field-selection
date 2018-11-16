@@ -17,14 +17,14 @@ namespace MvcCore\Ext\Forms\Field\Props;
  * Trait for classes:
  * - `\MvcCore\Ext\Forms\Fields\Checkbox`
  * Trait contains protected property `checked` with it's getter and setter
- * and public static method to recognize `checked` boolean automaticly from 
+ * and public static method to recognize `checked` boolean automatically from 
  * given field `$value`.
  */
 trait Checked
 {
 	/**
 	 * If `TRUE`, field will be rendered as checked, `FALSE` otherwise.
-	 * If not set, checked flag will be automaticly resolved by field value
+	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked
 	 * @var bool|NULL
@@ -33,7 +33,7 @@ trait Checked
 
 	/**
 	 * Set `TRUE` to rendered field as checked, `FALSE` otherwise.
-	 * If not set, checked flag will be automaticly resolved by field value
+	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked
 	 * @param bool $checked 
@@ -46,7 +46,7 @@ trait Checked
 
 	/**
 	 * Get `TRUE` if field is rendered as checked, `FALSE` otherwise.
-	 * If not set, checked flag will be automaticly resolved by field value
+	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked
 	 * @return bool|NULL
