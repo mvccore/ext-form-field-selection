@@ -14,7 +14,7 @@
 namespace MvcCore\Ext\Forms\Fields;
 
 /**
- * Responsibility: init, predispatch and render group of `input`s 
+ * Responsibility: init, pre-dispatch and render group of `input`s 
  *				   with `type` as `checkbox`, with configuration to 
  *				   select minimum and maximum count of values and 
  *				   required option. 

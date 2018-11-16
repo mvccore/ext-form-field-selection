@@ -14,7 +14,7 @@
 namespace MvcCore\Ext\Forms\Fields;
 
 /**
- * Responsibility: init, predispatch and render `<input>` HTML element 
+ * Responsibility: init, pre-dispatch and render `<input>` HTML element 
  *				   with `type` attribute `color` to select hexadecimal 
  *				   color with no transparency. `Color` field has it's own 
  *				   validator for hexadecimal color without transparency 

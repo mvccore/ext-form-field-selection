@@ -14,7 +14,7 @@
 namespace MvcCore\Ext\Forms\Fields;
 
 /**
- * Responsibility: init, predispatch and render `<select>` HTML element 
+ * Responsibility: init, pre-dispatch and render `<select>` HTML element 
  *				   as rollout menu for single option select or as options 
  *				   list for multiple selection with options as all existing 
  *				   world states or only filtered world states.

@@ -14,7 +14,7 @@
 namespace MvcCore\Ext\Forms\Fields;
 
 /**
- * Responsibility: init, predispatch and render `<input type="radio">` HTML 
+ * Responsibility: init, pre-dispatch and render `<input type="radio">` HTML 
  *				   element as radio buttons menu for single option selection.
  *				   `RadioGroup` field has it's own validator to check if 
  *				   submitted value is presented in configured options by default.
