@@ -68,7 +68,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 *					 values which you want to configure, presented 
 	 *					 in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\Checkbox|\MvcCore\Ext\Forms\IField
+	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
 		$this->labelSide = \MvcCore\Ext\Forms\IField::LABEL_SIDE_RIGHT;
@@ -113,7 +113,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			$valueStr = 'true';
 		if ($this->checked) 
 			$valueStr .= '" checked="checked';
-		return $viewClass::Format(static::$templates->control, [
+		/** @var $templates \stdClass */
+		$templates = static::$templates;
+		return $viewClass::Format($templates->control, [
 			'id'		=> $this->id,
 			'name'		=> $this->name,
 			'value'		=> $valueStr,

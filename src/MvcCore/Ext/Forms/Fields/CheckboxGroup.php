@@ -68,7 +68,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * `$field->jsSupportingFile` property to define path to your javascript file
 	 * relatively from configured `\MvcCore\Ext\Form::SetJsSupportFilesRootDir(...);`
 	 * value. Than you have to add supporting javascript file path into field form 
-	 * in `$field->PreDispatch();` method to render those files immediatelly after form
+	 * in `$field->PreDispatch();` method to render those files immediately after form
 	 * (once) or by any external custom assets renderer configured by:
 	 * `$form->SetJsSupportFilesRenderer(...);` method.
 	 * Or you can add your custom supporting javascript files into response by your 
@@ -85,7 +85,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * define path to your javascript file relatively from configured 
 	 * `\MvcCore\Ext\Form::SetJsSupportFilesRootDir(...);` value. 
 	 * Than you have to add supporting javascript file path into field form 
-	 * in `$field->PreDispatch();` method to render those files immediatelly after form
+	 * in `$field->PreDispatch();` method to render those files immediately after form
 	 * (once) or by any external custom assets renderer configured by:
 	 * `$form->SetJsSupportFilesRenderer(...);` method.
 	 * Or you can add your custom supporting javascript files into response by your 
@@ -115,7 +115,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 *					 values which you want to configure, presented 
 	 *					 in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\CheckboxGroup|\MvcCore\Ext\Forms\IField
+	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
 		parent::__construct($cfg);
@@ -139,6 +139,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetForm (\MvcCore\Ext\Forms\IForm & $form) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		parent::SetForm($form);
 		// add minimum/maximum options count validator if necessary
 		$this->setFormMinMaxOptions();
@@ -217,7 +218,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	/**
 	 * Complete and return semi-finished strings for rendering by field key and option:
 	 * - Label text string.
-	 * - Label attributes string string.
+	 * - Label attributes string.
 	 * - Control attributes string.
 	 * @param string	   $key
 	 * @param string|array $option

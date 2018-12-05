@@ -40,6 +40,7 @@ trait Checked
 	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetChecked ($checked = TRUE) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->checked = $checked;
 		return $this;
 	}

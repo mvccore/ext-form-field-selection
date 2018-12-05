@@ -70,6 +70,7 @@ trait MinMaxOptions
 	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetMinOptions ($minOptions) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->minOptions = $minOptions;
 		return $this;
 	}
@@ -90,6 +91,7 @@ trait MinMaxOptions
 	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetMaxOptions ($maxOptions) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->maxOptions = $maxOptions;
 		return $this;
 	}
@@ -110,6 +112,7 @@ trait MinMaxOptions
 	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetRequiredBubbleMessage ($requiredBubbleMessage) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->requiredBubbleMessage = $requiredBubbleMessage;
 		return $this;
 	}
@@ -128,6 +131,7 @@ trait MinMaxOptions
 	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetMinOptionsBubbleMessage ($minOptionsBubbleMessage) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->minOptionsBubbleMessage = $minOptionsBubbleMessage;
 		return $this;
 	}
@@ -146,6 +150,7 @@ trait MinMaxOptions
 	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetMaxOptionsBubbleMessage ($maxOptionsBubbleMessage) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->maxOptionsBubbleMessage = $maxOptionsBubbleMessage;
 		return $this;
 	}

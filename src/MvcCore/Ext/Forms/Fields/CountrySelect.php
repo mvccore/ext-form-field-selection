@@ -15,7 +15,7 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render `<select>` HTML element 
- *				   as rollout menu for single option select or as options 
+ *				   as roll-out menu for single option select or as options 
  *				   list for multiple selection with options as all existing 
  *				   world states or only filtered world states.
  *				   `CountrySelect` field has it's own validator to check if 
@@ -31,14 +31,14 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	protected $type = 'country-select';
 	
 	/**
-	 * Translate english state names. Default value is `FALSE`.
+	 * Translate English state names. Default value is `FALSE`.
 	 * @var bool
 	 */
 	protected $translate = FALSE;
 	
 	/**
-	 * All existing country codes and english state names.
-	 * Keys are country codes in upper case, values are english state names.
+	 * All existing country codes and English state names.
+	 * Keys are country codes in upper case, values are English state names.
 	 * this array is automatically used to render all select options. If there 
 	 * is configured any filtering to filter displayed countries, only selected
 	 * states are rendered. Use method `$field->FilterOptions();` or constructor
@@ -146,13 +146,14 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetValue ($countryCode) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->value = strtoupper($countryCode);
 		return $this;
 	}
 
 	/**
 	 * Get all existing country codes as array with keys as upper cased 
-	 * country codes and values as not translated english state names.
+	 * country codes and values as not translated English state names.
 	 * @return array
 	 */
 	public static function & GetAllOptions () {
@@ -161,7 +162,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 
 	/**
 	 * Set all existing country codes as array with keys as upper cased 
-	 * country codes and values as not translated english state names.
+	 * country codes and values as not translated English state names.
 	 * Given value will be automatically used as select options, if there 
 	 * will not be configured any filtering to filter displayed countries.
 	 * @param array $allOptions 
@@ -178,6 +179,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
 	 */
 	public function & FilterOptions ($countryCodes = []) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$options = [];
 		foreach ($countryCodes as $countryCode) {
 			$countryCode = strtoupper($countryCode);
@@ -199,7 +201,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 *					 values which you want to configure, presented 
 	 *					 in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
+	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
 		parent::__construct($cfg);
@@ -219,7 +221,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 		$result = '';
 		$valueTypeIsArray = gettype($this->value) == 'array';
 		if ($this->nullOptionText !== NULL && strlen((string) $this->nullOptionText) > 0) {
-			// advanced configuration with key, text, cs class, and any other attributes for single option tag
+			// advanced configuration with key, text, CSS class, and any other attributes for single option tag
 			$result .= $this->renderControlOptionsAdvanced(
 				'', [
 					'value'	=> '',
@@ -230,7 +232,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 			);
 		}
 		foreach ($this->options as $key => & $value) {
-			// advanced configuration with key, text, cs class, and any other attributes for single option tag
+			// advanced configuration with key, text, CSS class, and any other attributes for single option tag
 			$result .= $this->renderControlOptionsAdvanced($key, [
 				'class'	=> 'country-' . strtolower($key),
 				'text'	=> htmlspecialchars_decode(htmlspecialchars($value, ENT_QUOTES), ENT_QUOTES),

@@ -56,9 +56,10 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup
 	 * Field group is always not marked as multiple value control. This function 
 	 * does nothing, because multiple option has to be `FALSE` for radio group instance all time.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple
-	 * @return \MvcCore\Ext\Forms\FieldsGroup|\MvcCore\Ext\Forms\IFieldsGroup
+	 * @return \MvcCore\Ext\Forms\FieldsGroup|\MvcCore\Ext\Forms\IFieldsGroup|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetMultiple ($multiple = TRUE) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		return $this;
 	}
 
@@ -81,7 +82,7 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup
 	 *					 values which you want to configure, presented 
 	 *					 in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\RadioGroup|\MvcCore\Ext\Forms\IField
+	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
 		parent::__construct($cfg);

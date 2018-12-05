@@ -25,7 +25,7 @@ trait NullOptionText
 	 * when no option is selected yet. Typically: `--- please select an option ---`.
 	 * It's rendered every time this placeholder has any text value, doesn't matter,
 	 * if `<select>` tag has already any value selected or not yet . It's rendered usually 
-	 * as first `<option>` sublemlement with an empty value, as `disabled` and `selected` 
+	 * as first `<option>` sub-element with an empty value, as `disabled` and `selected` 
 	 * `<option>` tag. `NULL` value means no placeholder `<option>` tag will be rendered.
 	 * @var string|NULL
 	 */
@@ -36,12 +36,13 @@ trait NullOptionText
 	 * when no option is selected yet. Typically: `--- please select an option ---`.
 	 * It's rendered every time this placeholder has any text value, doesn't matter,
 	 * if `<select>` tag has already any value selected or not yet . It's rendered usually 
-	 * as first `<option>` sublemlement with an empty value, as `disabled` and `selected` 
+	 * as first `<option>` sub-element with an empty value, as `disabled` and `selected` 
 	 * `<option>` tag. `NULL` value means no placeholder `<option>` tag will be rendered.
 	 * @param string $nullOptionText 
-	 * @return \MvcCore\Ext\Forms\Field
+	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetNullOptionText ($nullOptionText) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->nullOptionText = $nullOptionText;
 		return $this;
 	}
@@ -51,7 +52,7 @@ trait NullOptionText
 	 * when no option is selected yet. Typically: `--- please select an option ---`.
 	 * It's rendered every time this placeholder has any text value, doesn't matter,
 	 * if `<select>` tag has already any value selected or not yet . It's rendered usually 
-	 * as first `<option>` sublemlement with an empty value, as `disabled` and `selected` 
+	 * as first `<option>` sub-element with an empty value, as `disabled` and `selected` 
 	 * `<option>` tag. `NULL` value means no placeholder `<option>` tag will be rendered.
 	 * @return string|NULL
 	 */

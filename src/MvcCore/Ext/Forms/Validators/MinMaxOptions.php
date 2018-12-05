@@ -55,6 +55,7 @@ class MinMaxOptions extends ValueInOptions
 	 * @return \MvcCore\Ext\Forms\Validator|\MvcCore\Ext\Forms\IValidator
 	 */
 	public function & SetField (\MvcCore\Ext\Forms\IField & $field) {
+		/** @var $this \MvcCore\Ext\Forms\IValidator */
 		$this->field = & $field;
 		$this->setUpFieldProps(array_merge(
 			self::$fieldSpecificProperties,
@@ -65,8 +66,8 @@ class MinMaxOptions extends ValueInOptions
 	
 	/**
 	 * Validate raw user input with maximum options count check.
-  * @param string|array $rawSubmittedValue Raw submitted value from user.
-	 * @return string|NULL Safe submitted value or `NULL` if not possible to return safe value.
+	 * @param string|array $rawSubmittedValue Raw submitted value from user.
+	 * @return \string[]|NULL Safe submitted value or `NULL` if not possible to return safe value.
 	 */
 	public function Validate ($rawSubmittedValue) {
 		$rawSubmittedArr = [];

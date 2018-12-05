@@ -15,7 +15,7 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render `<select>` HTML element 
- *				   as rollout menu for single option select or as options 
+ *				   as roll-out menu for single option select or as options 
  *				   list for multiple selection. `Select` field has it's own 
  *				   validator to check if submitted value is presented in 
  *				   configured options by default.
@@ -88,6 +88,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetValue ($value) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->value = $value;
 		return $this;
 	}
@@ -98,7 +99,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 *					 values which you want to configure, presented 
 	 *					 in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
+	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
 		parent::__construct($cfg);
@@ -123,6 +124,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
 	 */
 	public function & SetForm (\MvcCore\Ext\Forms\IForm & $form) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
 		parent::SetForm($form);
 		if (!$this->options) $this->throwNewInvalidArgumentException(
 			'No `options` property defined.'
@@ -172,7 +174,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 					$options[$key] = $form->Translate((string)$value);
 			} else if ($valueType == 'array') {
 				if (isset($value['options']) && gettype($value['options']) == 'array') {
-					// optgroup options configuration
+					// `<optgroup>` options configuration
 					$this->preDispatchTranslateOptionOptGroup($value);
 				} else {
 					// advanced configuration with key, text, css class, and any other attributes for single option tag
@@ -204,7 +206,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 				if ($groupOption) 
 					$optionsGroup['options'][$key] = $form->Translate((string) $groupOption);
 			} else if ($groupOptionType == 'array') {
-				// advanced configuration with key, text, cs class, and any other attributes for single option tag
+				// advanced configuration with key, text, CSS class, and any other attributes for single option tag
 				$valueText = isset($groupOption['text']) ? $groupOption['text'] : $key;
 				if ($valueText) $groupOption['text'] = $this->form->Translate((string) $valueText);
 			}
@@ -238,7 +240,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			$attrsStr .= (strlen($attrsStr) > 0 ? ' ' : '')
 				. 'form="' . $this->form->GetId() . '"';
 		$formViewClass = $this->form->GetViewClass();
-		return $formViewClass::Format(static::$templates->control, [
+		/** @var $templates \stdClass */
+		$templates = static::$templates;
+		return $formViewClass::Format($templates->control, [
 			'id'		=> $this->id,
 			'name'		=> $name,
 			'size'		=> $size,
@@ -275,7 +279,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 				$result .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
 			} else if ($valueType == 'array') {
 				if (isset($value['options']) && gettype($value['options']) == 'array') {
-					// optgroup options configuration
+					// `<optgroup>` options configuration
 					$result .= $this->renderControlOptionsGroup($value, $valueTypeIsArray);
 				} else {
 					// advanced configuration with key, text, cs class, and any other attributes for single option tag
@@ -300,7 +304,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			? in_array($value, $this->value)
 			: $this->value === $value ;
 		$formViewClass = $this->form->GetViewClass();
-		return $formViewClass::Format(static::$templates->option, [
+		/** @var $templates \stdClass */
+		$templates = static::$templates;
+		return $formViewClass::Format($templates->option, [
 			'value'		=> htmlspecialchars_decode(htmlspecialchars($value, ENT_QUOTES), ENT_QUOTES),
 			'selected'	=> $selected ? ' selected="selected"' : '',
 			'text'		=> htmlspecialchars_decode(htmlspecialchars($text, ENT_QUOTES), ENT_QUOTES),
@@ -338,7 +344,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$attrsStr = isset($optionsGroup['attrs']) 
 			? ' ' . $formViewClass::RenderAttrs($optionsGroup['attrs']) 
 			: '';
-		return $formViewClass::Format(static::$templates->optionsGroup, [
+		/** @var $templates \stdClass */
+		$templates = static::$templates;
+		return $formViewClass::Format($templates->optionsGroup, [
 			'options'	=> $optionsStr,
 			'label'		=> ' label="' . $label. '"',
 			'class'		=> $classStr,
@@ -375,7 +383,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$attrsStr = isset($optionData['attrs']) 
 			? ' ' . $formViewClass::RenderAttrs($optionData['attrs']) 
 			: '';
-		return $formViewClass::Format(static::$templates->option, [
+		/** @var $templates \stdClass */
+		$templates = static::$templates;
+		return $formViewClass::Format($templates->option, [
 			'value'		=> htmlspecialchars_decode(htmlspecialchars($valueToRender, ENT_QUOTES), ENT_QUOTES),
 			'selected'	=> $selected ? ' selected="selected"' : '',
 			'class'		=> $classStr,
