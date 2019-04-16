@@ -131,6 +131,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		);
 		// add minimum/maximum options count validator if necessary
 		$this->setFormMinMaxOptions();
+		return $this;
 	}
 
 	/**
@@ -166,6 +167,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$form = & $this->form;
 		if ($this->nullOptionText !== NULL && $this->nullOptionText !== '')
 			$this->nullOptionText = $form->translate($this->nullOptionText);
+		if (!$this->translateOptions) return;
 		foreach ($this->options as $key => & $value) {
 			$valueType = gettype($value);
 			if ($valueType == 'string') {
