@@ -210,7 +210,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			} else if ($groupOptionType == 'array') {
 				// advanced configuration with key, text, CSS class, and any other attributes for single option tag
 				$valueText = isset($groupOption['text']) ? $groupOption['text'] : $key;
-				if ($valueText) $groupOption['text'] = $this->form->Translate((string) $valueText);
+				if ($valueText) $groupOption['text'] = $form->Translate((string) $valueText);
 			}
 		}
 	}
