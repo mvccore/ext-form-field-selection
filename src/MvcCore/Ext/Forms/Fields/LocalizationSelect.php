@@ -37,14 +37,15 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	protected $translate = FALSE;
 	
 	/**
-	 * All existing language and country codes and English localizations names.
-	 * Keys are language and country codes in lower and upper case, values are 
-	 * English localizations names. This array is automatically used to render 
-	 * all select options. If there is configured any filtering to filter 
-	 * displayed localizations, only selected localizations are rendered. Use 
-	 * method `$field->FilterOptions();` or constructor `$cfg` array with record 
-	 * `filter` as array with lower and upper case language and country codes 
-	 * array to render only.
+	 * All existing localization codes and English localizations names.
+	 * Keys are language codes in lower case with optional alphabet after 
+	 * underscore, than there is another underscore and country code in upper 
+	 * case, values are English localizations names. This array is automatically 
+	 * used to render all select options. If there is configured any filtering 
+	 * to filter displayed localizations, only selected localizations are 
+	 * rendered. Use method `$field->FilterOptions([...]);` or constructor `$cfg` 
+	 * array with record `filter` as array with localization codes array to 
+	 * render only.
 	 * @var array
 	 */
 	protected static $allOptions = [
@@ -269,7 +270,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	];
 
 	/**
-	 * Return language and country code in lower and upper case, separated by underscore.
+	 * Return localization code, language and locale code separated by underscore.
 	 * @return string
 	 */
 	public function GetValue () {
@@ -277,20 +278,21 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	}
 
 	/**
-	 * Set language and country code value. Given country code will be automatically 
-	 converted to upper case.
-	 * @param string $countryCode 
-	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
+	 * Set localization value (language and country code separated by underscore). 
+	 * If there is given localization code separated by dash, it's automatically
+	 * replaced by underscore.
+	 * @param string $localizationCode 
+	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetValue ($countryCode) {
+	public function & SetValue ($localizationCode) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
-		$this->value = strtoupper($countryCode);
+		$this->value = static::normalizeLocalizationCode($localizationCode);
 		return $this;
 	}
 
 	/**
-	 * Get all existing country codes as array with keys as upper cased 
-	 * country codes and values as not translated English state names.
+	 * Get all existing localization codes as array with keys as localization 
+	 * codes and values as not translated English localization names.
 	 * @return array
 	 */
 	public static function & GetAllOptions () {
@@ -298,10 +300,10 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	}
 
 	/**
-	 * Set all existing country codes as array with keys as upper cased 
-	 * country codes and values as not translated English state names.
+	 * Set all existing localization codes as array with keys as localization 
+	 * codes and values as not translated English localization names.
 	 * Given value will be automatically used as select options, if there 
-	 * will not be configured any filtering to filter displayed countries.
+	 * will not be configured any filtering to filter displayed localizations.
 	 * @param array $allOptions 
 	 */
 	public static function SetAllOptions ($allOptions = []) {
@@ -309,17 +311,17 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	}
 
 	/**
-	 * Filter displayed countries to not show every time all existing 
-	 * countries in the world. Given country codes will be automatically
+	 * Filter displayed localizations to not show every time all existing 
+	 * localizations in the world. Given localizations codes will be automatically
 	 * converted to upper case.
-	 * @param \string[] $localizationsCodes Array of languages and country codes strings to rendered only, not to render all existing states.
-	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
+	 * @param \string[] $localizationsCodes Array of localization codes strings to rendered only, not to render all existing localizations.
+	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
 	 */
 	public function & FilterOptions ($localizationsCodes = []) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		$options = [];
 		foreach ($localizationsCodes as $localizationCode) {
-			//$localizationCode = strtoupper($localizationCode);
+			$localizationCode = static::normalizeLocalizationCode($localizationCode);
 			if (isset(static::$allOptions[$localizationCode])) {
 				$options[$localizationCode] = static::$allOptions[$localizationCode];
 			} else {
@@ -331,9 +333,9 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	}
 	
 	/**
-	 * Create new form country `<select>` control instance.
+	 * Create new form localization `<select>` control instance.
 	 * If there is record under `filter` key in `$cfg` array argument,
-	 * it's used for method $field->FilterOptions();` method.
+	 * it's used for method $field->FilterOptions([...]);` method.
 	 * @param array $cfg Config array with protected properties and it's 
 	 *					 values which you want to configure, presented 
 	 *					 in camel case properties names syntax.
@@ -344,6 +346,27 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 		parent::__construct($cfg);
 		if (isset($cfg['filter'])) 
 			$this->FilterOptions($cfg['filter']);
+	}
+
+	/**
+	 * This INTERNAL method is called from `\MvcCore\Ext\Form` after field
+	 * is added into form instance by `$form->AddField();` method. Do not 
+	 * use this method even if you don't develop any form field.
+	 * - Check if field has any name, which is required.
+	 * - Set up form and field id attribute by form id and field name.
+	 * - Set up required.
+	 * - Set up translate boolean property.
+	 * - Check if there are any select options in `$this->options`.
+	 * - Set up select minimum/maximum options to select if necessary.
+	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\Forms\IForm $form
+	 * @throws \InvalidArgumentException
+	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
+	 */
+	public function & SetForm (\MvcCore\Ext\Forms\IForm & $form) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
+		if (!$this->options) 
+			$this->options = static::$allOptions;
+		return parent::SetForm($form);
 	}
 
 	/**
@@ -377,5 +400,24 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 			], $valueTypeIsArray);
 		}
 		return $result;
+	}
+
+	/**
+	 * Normalize localization code into the right form with underscore separator:
+	 * - lower language code
+	 * - (optional alphabetical code in pascal case)
+	 * - upper case country code
+	 * @param string $rawLocalizationCode 
+	 * @return string
+	 */
+	protected static function normalizeLocalizationCode ($rawLocalizationCode) {
+		$explodedValues = explode('_', str_replace('-', '_', $rawLocalizationCode));
+		$explodedValuesCount = count($explodedValues);
+		if ($explodedValuesCount === 3) 
+			$explodedValues[1] = ucfirst(strtolower($explodedValues[1]));
+		$explodedValues[0] = strtolower($explodedValues[0]);
+		$lastItemIndex = $explodedValuesCount - 1;
+		$explodedValues[$lastItemIndex] = mb_strtoupper($explodedValues[$lastItemIndex]);
+		return implode('_', $explodedValues);
 	}
 }

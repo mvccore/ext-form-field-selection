@@ -210,6 +210,27 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	}
 
 	/**
+	 * This INTERNAL method is called from `\MvcCore\Ext\Form` after field
+	 * is added into form instance by `$form->AddField();` method. Do not 
+	 * use this method even if you don't develop any form field.
+	 * - Check if field has any name, which is required.
+	 * - Set up form and field id attribute by form id and field name.
+	 * - Set up required.
+	 * - Set up translate boolean property.
+	 * - Check if there are any select options in `$this->options`.
+	 * - Set up select minimum/maximum options to select if necessary.
+	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\Forms\IForm $form
+	 * @throws \InvalidArgumentException
+	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
+	 */
+	public function & SetForm (\MvcCore\Ext\Forms\IForm & $form) {
+		/** @var $this \MvcCore\Ext\Forms\IField */
+		if (!$this->options) 
+			$this->options = static::$allOptions;
+		return parent::SetForm($form);
+	}
+
+	/**
 	 * This INTERNAL method is called from `\MvcCore\Ext\Forms\Field\Rendering` 
 	 * in rendering process. Do not use this method even if you don't develop any form field.
 	 * 
