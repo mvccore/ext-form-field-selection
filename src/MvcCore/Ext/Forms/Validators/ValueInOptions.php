@@ -93,9 +93,10 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 				? [$rawSubmittedValue] 
 				: [];
 		}
+		$flattenOptions = self::GetFlattenOptions($this->options);
 		foreach ($rawSubmittedValues as & $rawSubmittedValueItem) {
 			$rawSubmittedValueItemStr = (string) $rawSubmittedValueItem;
-			if (array_key_exists($rawSubmittedValueItemStr, $this->options)) {
+			if (array_key_exists($rawSubmittedValueItemStr, $flattenOptions)) {
 				if ($this->multiple) {
 					$result[] = $rawSubmittedValueItemStr;
 				} else {
@@ -109,4 +110,6 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 			$this->multiple
 		];
 	}
+
+	
 }

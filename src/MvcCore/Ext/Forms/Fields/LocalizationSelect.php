@@ -379,7 +379,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	 */
 	public function RenderControlOptions () {
 		$result = '';
-		$valueTypeIsArray = gettype($this->value) == 'array';
+		$valueTypeIsArray = is_array($this->value);
 		if ($this->nullOptionText !== NULL && strlen((string) $this->nullOptionText) > 0) {
 			// advanced configuration with key, text, CSS class, and any other attributes for single option tag
 			$result .= $this->renderControlOptionsAdvanced(

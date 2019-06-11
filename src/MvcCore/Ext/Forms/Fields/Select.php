@@ -168,14 +168,13 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		if ($this->nullOptionText !== NULL && $this->nullOptionText !== '')
 			$this->nullOptionText = $form->translate($this->nullOptionText);
 		if (!$this->translateOptions) return;
-		foreach ($this->options as $key => & $value) {
-			$valueType = gettype($value);
-			if ($valueType == 'string') {
+		foreach ($this->options as $key => $value) {
+			if (is_scalar($value)) { // string|int|float|bool
 				// most simple key/value array options configuration
 				if ($value) 
 					$options[$key] = $form->Translate((string)$value);
-			} else if ($valueType == 'array') {
-				if (isset($value['options']) && gettype($value['options']) == 'array') {
+			} else if (is_array($value)) {
+				if (isset($value['options']) && is_array($value['options'])) {
 					// `<optgroup>` options configuration
 					$this->preDispatchTranslateOptionOptGroup($value);
 				} else {
@@ -201,13 +200,12 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$groupOptions = $optionsGroup['options'] 
 			? $optionsGroup['options'] 
 			: [];
-		foreach ($groupOptions as $key => & $groupOption) {
-			$groupOptionType = gettype($groupOption);
-			if ($groupOptionType == 'string') {
+		foreach ($groupOptions as $key => $groupOption) {
+			if (is_scalar($groupOption)) {
 				// most simple key/value array options configuration
 				if ($groupOption) 
 					$optionsGroup['options'][$key] = $form->Translate((string) $groupOption);
-			} else if ($groupOptionType == 'array') {
+			} else if (is_array($groupOption)) {
 				// advanced configuration with key, text, CSS class, and any other attributes for single option tag
 				$valueText = isset($groupOption['text']) ? $groupOption['text'] : $key;
 				if ($valueText) $groupOption['text'] = $form->Translate((string) $valueText);
@@ -263,7 +261,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 */
 	public function RenderControlOptions () {
 		$result = '';
-		$valueTypeIsArray = gettype($this->value) == 'array';
+		$valueTypeIsArray = is_array($this->value);
 		if ($this->nullOptionText !== NULL && mb_strlen((string) $this->nullOptionText) > 0) {
 			// advanced configuration with key, text, css class, and any other attributes for single option tag
 			$result .= $this->renderControlOptionsAdvanced(
@@ -275,12 +273,11 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			);
 		}
 		foreach ($this->options as $key => & $value) {
-			$valueType = gettype($value);
-			if ($valueType == 'string') {
+			if (is_scalar($value)) {
 				// most simple key/value array options configuration
 				$result .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
-			} else if ($valueType == 'array') {
-				if (isset($value['options']) && gettype($value['options']) == 'array') {
+			} else if (is_array($value)) {
+				if (isset($value['options']) && is_array($value['options'])) {
 					// `<optgroup>` options configuration
 					$result .= $this->renderControlOptionsGroup($value, $valueTypeIsArray);
 				} else {
@@ -326,11 +323,10 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	protected function renderControlOptionsGroup (& $optionsGroup, $valueTypeIsArray) {
 		$optionsStr = '';
 		foreach ($optionsGroup['options'] as $key => & $value) {
-			$valueType = gettype($value);
-			if ($valueType == 'string') {
+			if (is_scalar($value)) {
 				// most simple key/value array options configuration
 				$optionsStr .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
-			} else if ($valueType == 'array') {
+			} else if (is_array($value)) {
 				// advanced configuration with key, text, cs class, and any other attributes for single option tag
 				$optionsStr .= $this->renderControlOptionsAdvanced($key, $value, $valueTypeIsArray);
 			}

@@ -256,11 +256,11 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 				$attrsArr = array_merge($attrsArr, ['data-max-selected-options' => $this->maxOptions,]);
 			if (isset($option['class'])) {
 				$classArrParam = [];
-				$cssClassType = gettype($option['class']);
-				if ($cssClassType == 'array') {
-					$classArrParam = $option['class'];
-				} else if ($cssClassType == 'string') {
-					$classArrParam = explode(' ', $option['class']);
+				$cssClass = $option['class'];
+				if (is_array($cssClass)) {
+					$classArrParam = $cssClass;
+				} else if (is_string($cssClass)) {
+					$classArrParam = explode(' ', $cssClass);
 				}
 				foreach ($classArrParam as $clsValue) 
 					if ($clsValue) $classArr[] = $clsValue;
