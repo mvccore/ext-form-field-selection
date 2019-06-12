@@ -168,7 +168,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		if ($this->nullOptionText !== NULL && $this->nullOptionText !== '')
 			$this->nullOptionText = $form->translate($this->nullOptionText);
 		if (!$this->translateOptions) return;
-		foreach ($this->options as $key => $value) {
+		foreach ($this->options as $key => & $value) {
 			if (is_scalar($value)) { // string|int|float|bool
 				// most simple key/value array options configuration
 				if ($value) 
@@ -200,7 +200,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$groupOptions = $optionsGroup['options'] 
 			? $optionsGroup['options'] 
 			: [];
-		foreach ($groupOptions as $key => $groupOption) {
+		foreach ($groupOptions as $key => & $groupOption) {
 			if (is_scalar($groupOption)) {
 				// most simple key/value array options configuration
 				if ($groupOption) 
@@ -272,7 +272,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 				], $valueTypeIsArray
 			);
 		}
-		foreach ($this->options as $key => $value) {
+		foreach ($this->options as $key => & $value) {
 			if (is_scalar($value)) {
 				// most simple key/value array options configuration
 				$result .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
@@ -324,7 +324,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 */
 	protected function renderControlOptionsGroup (& $optionsGroup, $valueTypeIsArray) {
 		$optionsStr = '';
-		foreach ($optionsGroup['options'] as $key => $value) {
+		foreach ($optionsGroup['options'] as $key => & $value) {
 			if (is_scalar($value)) {
 				// most simple key/value array options configuration
 				$optionsStr .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
