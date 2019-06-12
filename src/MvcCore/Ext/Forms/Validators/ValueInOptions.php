@@ -56,60 +56,77 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 * @return string|\string[]|NULL	Safe submitted value or `NULL` if not possible to return safe value.
 	 */
 	public function Validate ($rawSubmittedValue) {
-		list($result, $multiple) = $this->completeSafeValueByOptions($rawSubmittedValue);
+		$submittedValue = $this->getSubmittedValueCorrectType($rawSubmittedValue);
 		if (
-			($multiple && count($result) !== count($rawSubmittedValue)) ||
-			(!$multiple && $result === NULL)
-		) {
+			($this->multiple && count($submittedValue) === 0) ||
+			(!$this->multiple && $submittedValue === NULL)
+		) return $submittedValue;
+		$result = $this->completeSafeValueByOptions($submittedValue);
+		if (
+			($this->multiple && count($result) !== count($submittedValue)) ||
+			(!$this->multiple && $result === NULL && $rawSubmittedValue !== NULL)
+		) 
 			$this->field->AddValidationError(
 				static::GetErrorMessage(self::ERROR_VALID_OPTION)
 			);
-		}
 		return $result;
 	}
 
 	/**
 	 * Return safe value(s), which exist(s) in field options 
 	 * and return boolean (`TRUE`) if result is array or not.
-	 * Example: `list($safeValue, $multiple) = $this->completeSafeValueByOptions($rawSubmittedValue);`;
-	 * @param string|array $rawSubmittedValue 
+	 * Example: `list($safeValue, $multiple) = $this->completeSafeValueByOptions($submittedValue);`;
+	 * @param string|\string[] $submittedValue 
 	 * @return array
 	 */
-	protected function completeSafeValueByOptions ($rawSubmittedValue) {
-		$result = $this->multiple ? [] : NULL;
-		$rawSubmittedValueArrayType = gettype($rawSubmittedValue) == 'array';
-		if ($rawSubmittedValueArrayType) {
-			if ($this->multiple) {
-				$rawSubmittedValues = $rawSubmittedValue;
+	protected function completeSafeValueByOptions ($submittedValue) {
+		$flattenOptions = self::GetFlattenOptions($this->options);
+		if ($this->multiple) {
+			$result = [];
+			foreach ($submittedValue as & $submittedValueItem) {
+				$submittedValueItemStr = strval($submittedValueItem);
+				if (array_key_exists($submittedValueItemStr, $flattenOptions)) 
+					$result[] = $submittedValueItemStr;
+			}
+		} else {
+			$result = NULL;
+			$submittedValueStr = strval($submittedValue);
+			if (array_key_exists($submittedValueStr, $flattenOptions)) 
+				$result = $submittedValueStr;
+		}
+		return $result;
+	}
+
+	/**
+	 * @param string|\string[]|NULL $rawSubmittedValue 
+	 * @return string|\string[]|NULL
+	 */
+	protected function getSubmittedValueCorrectType ($rawSubmittedValue) {
+		$rawSubmittedValueIsArray = is_array($rawSubmittedValue);
+		if ($this->multiple) {
+			if ($rawSubmittedValueIsArray) {
+				return $rawSubmittedValue;
+			} else if ($rawSubmittedValue === NULL) {
+				return [];
 			} else {
-				$rawSubmittedValue = (string) $rawSubmittedValue;
-				$rawSubmittedValues = mb_strlen($rawSubmittedValue) > 0 
+				$rawSubmittedValue = trim((string) $rawSubmittedValue);
+				return mb_strlen($rawSubmittedValue) > 0 
 					? [$rawSubmittedValue] 
 					: [];
 			}
 		} else {
-			$rawSubmittedValue = (string) $rawSubmittedValue;
-			$rawSubmittedValues = mb_strlen($rawSubmittedValue) > 0 
-				? [$rawSubmittedValue] 
-				: [];
-		}
-		$flattenOptions = self::GetFlattenOptions($this->options);
-		foreach ($rawSubmittedValues as & $rawSubmittedValueItem) {
-			$rawSubmittedValueItemStr = (string) $rawSubmittedValueItem;
-			if (array_key_exists($rawSubmittedValueItemStr, $flattenOptions)) {
-				if ($this->multiple) {
-					$result[] = $rawSubmittedValueItemStr;
-				} else {
-					$result = $rawSubmittedValueItemStr;
-				}
-				if (!$this->multiple) break;
+			if ($rawSubmittedValueIsArray) {
+				return isset($rawSubmittedValue[0]) && mb_strlen(trim((string) $rawSubmittedValue[0])) > 0
+					? $rawSubmittedValue[0]
+					: NULL;
+			} else if ($rawSubmittedValue === NULL) {
+				return NULL;
+			} else {
+				$rawSubmittedValue = trim((string) $rawSubmittedValue);
+				return mb_strlen($rawSubmittedValue) > 0 
+					? $rawSubmittedValue
+					: NULL;
 			}
 		}
-		return [
-			$result, 
-			$this->multiple
-		];
 	}
-
-	
 }

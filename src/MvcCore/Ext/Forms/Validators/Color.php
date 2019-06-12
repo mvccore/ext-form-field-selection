@@ -40,6 +40,7 @@ class Color extends \MvcCore\Ext\Forms\Validator
 	 */
 	public function Validate ($rawSubmittedValue) {
 		$result = strtoupper(trim((string) $rawSubmittedValue));
+		if (mb_strlen($result) === 0) return NULL;
 		$matched = preg_match('/^#[0-9A-F]{6}$/', $result);
 		if (!$matched) {
 			$this->field->AddValidationError(

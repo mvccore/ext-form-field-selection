@@ -77,6 +77,7 @@ class MinMaxOptions extends ValueInOptions
 			$rawSubmittedArr = [$rawSubmittedValue];
 		}
 		$submittedArrCount = count($rawSubmittedArr);
+		if ($submittedArrCount === 0) return [];
 
 		// check if there is enough options checked
 		if ($this->minOptions !== NULL && $this->minOptions > 0 && $submittedArrCount < $this->minOptions) 
