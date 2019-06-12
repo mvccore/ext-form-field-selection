@@ -272,7 +272,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 				], $valueTypeIsArray
 			);
 		}
-		foreach ($this->options as $key => & $value) {
+		foreach ($this->options as $key => $value) {
 			if (is_scalar($value)) {
 				// most simple key/value array options configuration
 				$result .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
@@ -282,7 +282,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 					$result .= $this->renderControlOptionsGroup($value, $valueTypeIsArray);
 				} else {
 					// advanced configuration with key, text, cs class, and any other attributes for single option tag
-					$result .= $this->renderControlOptionsAdvanced($key, $value, $valueTypeIsArray);
+					$result .= $this->renderControlOptionsAdvanced(
+						isset($value['value']) ? $value['value'] : $key, $value, $valueTypeIsArray
+					);
 				}
 			}
 		}
@@ -322,7 +324,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 */
 	protected function renderControlOptionsGroup (& $optionsGroup, $valueTypeIsArray) {
 		$optionsStr = '';
-		foreach ($optionsGroup['options'] as $key => & $value) {
+		foreach ($optionsGroup['options'] as $key => $value) {
 			if (is_scalar($value)) {
 				// most simple key/value array options configuration
 				$optionsStr .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
