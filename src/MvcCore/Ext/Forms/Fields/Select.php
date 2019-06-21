@@ -302,7 +302,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 */
 	protected function renderControlOptionKeyValue ($value, & $text, $valueTypeIsArray) {
 		$selected = $valueTypeIsArray
-			? in_array($value, $this->value)
+			? in_array($value, $this->value, TRUE)
 			: $this->value === $value ;
 		$formViewClass = $this->form->GetViewClass();
 		/** @var $templates \stdClass */
@@ -369,12 +369,12 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			: ($value === NULL ? '' : $value);
 		if ($valueTypeIsArray) {
 			if (count($this->value) > 0) {
-				$selected = in_array($value, $this->value);
+				$selected = in_array($valueToRender, $this->value, TRUE);
 			} else {
-				$selected = $value === NULL;
+				$selected = $valueToRender === NULL;
 			}
 		} else {
-			$selected = $this->value === $value;
+			$selected = $this->value === $valueToRender;
 		}
 		$formViewClass = $this->form->GetViewClass();
 		$classStr = isset($optionData['class']) && strlen((string) $optionData['class'])
