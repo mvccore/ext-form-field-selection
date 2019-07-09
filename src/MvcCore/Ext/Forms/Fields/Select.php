@@ -266,9 +266,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			// advanced configuration with key, text, css class, and any other attributes for single option tag
 			$result .= $this->renderControlOptionsAdvanced(
 				NULL, [
-					'value'	=> '',
+					'value'	=> NULL,
 					'text'	=> htmlspecialchars_decode(htmlspecialchars($this->nullOptionText, ENT_QUOTES), ENT_QUOTES),
-					'attrs'	=> ['disabled' => 'disabled']
+					//'attrs'	=> ['disabled' => 'disabled'] // this will cause the browser to select the first allowed option automatically 
 				], $valueTypeIsArray
 			);
 		}
