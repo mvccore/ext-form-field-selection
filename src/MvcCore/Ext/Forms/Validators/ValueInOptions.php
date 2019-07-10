@@ -84,15 +84,13 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 		if ($this->multiple) {
 			$result = [];
 			foreach ($submittedValue as & $submittedValueItem) {
-				$submittedValueItemStr = strval($submittedValueItem);
-				if (array_key_exists($submittedValueItemStr, $flattenOptions)) 
-					$result[] = $submittedValueItemStr;
+				if (array_key_exists($submittedValueItem, $flattenOptions)) 
+					$result[] = $submittedValueItem;
 			}
 		} else {
 			$result = NULL;
-			$submittedValueStr = strval($submittedValue);
-			if (array_key_exists($submittedValueStr, $flattenOptions)) 
-				$result = $submittedValueStr;
+			if (array_key_exists($submittedValue, $flattenOptions)) 
+				$result = $submittedValue;
 		}
 		return $result;
 	}
