@@ -80,7 +80,11 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 * @return array
 	 */
 	protected function completeSafeValueByOptions ($submittedValue) {
-		$flattenOptions = self::GetFlattenOptions($this->options);
+		if ($this->field instanceof \MvcCore\Ext\Forms\Fields\IOptions) {
+			$flattenOptions = $this->field->GetFlattenOptions();
+		} else {
+			$flattenOptions = $this->GetFlattenOptions($this->options);
+		}
 		if ($this->multiple) {
 			$result = [];
 			foreach ($submittedValue as & $submittedValueItem) {
