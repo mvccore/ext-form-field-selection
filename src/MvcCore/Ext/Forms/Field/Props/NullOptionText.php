@@ -41,7 +41,7 @@ trait NullOptionText
 	 * @param string $nullOptionText 
 	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetNullOptionText ($nullOptionText) {
+	public function SetNullOptionText ($nullOptionText) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->nullOptionText = $nullOptionText;
 		return $this;

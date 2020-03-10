@@ -30,7 +30,7 @@ interface IChecked
 	 * @param bool $checked 
 	 * @return \MvcCore\Ext\Forms\IField
 	 */
-	public function & SetChecked ($checked = TRUE);
+	public function SetChecked ($checked = TRUE);
 
 	/**
 	 * Get `TRUE` if field is rendered as checked, `FALSE` otherwise.

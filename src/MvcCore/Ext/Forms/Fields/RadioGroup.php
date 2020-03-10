@@ -58,7 +58,7 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple
 	 * @return \MvcCore\Ext\Forms\FieldsGroup|\MvcCore\Ext\Forms\IFieldsGroup|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetMultiple ($multiple = TRUE) {
+	public function SetMultiple ($multiple = TRUE) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		return $this;
 	}

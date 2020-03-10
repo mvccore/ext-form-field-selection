@@ -87,7 +87,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @param array|string|NULL $value
 	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetValue ($value) {
+	public function SetValue ($value) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->value = $value;
 		return $this;
@@ -123,7 +123,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetForm (\MvcCore\Ext\Forms\IForm & $form) {
+	public function SetForm (\MvcCore\Ext\Forms\IForm $form) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		parent::SetForm($form);
 		if (!$this->options) $this->throwNewInvalidArgumentException(
@@ -164,7 +164,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		parent::PreDispatch();
 		$this->preDispatchTabIndex();
 		if (!$this->translate) return;
-		$form = & $this->form;
+		$form = $this->form;
 		if ($this->nullOptionText !== NULL && $this->nullOptionText !== '')
 			$this->nullOptionText = $form->translate($this->nullOptionText);
 		if (!$this->translateOptions) return;
@@ -191,7 +191,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @param array & $optionsGroup 
 	 */
 	protected function preDispatchTranslateOptionOptGroup (& $optionsGroup) {
-		$form = & $this->form;
+		$form = $this->form;
 		$groupLabel = isset($optionsGroup['label']) 
 			? $optionsGroup['label'] 
 			: '';

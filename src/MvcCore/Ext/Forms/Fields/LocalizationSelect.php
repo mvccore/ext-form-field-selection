@@ -284,7 +284,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @param string $localizationCode 
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetValue ($localizationCode) {
+	public function SetValue ($localizationCode) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->value = static::normalizeLocalizationCode($localizationCode);
 		return $this;
@@ -317,7 +317,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @param \string[] $localizationsCodes Array of localization codes strings to rendered only, not to render all existing localizations.
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
 	 */
-	public function & FilterOptions ($localizationsCodes = []) {
+	public function FilterOptions ($localizationsCodes = []) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		$options = [];
 		foreach ($localizationsCodes as $localizationCode) {
@@ -362,7 +362,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetForm (\MvcCore\Ext\Forms\IForm & $form) {
+	public function SetForm (\MvcCore\Ext\Forms\IForm $form) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		if (!$this->options) 
 			$this->options = static::$allOptions;
@@ -391,7 +391,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 				], $valueTypeIsArray
 			);
 		}
-		foreach ($this->options as $key => & $value) {
+		foreach ($this->options as $key => $value) {
 			// advanced configuration with key, text, CSS class, and any other attributes for single option tag
 			$result .= $this->renderControlOptionsAdvanced($key, [
 				'class'	=> 'localization-' . str_replace('_', '-', strtolower($key)),

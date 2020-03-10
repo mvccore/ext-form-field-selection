@@ -138,7 +138,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetForm (\MvcCore\Ext\Forms\IForm & $form) {
+	public function SetForm (\MvcCore\Ext\Forms\IForm $form) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		parent::SetForm($form);
 		// add minimum/maximum options count validator if necessary

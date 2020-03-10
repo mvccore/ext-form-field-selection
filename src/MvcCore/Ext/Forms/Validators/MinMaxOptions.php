@@ -54,9 +54,9 @@ class MinMaxOptions extends ValueInOptions
 	 * @param \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField $field 
 	 * @return \MvcCore\Ext\Forms\Validator|\MvcCore\Ext\Forms\IValidator
 	 */
-	public function & SetField (\MvcCore\Ext\Forms\IField & $field) {
+	public function SetField (\MvcCore\Ext\Forms\IField $field) {
 		/** @var $this \MvcCore\Ext\Forms\IValidator */
-		$this->field = & $field;
+		$this->field = $field;
 		$this->setUpFieldProps(array_merge(
 			self::$fieldSpecificProperties,
 			parent::$fieldSpecificProperties

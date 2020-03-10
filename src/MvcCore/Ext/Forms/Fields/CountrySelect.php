@@ -145,7 +145,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @param string $countryCode 
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetValue ($countryCode) {
+	public function SetValue ($countryCode) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		$this->value = strtoupper($countryCode);
 		return $this;
@@ -178,7 +178,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @param \string[] $countryCodes Array of country codes strings to rendered only, not to render all existing states.
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
 	 */
-	public function & FilterOptions ($countryCodes = []) {
+	public function FilterOptions ($countryCodes = []) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		$options = [];
 		foreach ($countryCodes as $countryCode) {
@@ -223,7 +223,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
 	 */
-	public function & SetForm (\MvcCore\Ext\Forms\IForm & $form) {
+	public function SetForm (\MvcCore\Ext\Forms\IForm $form) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		if (!$this->options) 
 			$this->options = static::$allOptions;

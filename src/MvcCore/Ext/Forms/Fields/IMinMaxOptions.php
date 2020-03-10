@@ -38,7 +38,7 @@ interface IMinMaxOptions
 	 * @param int|NULL $minOptions
 	 * @return \MvcCore\Ext\Forms\IField
 	 */
-	public function & SetMinOptions ($minOptions);
+	public function SetMinOptions ($minOptions);
 
 	/**
 	 * Get maximum options count to select. 
@@ -53,7 +53,7 @@ interface IMinMaxOptions
 	 * @param int|NULL $maxOptions
 	 * @return \MvcCore\Ext\Forms\IField
 	 */
-	public function & SetMaxOptions ($maxOptions);
+	public function SetMaxOptions ($maxOptions);
 
 	/**
 	 * Get field is required bubble message for javascript.
@@ -68,7 +68,7 @@ interface IMinMaxOptions
 	 * @param string $requiredBubbleMessage 
 	 * @return \MvcCore\Ext\Forms\IField
 	 */
-	public function & SetRequiredBubbleMessage ($requiredBubbleMessage);
+	public function SetRequiredBubbleMessage ($requiredBubbleMessage);
 
 	/**
 	 * Get minimum options bubble message for javascript.
@@ -81,7 +81,7 @@ interface IMinMaxOptions
 	 * @param string $minOptionsBubbleMessage 
 	 * @return \MvcCore\Ext\Forms\IField
 	 */
-	public function & SetMinOptionsBubbleMessage ($minOptionsBubbleMessage);
+	public function SetMinOptionsBubbleMessage ($minOptionsBubbleMessage);
 
 	/**
 	 * Get maximum options bubble message for javascript.
@@ -94,5 +94,5 @@ interface IMinMaxOptions
 	 * @param string $minOptionsBubbleMessage 
 	 * @return \MvcCore\Ext\Forms\IField
 	 */
-	public function & SetMaxOptionsBubbleMessage ($maxOptionsBubbleMessage);
+	public function SetMaxOptionsBubbleMessage ($maxOptionsBubbleMessage);
 }
