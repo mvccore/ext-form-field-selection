@@ -51,7 +51,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * Possible value: `checkbox`, used in HTML code for this fields.
 	 * @var string
 	 */
-	protected $type = 'checkbox';
+	protected $type = 'checkbox-group';
 	
 	/**
 	 * Validators: 
@@ -106,11 +106,11 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * @var string
 	 */
 	protected static $templates = [
-		'control'	=> '<input id="{id}" name="{name}[]" type="{type}" value="{value}"{checked}{attrs} />',
+		'control'	=> '<input id="{id}" name="{name}[]" type="checkbox" value="{value}"{checked}{attrs} />',
 	];
 
 	/**
-	 * Create new form `<input type="checkbx" />` group control instance.
+	 * Create new form `<input type="checkbox" />` group control instance.
 	 * @param array $cfg Config array with public properties and it's 
 	 *					 values which you want to configure, presented 
 	 *					 in camel case properties names syntax.
@@ -230,8 +230,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 		$controlAttrsStr = '';
 		$itemLabelText = '';
 		$originalRequired = $this->required;
-		if ($this->type == 'checkbox') 
-			$this->required = FALSE;
+		$this->required = FALSE;
 		if ($optionType == 'string') {
 			$itemLabelText = $option ? $option : $key;
 			$labelAttrsStr = $this->renderLabelAttrsWithFieldVars();
@@ -272,8 +271,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 				[], $attrsArr, $classArr, TRUE
 			);
 		}
-		if ($this->type == 'checkbox') 
-			$this->required = $originalRequired;
+		$this->required = $originalRequired;
 		return [$itemLabelText, $labelAttrsStr, $controlAttrsStr];
 	}
 }
