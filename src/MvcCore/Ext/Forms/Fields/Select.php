@@ -164,10 +164,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		parent::PreDispatch();
 		$this->preDispatchTabIndex();
 		if (!$this->translate) return;
-		$form = $this->form;
-		if ($this->nullOptionText !== NULL && $this->nullOptionText !== '')
-			$this->nullOptionText = $form->translate($this->nullOptionText);
+		$this->preDispatchNullOptionText();
 		if (!$this->translateOptions) return;
+		$form = $this->form;
 		foreach ($this->options as $key => & $value) {
 			if (is_scalar($value)) { // string|int|float|bool
 				// most simple key/value array options configuration

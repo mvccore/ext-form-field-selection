@@ -30,21 +30,22 @@ trait NullOptionText
 	 * @var string|NULL
 	 */
 	protected $nullOptionText = NULL;
+	
+	/**
+	 * Boolean to translate placeholder text, `TRUE` by default.
+	 * @var boolean
+	 */
+	protected $translateNullOptionText = TRUE;
 
 	/**
-	 * This attribute is a text placeholder for `<select>` controls,
-	 * when no option is selected yet. Typically: `--- please select an option ---`.
-	 * It's rendered every time this placeholder has any text value, doesn't matter,
-	 * if `<select>` tag has already any value selected or not yet . It's rendered usually 
-	 * as first `<option>` sub-element with an empty value, as `disabled` and `selected` 
-	 * `<option>` tag. `NULL` value means no placeholder `<option>` tag will be rendered.
-	 * @param string $nullOptionText 
-	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
+	 * Automatically translate `nullOptionText` property if necessary
+	 * in `PreDispatch()` field rendering moment.
+	 * @return void
 	 */
-	public function SetNullOptionText ($nullOptionText) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
-		$this->nullOptionText = $nullOptionText;
-		return $this;
+	protected function preDispatchNullOptionText () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
+		if ($this->translate && $this->nullOptionText !== NULL && $this->translateNullOptionText)
+			$this->nullOptionText = $this->form->Translate($this->nullOptionText);
 	}
 
 	/**
@@ -57,6 +58,27 @@ trait NullOptionText
 	 * @return string|NULL
 	 */
 	public function GetNullOptionText () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		return $this->nullOptionText;
 	}
+	
+	/**
+	 * This attribute is a text placeholder for `<select>` controls,
+	 * when no option is selected yet. Typically: `--- please select an option ---`.
+	 * It's rendered every time this placeholder has any text value, doesn't matter,
+	 * if `<select>` tag has already any value selected or not yet . It's rendered usually 
+	 * as first `<option>` sub-element with an empty value, as `disabled` and `selected` 
+	 * `<option>` tag. `NULL` value means no placeholder `<option>` tag will be rendered.
+	 * @param string|NULL  $nullOptionText 
+	 * @param boolean|NULL $translateNullOptionText 
+	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
+	 */
+	public function SetNullOptionText ($nullOptionText, $translateNullOptionText = NULL) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
+		$this->nullOptionText = $nullOptionText;
+		if ($translateNullOptionText !== NULL)
+			$this->translateNullOptionText = $translateNullOptionText;
+		return $this;
+	}
+
 }
