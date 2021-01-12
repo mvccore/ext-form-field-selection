@@ -119,11 +119,11 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * - Set up translate boolean property.
 	 * - Check if there are any select options in `$this->options`.
 	 * - Set up select minimum/maximum options to select if necessary.
-	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\Forms\IForm $form
+	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\IForm $form
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
 	 */
-	public function SetForm (\MvcCore\Ext\Forms\IForm $form) {
+	public function SetForm (\MvcCore\Ext\IForm $form) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		parent::SetForm($form);
 		if (!$this->options) $this->throwNewInvalidArgumentException(

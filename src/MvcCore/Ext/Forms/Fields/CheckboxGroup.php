@@ -93,7 +93,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * `NULL` by default.
 	 * @var string
 	 */
-	protected $jsSupportingFile = \MvcCore\Ext\Forms\IForm::FORM_ASSETS_DIR_REPLACEMENT . '/fields/checkbox-group.js';
+	protected $jsSupportingFile = \MvcCore\Ext\IForm::FORM_ASSETS_DIR_REPLACEMENT . '/fields/checkbox-group.js';
 
 	/**
 	 * Maximum options specific css class for supporting javascript code.
@@ -134,11 +134,11 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * - Set up required.
 	 * - Check if there are any options for current controls group.
 	 * - Check if there are defined validators if there are defined minimum or maximum selected options.
-	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\Forms\IForm $form
+	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\IForm $form
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
 	 */
-	public function SetForm (\MvcCore\Ext\Forms\IForm $form) {
+	public function SetForm (\MvcCore\Ext\IForm $form) {
 		/** @var $this \MvcCore\Ext\Forms\IField */
 		parent::SetForm($form);
 		// add minimum/maximum options count validator if necessary
