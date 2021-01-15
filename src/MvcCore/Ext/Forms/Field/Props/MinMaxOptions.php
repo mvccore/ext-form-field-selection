@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Field\Props;
@@ -20,8 +20,8 @@ namespace MvcCore\Ext\Forms\Field\Props;
  * - `\MvcCore\Ext\Forms\CheckboxGroup`
  * - `\MvcCore\Ext\Forms\Validators\MinMaxOptions`
  */
-trait MinMaxOptions
-{
+trait MinMaxOptions {
+
 	/**
 	 * Minimum options count to select. 
 	 * Default value is `NULL` to not limit anything.
@@ -67,10 +67,10 @@ trait MinMaxOptions
 	 * Set minimum options count to select. 
 	 * Default value is `NULL` to not limit anything.
 	 * @param int|NULL $minOptions
-	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMinOptions ($minOptions) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->minOptions = $minOptions;
 		return $this;
 	}
@@ -88,10 +88,10 @@ trait MinMaxOptions
 	 * Set maximum options count to select. 
 	 * Default value is `NULL` to not limit anything.
 	 * @param int|NULL $maxOptions
-	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMaxOptions ($maxOptions) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->maxOptions = $maxOptions;
 		return $this;
 	}
@@ -109,10 +109,10 @@ trait MinMaxOptions
 	 * Set field is required bubble message for javascript.
 	 * This method could be used only for checkbox group control.
 	 * @param string $requiredBubbleMessage 
-	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetRequiredBubbleMessage ($requiredBubbleMessage) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->requiredBubbleMessage = $requiredBubbleMessage;
 		return $this;
 	}
@@ -128,10 +128,10 @@ trait MinMaxOptions
 	/**
 	 * Set minimum options bubble message for javascript.
 	 * @param string $minOptionsBubbleMessage 
-	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMinOptionsBubbleMessage ($minOptionsBubbleMessage) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->minOptionsBubbleMessage = $minOptionsBubbleMessage;
 		return $this;
 	}
@@ -147,10 +147,10 @@ trait MinMaxOptions
 	/**
 	 * Set maximum options bubble message for javascript.
 	 * @param string $minOptionsBubbleMessage 
-	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMaxOptionsBubbleMessage ($maxOptionsBubbleMessage) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->maxOptionsBubbleMessage = $maxOptionsBubbleMessage;
 		return $this;
 	}

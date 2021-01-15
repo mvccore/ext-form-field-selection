@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Fields;
@@ -22,8 +22,8 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   submitted value is presented in configured options by default.
  *				   
  */
-class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
-{
+class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
+
 	/**
 	 * Possible value: `localization-select`, not used in HTML code for this field.
 	 * @var string
@@ -282,10 +282,10 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * If there is given localization code separated by dash, it's automatically
 	 * replaced by underscore.
 	 * @param string $localizationCode 
-	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
 	public function SetValue ($localizationCode) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->value = static::normalizeLocalizationCode($localizationCode);
 		return $this;
 	}
@@ -315,10 +315,10 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * localizations in the world. Given localizations codes will be automatically
 	 * converted to upper case.
 	 * @param \string[] $localizationsCodes Array of localization codes strings to rendered only, not to render all existing localizations.
-	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
 	public function FilterOptions ($localizationsCodes = []) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$options = [];
 		foreach ($localizationsCodes as $localizationCode) {
 			$localizationCode = static::normalizeLocalizationCode($localizationCode);
@@ -358,12 +358,12 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * - Set up translate boolean property.
 	 * - Check if there are any select options in `$this->options`.
 	 * - Set up select minimum/maximum options to select if necessary.
-	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\IForm $form
+	 * @param \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		if (!$this->options) 
 			$this->options = static::$allOptions;
 		return parent::SetForm($form);

@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Fields;
@@ -22,8 +22,8 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   submitted value is presented in configured options by default.
  *				   
  */
-class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
-{
+class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
+
 	/**
 	 * Possible value: `country-select`, not used in HTML code for this field.
 	 * @var string
@@ -143,10 +143,10 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	/**
 	 * Set country code value. Given country code will be automatically converted to upper case.
 	 * @param string $countryCode 
-	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function SetValue ($countryCode) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->value = strtoupper($countryCode);
 		return $this;
 	}
@@ -176,10 +176,10 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * countries in the world. Given country codes will be automatically
 	 * converted to upper case.
 	 * @param \string[] $countryCodes Array of country codes strings to rendered only, not to render all existing states.
-	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function FilterOptions ($countryCodes = []) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$options = [];
 		foreach ($countryCodes as $countryCode) {
 			$countryCode = strtoupper($countryCode);
@@ -219,12 +219,12 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select
 	 * - Set up translate boolean property.
 	 * - Check if there are any select options in `$this->options`.
 	 * - Set up select minimum/maximum options to select if necessary.
-	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\IForm $form
+	 * @param \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		if (!$this->options) 
 			$this->options = static::$allOptions;
 		return parent::SetForm($form);

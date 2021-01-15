@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Field\Props;
@@ -20,8 +20,8 @@ namespace MvcCore\Ext\Forms\Field\Props;
  * and public static method to recognize `checked` boolean automatically from 
  * given field `$value`.
  */
-trait Checked
-{
+trait Checked {
+
 	/**
 	 * If `TRUE`, field will be rendered as checked, `FALSE` otherwise.
 	 * If not set, checked flag will be automatically resolved by field value
@@ -37,10 +37,10 @@ trait Checked
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked
 	 * @param bool $checked 
-	 * @return \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetChecked ($checked = TRUE) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->checked = $checked;
 		return $this;
 	}

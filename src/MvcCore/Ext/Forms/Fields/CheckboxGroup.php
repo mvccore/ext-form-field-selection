@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Fields;
@@ -25,8 +25,8 @@ namespace MvcCore\Ext\Forms\Fields;
  */
 class		CheckboxGroup 
 extends		\MvcCore\Ext\Forms\FieldsGroup 
-implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
-{
+implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
+
 	use \MvcCore\Ext\Forms\Field\Props\MinMaxOptions;
 	
 	/**
@@ -134,12 +134,12 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions
 	 * - Set up required.
 	 * - Check if there are any options for current controls group.
 	 * - Check if there are defined validators if there are defined minimum or maximum selected options.
-	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\IForm $form
+	 * @param \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\Select
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		parent::SetForm($form);
 		// add minimum/maximum options count validator if necessary
 		$this->setFormMinMaxOptions();

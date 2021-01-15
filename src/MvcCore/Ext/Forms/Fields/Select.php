@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Fields;
@@ -26,8 +26,8 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			\MvcCore\Ext\Forms\Fields\ILabel,
 			\MvcCore\Ext\Forms\Fields\IMultiple, 
 			\MvcCore\Ext\Forms\Fields\IOptions, 
-			\MvcCore\Ext\Forms\Fields\IMinMaxOptions
-{
+			\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
+
 	use \MvcCore\Ext\Forms\Field\Props\VisibleField;
 	use \MvcCore\Ext\Forms\Field\Props\Label;
 	use \MvcCore\Ext\Forms\Field\Props\AutoComplete;
@@ -36,6 +36,13 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	use \MvcCore\Ext\Forms\Field\Props\MinMaxOptions;
 	use \MvcCore\Ext\Forms\Field\Props\NullOptionText;
 	use \MvcCore\Ext\Forms\Field\Props\Size;
+	
+	/**
+	 * MvcCore Extension - Form - Field - Selection - version:
+	 * Comparison by PHP function version_compare();
+	 * @see http://php.net/manual/en/function.version-compare.php
+	 */
+	const VERSION = '5.0.0';
 
 	/**
 	 * Possible value: `select`, not used in HTML code for this field.
@@ -85,10 +92,10 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * attribute, set to this function `string`.
 	 * If you don't want any selected value, set `NULL`.
 	 * @param array|string|NULL $value
-	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\Select
 	 */
 	public function SetValue ($value) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->value = $value;
 		return $this;
 	}
@@ -119,12 +126,12 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * - Set up translate boolean property.
 	 * - Check if there are any select options in `$this->options`.
 	 * - Set up select minimum/maximum options to select if necessary.
-	 * @param \MvcCore\Ext\Form|\MvcCore\Ext\IForm $form
+	 * @param \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\Select|\MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Fields\Select
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
-		/** @var $this \MvcCore\Ext\Forms\IField */
+		/** @var $this \MvcCore\Ext\Forms\Field */
 		parent::SetForm($form);
 		if (!$this->options) $this->throwNewInvalidArgumentException(
 			'No `options` property defined.'

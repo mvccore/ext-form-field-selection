@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Fields;
@@ -23,9 +23,9 @@ namespace MvcCore\Ext\Forms\Fields;
  * - `\MvcCore\Ext\Forms\CheckboxGroup`
  * - `\MvcCore\Ext\Forms\Validators\MinMaxOptions`
  */
-interface IMinMaxOptions
-{
-    /**
+interface IMinMaxOptions {
+	
+	/**
 	 * Get minimum options count to select. 
 	 * Default value is `NULL` to not limit anything.
 	 * @return int|NULL
@@ -36,7 +36,7 @@ interface IMinMaxOptions
 	 * Set minimum options count to select. 
 	 * Default value is `NULL` to not limit anything.
 	 * @param int|NULL $minOptions
-	 * @return \MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMinOptions ($minOptions);
 
@@ -51,7 +51,7 @@ interface IMinMaxOptions
 	 * Set maximum options count to select. 
 	 * Default value is `NULL` to not limit anything.
 	 * @param int|NULL $maxOptions
-	 * @return \MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMaxOptions ($maxOptions);
 
@@ -66,7 +66,7 @@ interface IMinMaxOptions
 	 * Set field is required bubble message for javascript.
 	 * This method could be used only for checkbox group control.
 	 * @param string $requiredBubbleMessage 
-	 * @return \MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetRequiredBubbleMessage ($requiredBubbleMessage);
 
@@ -79,7 +79,7 @@ interface IMinMaxOptions
 	/**
 	 * Set minimum options bubble message for javascript.
 	 * @param string $minOptionsBubbleMessage 
-	 * @return \MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMinOptionsBubbleMessage ($minOptionsBubbleMessage);
 
@@ -92,7 +92,7 @@ interface IMinMaxOptions
 	/**
 	 * Set maximum options bubble message for javascript.
 	 * @param string $minOptionsBubbleMessage 
-	 * @return \MvcCore\Ext\Forms\IField
+	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMaxOptionsBubbleMessage ($maxOptionsBubbleMessage);
 }

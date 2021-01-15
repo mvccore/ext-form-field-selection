@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Validators;
@@ -19,8 +19,8 @@ namespace MvcCore\Ext\Forms\Validators;
 class		ValueInOptions
 extends		\MvcCore\Ext\Forms\Validator
 implements	\MvcCore\Ext\Forms\Fields\IMultiple,
-			\MvcCore\Ext\Forms\Fields\IOptions
-{
+			\MvcCore\Ext\Forms\Fields\IOptions {
+
 	use \MvcCore\Ext\Forms\Field\Props\Multiple;
 	use \MvcCore\Ext\Forms\Field\Props\Options;
 

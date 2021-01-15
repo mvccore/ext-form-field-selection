@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Forms\Fields;
@@ -24,8 +24,8 @@ class		Checkbox
 extends		\MvcCore\Ext\Forms\Field
 implements	\MvcCore\Ext\Forms\Fields\IVisibleField, 
 			\MvcCore\Ext\Forms\Fields\ILabel, 
-			\MvcCore\Ext\Forms\Fields\IChecked
-{
+			\MvcCore\Ext\Forms\Fields\IChecked {
+
 	use \MvcCore\Ext\Forms\Field\Props\VisibleField;
 	use \MvcCore\Ext\Forms\Field\Props\Label;
 	use \MvcCore\Ext\Forms\Field\Props\Checked;
