@@ -3,22 +3,22 @@
 	"type": "library",
 	"description": "MvcCore - Extension - Form - Field - Selection - form field types - select, country select, checkbox, radio button, color and checkboxes group.",
 	"keywords": [
-		"mvc", 
-		"mvccore", 
-		"framework", 
-		"extension", 
-		"plugin", 
-		"plug-in", 
-		"ext", 
-		"mvccore", 
-		"form", 
-		"forms", 
-		"webform", 
-		"html5", 
-		"input", 
-		"inputs", 
-		"select", 
-		"selects", 
+		"mvc",
+		"mvccore",
+		"framework",
+		"extension",
+		"plugin",
+		"plug-in",
+		"ext",
+		"mvccore",
+		"form",
+		"forms",
+		"webform",
+		"html5",
+		"input",
+		"inputs",
+		"select",
+		"selects",
 		"country",
 		"countires",
 		"states",
@@ -41,10 +41,12 @@
 	}],
 	"require": {
 		"php": ">=5.4.0",
-		"mvccore/mvccore": "dev-master"
+		"mvccore/mvccore": "^5.0"
 	},
 	"autoload": {
-		"classmap": ["src/"]
+		"classmap": [
+			"src/"
+		]
 	},
 	"minimum-stability": "dev"
 }
