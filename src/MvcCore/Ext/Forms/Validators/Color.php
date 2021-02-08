@@ -17,6 +17,7 @@ namespace MvcCore\Ext\Forms\Validators;
  * Responsibility: Validate hexadecimal color with no transparency including 
  *				   leading hash char `#`.
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class Color extends \MvcCore\Ext\Forms\Validator {
 
 	/**

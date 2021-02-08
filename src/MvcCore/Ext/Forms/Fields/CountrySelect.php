@@ -22,6 +22,7 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   submitted value is presented in configured options by default.
  *				   
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 
 	/**

@@ -20,6 +20,7 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   validator to check if submitted value is presented in 
  *				   configured options by default.
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class		Select 
 extends		\MvcCore\Ext\Forms\Field 
 implements	\MvcCore\Ext\Forms\Fields\IVisibleField, 
@@ -42,7 +43,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.0.0';
+	const VERSION = '5.0.1';
 
 	/**
 	 * Possible value: `select`, not used in HTML code for this field.

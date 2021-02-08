@@ -20,6 +20,7 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   validator for hexadecimal color without transparency 
  *				   and leading slash char `#` by default.
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class		Color 
 extends		\MvcCore\Ext\Forms\Field
 implements	\MvcCore\Ext\Forms\Fields\IVisibleField, 

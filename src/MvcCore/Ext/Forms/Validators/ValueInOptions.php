@@ -16,6 +16,7 @@ namespace MvcCore\Ext\Forms\Validators;
 /**
  * Responsibility: Validate if submitted string(s) are presented in options keys.
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class		ValueInOptions
 extends		\MvcCore\Ext\Forms\Validator
 implements	\MvcCore\Ext\Forms\Fields\IMultiple,

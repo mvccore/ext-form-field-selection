@@ -23,6 +23,7 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   default and it's own validator to check minimum or 
  *				   maximum count of selected options.
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class		CheckboxGroup 
 extends		\MvcCore\Ext\Forms\FieldsGroup 
 implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {

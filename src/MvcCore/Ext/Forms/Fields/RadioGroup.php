@@ -19,6 +19,7 @@ namespace MvcCore\Ext\Forms\Fields;
  *				   `RadioGroup` field has it's own validator to check if 
  *				   submitted value is presented in configured options by default.
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 
 	/**
