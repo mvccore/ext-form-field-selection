@@ -50,6 +50,7 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 	 * @return bool
 	 */
 	public function GetMultiple () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\RadioGroup */
 		return FALSE;
 	}
 
@@ -57,10 +58,10 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 	 * Field group is always not marked as multiple value control. This function 
 	 * does nothing, because multiple option has to be `FALSE` for radio group instance all time.
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple
-	 * @return \MvcCore\Ext\Forms\FieldsGroup
+	 * @return \MvcCore\Ext\Forms\Fields\RadioGroup
 	 */
 	public function SetMultiple ($multiple = TRUE) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\RadioGroup */
 		return $this;
 	}
 
@@ -70,6 +71,7 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\RadioGroup */
 		$result = [
 			'multiple'		=> FALSE, 
 			'options'		=> & $this->options, 
@@ -86,6 +88,7 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\RadioGroup */
 		parent::__construct($cfg);
 		static::$templates = (object) array_merge(
 			(array) parent::$templates, 

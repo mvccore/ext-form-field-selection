@@ -68,7 +68,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	/**
 	 * Standard field template strings for natural 
 	 * rendering - `control`, `option` and `optionsGroup`.
-	 * @var string
+	 * @var \string[]|\stdClass[]
 	 */
 	protected static $templates = [
 		'control'		=> '<select id="{id}" name="{name}"{size}{attrs}>{options}</select>',
@@ -84,6 +84,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return array|string|NULL
 	 */
 	public function GetValue () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		return $this->value;
 	}
 	
@@ -96,7 +97,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return \MvcCore\Ext\Forms\Fields\Select
 	 */
 	public function SetValue ($value) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$this->value = $value;
 		return $this;
 	}
@@ -110,11 +111,13 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		parent::__construct($cfg);
 		static::$templates = (object) array_merge(
 			(array) parent::$templates, 
 			(array) self::$templates
 		);
+		$this->ctorOptions($cfg);
 	}
 
 	/**
@@ -132,8 +135,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return \MvcCore\Ext\Forms\Fields\Select
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		parent::SetForm($form);
+		$this->setFormLoadOptions();
 		if (!$this->options) $this->throwNewInvalidArgumentException(
 			'No `options` property defined.'
 		);
@@ -148,6 +152,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$result = [
 			'multiple'		=> $this->multiple, 
 			'options'		=> & $this->options, 
@@ -169,6 +174,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return void
 	 */
 	public function PreDispatch () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		parent::PreDispatch();
 		$this->preDispatchTabIndex();
 		if (!$this->translate) return;
@@ -179,7 +185,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			if (is_scalar($value)) { // string|int|float|bool
 				// most simple key/value array options configuration
 				if ($value) 
-					$options[$key] = $form->Translate((string)$value);
+					$options[$key] = $form->Translate((string) $value);
 			} else if (is_array($value)) {
 				if (isset($value['options']) && is_array($value['options'])) {
 					// `<optgroup>` options configuration
@@ -198,6 +204,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @param array & $optionsGroup 
 	 */
 	protected function preDispatchTranslateOptionOptGroup (& $optionsGroup) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$form = $this->form;
 		$groupLabel = isset($optionsGroup['label']) 
 			? $optionsGroup['label'] 
@@ -230,6 +237,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return string
 	 */
 	public function RenderControl () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$optionsStr = $this->RenderControlOptions();
 		$attrsStr = $this->renderControlAttrsWithFieldVars([
 			'autoComplete',
@@ -267,6 +275,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return string
 	 */
 	public function RenderControlOptions () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$result = '';
 		$valueTypeIsArray = is_array($this->value);
 		if ($this->nullOptionText !== NULL && mb_strlen((string) $this->nullOptionText) > 0) {
@@ -308,6 +317,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return string
 	 */
 	protected function renderControlOptionKeyValue ($value, & $text, $valueTypeIsArray) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$selected = $valueTypeIsArray
 			? in_array($value, $this->value, TRUE)
 			: $this->value === $value ;
@@ -330,6 +340,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return string
 	 */
 	protected function renderControlOptionsGroup (& $optionsGroup, $valueTypeIsArray) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$optionsStr = '';
 		foreach ($optionsGroup['options'] as $key => & $value) {
 			if (is_scalar($value)) {
@@ -371,6 +382,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return mixed
 	 */
 	protected function renderControlOptionsAdvanced ($value, $optionData, $valueTypeIsArray) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$valueToRender = isset($optionData['value']) 
 			? $optionData['value'] 
 			: ($value === NULL ? '' : $value);

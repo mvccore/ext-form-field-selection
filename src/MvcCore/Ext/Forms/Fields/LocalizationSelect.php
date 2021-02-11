@@ -286,7 +286,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
 	public function SetValue ($localizationCode) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\LocalizationSelect */
 		$this->value = static::normalizeLocalizationCode($localizationCode);
 		return $this;
 	}
@@ -297,6 +297,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return array
 	 */
 	public static function & GetAllOptions () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\LocalizationSelect */
 		return static::$allOptions;
 	}
 
@@ -308,6 +309,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @param array $allOptions 
 	 */
 	public static function SetAllOptions ($allOptions = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\LocalizationSelect */
 		static::$allOptions = $allOptions;
 	}
 
@@ -319,7 +321,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
 	public function FilterOptions ($localizationsCodes = []) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\LocalizationSelect */
 		$options = [];
 		foreach ($localizationsCodes as $localizationCode) {
 			$localizationCode = static::normalizeLocalizationCode($localizationCode);
@@ -344,6 +346,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\LocalizationSelect */
 		parent::__construct($cfg);
 		if (isset($cfg['filter'])) 
 			$this->FilterOptions($cfg['filter']);
@@ -364,7 +367,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\LocalizationSelect */
 		if (!$this->options) 
 			$this->options = static::$allOptions;
 		return parent::SetForm($form);
@@ -379,6 +382,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return string
 	 */
 	public function RenderControlOptions () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\LocalizationSelect */
 		$result = '';
 		$valueTypeIsArray = is_array($this->value);
 		if ($this->nullOptionText !== NULL && strlen((string) $this->nullOptionText) > 0) {
@@ -412,6 +416,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return string
 	 */
 	protected static function normalizeLocalizationCode ($rawLocalizationCode) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\LocalizationSelect */
 		$explodedValues = explode('_', str_replace('-', '_', $rawLocalizationCode));
 		$explodedValuesCount = count($explodedValues);
 		if ($explodedValuesCount === 3) 

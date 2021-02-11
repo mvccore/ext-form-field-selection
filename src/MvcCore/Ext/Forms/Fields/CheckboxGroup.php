@@ -104,7 +104,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 
 	/**
 	 * Standard field template strings for natural rendering a `control`.
-	 * @var string
+	 * @var \string[]|\stdClass
 	 */
 	protected static $templates = [
 		'control'	=> '<input id="{id}" name="{name}[]" type="checkbox" value="{value}"{checked}{attrs} />',
@@ -119,6 +119,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\CheckboxGroup */
 		parent::__construct($cfg);
 		static::$templates = (object) array_merge(
 			(array) parent::$templates, 
@@ -137,10 +138,10 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * - Check if there are defined validators if there are defined minimum or maximum selected options.
 	 * @param \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
-	 * @return \MvcCore\Ext\Forms\Fields\Select
+	 * @return \MvcCore\Ext\Forms\Fields\CheckboxGroup
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\CheckboxGroup */
 		parent::SetForm($form);
 		// add minimum/maximum options count validator if necessary
 		$this->setFormMinMaxOptions();
@@ -153,6 +154,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\CheckboxGroup */
 		$result = [
 			'multiple'		=> TRUE, 
 			'options'		=> & $this->options, 
@@ -176,6 +178,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * @return void
 	 */
 	public function PreDispatch () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\CheckboxGroup */
 		parent::PreDispatch();
 		$minOptsDefined = $this->minOptions !== NULL;
 		$maxOptsDefined = $this->maxOptions !== NULL;
@@ -226,6 +229,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * @return array
 	 */
 	protected function renderControlItemCompleteAttrsClassesAndText ($key, & $option) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\CheckboxGroup */
 		$optionType = gettype($option);
 		$labelAttrsStr = '';
 		$controlAttrsStr = '';

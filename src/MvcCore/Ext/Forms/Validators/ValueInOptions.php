@@ -82,7 +82,9 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 */
 	protected function completeSafeValueByOptions ($submittedValue) {
 		if ($this->field instanceof \MvcCore\Ext\Forms\Fields\IOptions) {
-			$flattenOptions = $this->field->GetFlattenOptions();
+			/** @var $optionsField \MvcCore\Ext\Forms\Fields\IOptions */
+			$optionsField = $this->field;
+			$flattenOptions = $optionsField->GetFlattenOptions();
 		} else {
 			$flattenOptions = $this->GetFlattenOptions($this->options);
 		}

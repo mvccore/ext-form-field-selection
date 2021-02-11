@@ -138,6 +138,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return string
 	 */
 	public function GetValue () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\CountrySelect */
 		return $this->value;
 	}
 
@@ -147,7 +148,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function SetValue ($countryCode) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\CountrySelect */
 		$this->value = strtoupper($countryCode);
 		return $this;
 	}
@@ -180,7 +181,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function FilterOptions ($countryCodes = []) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\CountrySelect */
 		$options = [];
 		foreach ($countryCodes as $countryCode) {
 			$countryCode = strtoupper($countryCode);
@@ -205,6 +206,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
+		/** @var $this \MvcCore\Ext\Forms\Fields\CountrySelect */
 		parent::__construct($cfg);
 		if (isset($cfg['filter'])) 
 			$this->FilterOptions($cfg['filter']);
@@ -225,7 +227,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
+		/** @var $this \MvcCore\Ext\Forms\Fields\CountrySelect */
 		if (!$this->options) 
 			$this->options = static::$allOptions;
 		return parent::SetForm($form);
@@ -240,6 +242,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * @return string
 	 */
 	public function RenderControlOptions () {
+		/** @var $this \MvcCore\Ext\Forms\Fields\CountrySelect */
 		$result = '';
 		$valueTypeIsArray = is_array($this->value);
 		if ($this->nullOptionText !== NULL && strlen((string) $this->nullOptionText) > 0) {
