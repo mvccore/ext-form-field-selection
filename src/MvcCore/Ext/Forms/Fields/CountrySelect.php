@@ -15,12 +15,11 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render `<select>` HTML element 
- *				   as roll-out menu for single option select or as options 
- *				   list for multiple selection with options as all existing 
- *				   world states or only filtered world states.
- *				   `CountrySelect` field has it's own validator to check if 
- *				   submitted value is presented in configured options by default.
- *				   
+ *                 as roll-out menu for single option select or as options 
+ *                 list for multiple selection with options as all existing 
+ *                 world states or only filtered world states.
+ *                 `CountrySelect` field has it's own validator to check if 
+ *                 submitted value is presented in configured options by default.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
@@ -144,7 +143,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 
 	/**
 	 * Set country code value. Given country code will be automatically converted to upper case.
-	 * @param string $countryCode 
+	 * @param  string $countryCode 
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function SetValue ($countryCode) {
@@ -177,7 +176,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * Filter displayed countries to not show every time all existing 
 	 * countries in the world. Given country codes will be automatically
 	 * converted to upper case.
-	 * @param \string[] $countryCodes Array of country codes strings to rendered only, not to render all existing states.
+	 * @param  \string[] $countryCodes Array of country codes strings to rendered only, not to render all existing states.
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function FilterOptions ($countryCodes = []) {
@@ -199,9 +198,9 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * Create new form country `<select>` control instance.
 	 * If there is record under `filter` key in `$cfg` array argument,
 	 * it's used for method $field->FilterOptions();` method.
-	 * @param array $cfg Config array with protected properties and it's 
-	 *					 values which you want to configure, presented 
-	 *					 in camel case properties names syntax.
+	 * @param  array $cfg Config array with protected properties and it's 
+	 *                    values which you want to configure, presented 
+	 *                    in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */
@@ -222,7 +221,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * - Set up translate boolean property.
 	 * - Check if there are any select options in `$this->options`.
 	 * - Set up select minimum/maximum options to select if necessary.
-	 * @param \MvcCore\Ext\Form $form
+	 * @param  \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */

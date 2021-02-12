@@ -15,10 +15,10 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render `<input>` HTML element with 
- *				   type `checkbox`. `checkbox` field has it's own validator 
- *				   `SafeString` to clean string from base ASCII chars and 
- *				   some control chars by default. But validator `SafeString` 
- *				   doesn't prevent SQL injects and more.
+ *                 type `checkbox`. `checkbox` field has it's own validator 
+ *                 `SafeString` to clean string from base ASCII chars and 
+ *                 some control chars by default. But validator `SafeString` 
+ *                 doesn't prevent SQL injects and more.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class		Checkbox 
@@ -46,16 +46,16 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	/**
 	 * Validators: 
 	 * - `SafeString` - remove from submitted value base ASCII characters from 0 to 31 incl. 
-	 *					(first column) and escape special characters: `& " ' < > | = \ %`.
-	 *					This validator is not prevent SQL inject attacks!
-	 * @var string[]|\Closure[]
+	 *                  (first column) and escape special characters: `& " ' < > | = \ %`.
+	 *                  This validator is not prevent SQL inject attacks!
+	 * @var \string[]|\Closure[]
 	 */
 	protected $validators = ['SafeString'];
 
 	/**
 	 * Standard field template strings for natural 
 	 * rendering - `control`, `togetherLabelLeft` and `togetherLabelRight`.
-	 * @var string
+	 * @var \string[]|\stdClass
 	 */
 	protected static $templates = [
 		'control'			=> '<input id="{id}" name="{name}" type="checkbox" value="{value}"{attrs} />',
@@ -65,9 +65,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	
 	/**
 	 * Create new form control instance.
-	 * @param array $cfg Config array with public properties and it's 
-	 *					 values which you want to configure, presented 
-	 *					 in camel case properties names syntax.
+	 * @param  array $cfg Config array with public properties and it's 
+	 *                    values which you want to configure, presented 
+	 *                    in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */

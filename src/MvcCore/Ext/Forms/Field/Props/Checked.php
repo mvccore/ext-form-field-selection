@@ -36,7 +36,7 @@ trait Checked {
 	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked
-	 * @param bool $checked 
+	 * @param  bool $checked 
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetChecked ($checked = TRUE) {
@@ -60,7 +60,7 @@ trait Checked {
 	 * Return `TRUE` for any `array`, `object`, `resource` or `unknown type`,
 	 * `TRUE` for `boolean` `TRUE`, for `string` not equal to `no`, 
 	 * for `integer` not equal to `0` and `TRUE` for `float` not equal to `0.0`.
-	 * @param mixed $value 
+	 * @param  mixed $value 
 	 * @return bool
 	 */
 	public static function GetCheckedByValue ($value) {

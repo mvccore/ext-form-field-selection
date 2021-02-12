@@ -15,10 +15,10 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render `<input>` HTML element 
- *				   with `type` attribute `color` to select hexadecimal 
- *				   color with no transparency. `Color` field has it's own 
- *				   validator for hexadecimal color without transparency 
- *				   and leading slash char `#` by default.
+ *                 with `type` attribute `color` to select hexadecimal 
+ *                 color with no transparency. `Color` field has it's own 
+ *                 validator for hexadecimal color without transparency 
+ *                 and leading slash char `#` by default.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class		Color 
@@ -48,7 +48,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	/**
 	 * Validators: 
 	 * - `Color` - to validate hexadecimal color with no transparency including leading hash char `#`.
-	 * @var string[]|\Closure[]
+	 * @var \string[]|\Closure[]
 	 */
 	protected $validators = ['Color'];
 

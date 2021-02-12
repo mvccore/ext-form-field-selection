@@ -15,7 +15,7 @@ namespace MvcCore\Ext\Forms\Validators;
 
 /**
  * Responsibility: Validate minimum or maximum selected options count in 
- *				   submitted value by configured field setters.
+ *                 submitted value by configured field setters.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class MinMaxOptions extends ValueInOptions {
@@ -52,7 +52,7 @@ class MinMaxOptions extends ValueInOptions {
 	 * validator during submit before every `Validate()` method call.
 	 * This method is also called once, when validator instance is separately 
 	 * added into already created field instance to process any field checking.
-	 * @param \MvcCore\Ext\Forms\Field $field 
+	 * @param  \MvcCore\Ext\Forms\Field $field 
 	 * @return \MvcCore\Ext\Forms\Validator
 	 */
 	public function SetField (\MvcCore\Ext\Forms\IField $field) {
@@ -67,7 +67,7 @@ class MinMaxOptions extends ValueInOptions {
 	
 	/**
 	 * Validate raw user input with maximum options count check.
-	 * @param string|array $rawSubmittedValue Raw submitted value from user.
+	 * @param  string|array $rawSubmittedValue Raw submitted value from user.
 	 * @return \string[]|NULL Safe submitted value or `NULL` if not possible to return safe value.
 	 */
 	public function Validate ($rawSubmittedValue) {

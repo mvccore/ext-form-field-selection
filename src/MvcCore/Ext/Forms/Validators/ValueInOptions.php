@@ -53,8 +53,8 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 * or return string which exists as key in options or `NULL`
 	 * if submitted value is `NULL`. Add error if submitted value
 	 * is not the same as value after existence check.
-	 * @param string|array			$submitValue
-	 * @return string|\string[]|NULL	Safe submitted value or `NULL` if not possible to return safe value.
+	 * @param  string|array          $rawSubmittedValue
+	 * @return string|\string[]|NULL Safe submitted value or `NULL` if not possible to return safe value.
 	 */
 	public function Validate ($rawSubmittedValue) {
 		$submittedValue = $this->getSubmittedValueCorrectType($rawSubmittedValue);
@@ -77,7 +77,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 * Return safe value(s), which exist(s) in field options
 	 * and return boolean (`TRUE`) if result is array or not.
 	 * Example: `list($safeValue, $multiple) = $this->completeSafeValueByOptions($submittedValue);`;
-	 * @param string|\string[] $submittedValue
+	 * @param  string|\string[] $submittedValue
 	 * @return array
 	 */
 	protected function completeSafeValueByOptions ($submittedValue) {
@@ -103,7 +103,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	}
 
 	/**
-	 * @param string|\string[]|NULL $rawSubmittedValue
+	 * @param  string|\string[]|NULL $rawSubmittedValue
 	 * @return string|\string[]|NULL
 	 */
 	protected function getSubmittedValueCorrectType ($rawSubmittedValue) {

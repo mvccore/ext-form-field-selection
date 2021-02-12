@@ -15,10 +15,10 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render `<select>` HTML element 
- *				   as roll-out menu for single option select or as options 
- *				   list for multiple selection. `Select` field has it's own 
- *				   validator to check if submitted value is presented in 
- *				   configured options by default.
+ *                 as roll-out menu for single option select or as options 
+ *                 list for multiple selection. `Select` field has it's own 
+ *                 validator to check if submitted value is presented in 
+ *                 configured options by default.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class		Select 
@@ -43,7 +43,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.0.1';
+	const VERSION = '5.1.2';
 
 	/**
 	 * Possible value: `select`, not used in HTML code for this field.
@@ -60,15 +60,15 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	/**
 	 * Validators: 
 	 * - `ValueInOptions` - to validate if submitted string(s) 
-	 *						are presented in select options keys.
-	 * @var string[]|\Closure[]
+	 *                      are presented in select options keys.
+	 * @var \string[]|\Closure[]
 	 */
 	protected $validators = ['ValueInOptions'];
 
 	/**
 	 * Standard field template strings for natural 
 	 * rendering - `control`, `option` and `optionsGroup`.
-	 * @var \string[]|\stdClass[]
+	 * @var \string[]|\stdClass
 	 */
 	protected static $templates = [
 		'control'		=> '<select id="{id}" name="{name}"{size}{attrs}>{options}</select>',
@@ -93,7 +93,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * function `\string[]` array. If select has not `multiple` 
 	 * attribute, set to this function `string`.
 	 * If you don't want any selected value, set `NULL`.
-	 * @param array|string|NULL $value
+	 * @param  array|string|NULL $value
 	 * @return \MvcCore\Ext\Forms\Fields\Select
 	 */
 	public function SetValue ($value) {
@@ -104,9 +104,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	
 	/**
 	 * Create new form `<select>` control instance.
-	 * @param array $cfg Config array with public properties and it's 
-	 *					 values which you want to configure, presented 
-	 *					 in camel case properties names syntax.
+	 * @param  array $cfg Config array with public properties and it's 
+	 *                    values which you want to configure, presented 
+	 *                    in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */
@@ -130,7 +130,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * - Set up translate boolean property.
 	 * - Check if there are any select options in `$this->options`.
 	 * - Set up select minimum/maximum options to select if necessary.
-	 * @param \MvcCore\Ext\Form $form
+	 * @param  \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\Select
 	 */
@@ -148,7 +148,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 
 	/**
 	 * Return field specific data for validator.
-	 * @param array $fieldPropsDefaultValidValues 
+	 * @param  array $fieldPropsDefaultValidValues 
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
@@ -311,9 +311,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Render select `<option>` tag with inner visible text and attributes: `value` and
 	 * `selected` (optionally) by given `$value` string for value to select and `$text` 
 	 * string for visible text.
-	 * @param string|NULL $value 
-	 * @param string $text 
-	 * @param bool $valueTypeIsArray 
+	 * @param  string|NULL $value 
+	 * @param  string      $text 
+	 * @param  bool        $valueTypeIsArray 
 	 * @return string
 	 */
 	protected function renderControlOptionKeyValue ($value, & $text, $valueTypeIsArray) {
@@ -335,8 +335,8 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 
 	/**
 	 * Render `<optgroup>` tag including it's rendered `<option>` tags.
-	 * @param array $optionsGroup 
-	 * @param bool $valueTypeIsArray 
+	 * @param  array $optionsGroup 
+	 * @param  bool  $valueTypeIsArray 
 	 * @return string
 	 */
 	protected function renderControlOptionsGroup (& $optionsGroup, $valueTypeIsArray) {
@@ -376,9 +376,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Render select `<option>` tag with inner visible text and attributes: `value`, 
 	 * `selected` (optionally), `class` (optionally) and any other optional attributes if configured
 	 * by given `$value` string and `$optionData` array with additional option configuration data.
-	 * @param string|NULL $value 
-	 * @param mixed $optionData 
-	 * @param mixed $valueTypeIsArray 
+	 * @param  string|NULL $value 
+	 * @param  mixed       $optionData 
+	 * @param  mixed       $valueTypeIsArray 
 	 * @return mixed
 	 */
 	protected function renderControlOptionsAdvanced ($value, $optionData, $valueTypeIsArray) {

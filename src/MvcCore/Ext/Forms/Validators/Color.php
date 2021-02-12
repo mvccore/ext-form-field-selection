@@ -15,7 +15,7 @@ namespace MvcCore\Ext\Forms\Validators;
 
 /**
  * Responsibility: Validate hexadecimal color with no transparency including 
- *				   leading hash char `#`.
+ *                 leading hash char `#`.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class Color extends \MvcCore\Ext\Forms\Validator {
@@ -36,8 +36,8 @@ class Color extends \MvcCore\Ext\Forms\Validator {
 
 	/**
 	 * Validate fully opaque color string by PHP `preg_match('/^#[0-9A-F]{6}$/', strtoupper($rawSubmittedValue));`.
-	 * @param string|array $rawSubmittedValue Raw submitted value from user.
-	 * @return string|NULL Safe submitted value or `NULL` if not possible to return safe value.
+	 * @param  string|array $rawSubmittedValue Raw submitted value from user.
+	 * @return string|NULL  Safe submitted value or `NULL` if not possible to return safe value.
 	 */
 	public function Validate ($rawSubmittedValue) {
 		$result = strtoupper(trim((string) $rawSubmittedValue));

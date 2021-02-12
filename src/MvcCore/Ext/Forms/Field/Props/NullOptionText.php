@@ -69,8 +69,8 @@ trait NullOptionText {
 	 * if `<select>` tag has already any value selected or not yet . It's rendered usually 
 	 * as first `<option>` sub-element with an empty value, as `disabled` and `selected` 
 	 * `<option>` tag. `NULL` value means no placeholder `<option>` tag will be rendered.
-	 * @param string|NULL  $nullOptionText 
-	 * @param boolean|NULL $translateNullOptionText 
+	 * @param  string|NULL  $nullOptionText 
+	 * @param  boolean|NULL $translateNullOptionText 
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetNullOptionText ($nullOptionText, $translateNullOptionText = NULL) {

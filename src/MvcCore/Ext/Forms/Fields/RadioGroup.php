@@ -15,9 +15,9 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render `<input type="radio">` HTML 
- *				   element as radio buttons menu for single option selection.
- *				   `RadioGroup` field has it's own validator to check if 
- *				   submitted value is presented in configured options by default.
+ *                 element as radio buttons menu for single option selection.
+ *                 `RadioGroup` field has it's own validator to check if 
+ *                 submitted value is presented in configured options by default.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
@@ -39,7 +39,7 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 	/**
 	 * Validators: 
 	 * - `ValueInOptions` - to validate if submitted string is presented in radio options keys.
-	 * @var string[]|\Closure[]
+	 * @var \string[]|\Closure[]
 	 */
 	protected $validators = ['ValueInOptions'];
 
@@ -67,7 +67,7 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 
 	/**
 	 * Return field specific data for validator.
-	 * @param array $fieldPropsDefaultValidValues 
+	 * @param  array $fieldPropsDefaultValidValues 
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
@@ -81,9 +81,9 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 
 	/**
 	 * Create new form `<input type="radio">` control instance.
-	 * @param array $cfg Config array with public properties and it's 
-	 *					 values which you want to configure, presented 
-	 *					 in camel case properties names syntax.
+	 * @param  array $cfg Config array with public properties and it's 
+	 *                    values which you want to configure, presented 
+	 *                    in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */

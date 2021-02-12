@@ -15,12 +15,11 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render `<select>` HTML element 
- *				   as roll-out menu for single option select or as options 
- *				   list for multiple selection with options as all existing 
- *				   world localizations or only filtered world localizations.
- *				   `LocalizationSelect` field has it's own validator to check if 
- *				   submitted value is presented in configured options by default.
- *				   
+ *                 as roll-out menu for single option select or as options 
+ *                 list for multiple selection with options as all existing 
+ *                 world localizations or only filtered world localizations.
+ *                 `LocalizationSelect` field has it's own validator to check if 
+ *                 submitted value is presented in configured options by default.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
@@ -282,7 +281,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * Set localization value (language and country code separated by underscore). 
 	 * If there is given localization code separated by dash, it's automatically
 	 * replaced by underscore.
-	 * @param string $localizationCode 
+	 * @param  string $localizationCode 
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
 	public function SetValue ($localizationCode) {
@@ -317,7 +316,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * Filter displayed localizations to not show every time all existing 
 	 * localizations in the world. Given localizations codes will be automatically
 	 * converted to upper case.
-	 * @param \string[] $localizationsCodes Array of localization codes strings to rendered only, not to render all existing localizations.
+	 * @param  \string[] $localizationsCodes Array of localization codes strings to rendered only, not to render all existing localizations.
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
 	public function FilterOptions ($localizationsCodes = []) {
@@ -339,9 +338,9 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * Create new form localization `<select>` control instance.
 	 * If there is record under `filter` key in `$cfg` array argument,
 	 * it's used for method $field->FilterOptions([...]);` method.
-	 * @param array $cfg Config array with protected properties and it's 
-	 *					 values which you want to configure, presented 
-	 *					 in camel case properties names syntax.
+	 * @param  array $cfg Config array with protected properties and it's 
+	 *                    values which you want to configure, presented 
+	 *                    in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */
@@ -362,7 +361,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * - Set up translate boolean property.
 	 * - Check if there are any select options in `$this->options`.
 	 * - Set up select minimum/maximum options to select if necessary.
-	 * @param \MvcCore\Ext\Form $form
+	 * @param  \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\LocalizationSelect
 	 */
@@ -412,7 +411,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * - lower language code
 	 * - (optional alphabetical code in pascal case)
 	 * - upper case country code
-	 * @param string $rawLocalizationCode 
+	 * @param  string $rawLocalizationCode 
 	 * @return string
 	 */
 	protected static function normalizeLocalizationCode ($rawLocalizationCode) {

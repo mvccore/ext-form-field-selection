@@ -15,13 +15,13 @@ namespace MvcCore\Ext\Forms\Fields;
 
 /**
  * Responsibility: init, pre-dispatch and render group of `input`s 
- *				   with `type` as `checkbox`, with configuration to 
- *				   select minimum and maximum count of values and 
- *				   required option. 
- *				   `CheckboxGroup` has it's own validator to check if 
- *				   submitted values are presented in configured by 
- *				   default and it's own validator to check minimum or 
- *				   maximum count of selected options.
+ *                 with `type` as `checkbox`, with configuration to 
+ *                 select minimum and maximum count of values and 
+ *                 required option. 
+ *                 `CheckboxGroup` has it's own validator to check if 
+ *                 submitted values are presented in configured by 
+ *                 default and it's own validator to check minimum or 
+ *                 maximum count of selected options.
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class		CheckboxGroup 
@@ -57,8 +57,8 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	/**
 	 * Validators: 
 	 * - `ValueInOptions` - to validate if submitted string(s) 
-	 *						are presented in select options keys.
-	 * @var string[]|\Closure[]
+	 *                      are presented in select options keys.
+	 * @var \string[]|\Closure[]
 	 */
 	protected $validators = ["ValueInOptions"];
 
@@ -112,9 +112,9 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 
 	/**
 	 * Create new form `<input type="checkbox" />` group control instance.
-	 * @param array $cfg Config array with public properties and it's 
-	 *					 values which you want to configure, presented 
-	 *					 in camel case properties names syntax.
+	 * @param  array $cfg Config array with public properties and it's 
+	 *                    values which you want to configure, presented 
+	 *                    in camel case properties names syntax.
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */
@@ -136,7 +136,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * - Set up required.
 	 * - Check if there are any options for current controls group.
 	 * - Check if there are defined validators if there are defined minimum or maximum selected options.
-	 * @param \MvcCore\Ext\Form $form
+	 * @param  \MvcCore\Ext\Form $form
 	 * @throws \InvalidArgumentException
 	 * @return \MvcCore\Ext\Forms\Fields\CheckboxGroup
 	 */
@@ -150,7 +150,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 
 	/**
 	 * Return field specific data for validator.
-	 * @param array $fieldPropsDefaultValidValues 
+	 * @param  array $fieldPropsDefaultValidValues 
 	 * @return array
 	 */
 	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
@@ -224,8 +224,8 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * - Label text string.
 	 * - Label attributes string.
 	 * - Control attributes string.
-	 * @param string	   $key
-	 * @param string|array $option
+	 * @param  string       $key
+	 * @param  string|array $option
 	 * @return array
 	 */
 	protected function renderControlItemCompleteAttrsClassesAndText ($key, & $option) {
