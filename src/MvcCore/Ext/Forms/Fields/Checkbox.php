@@ -72,7 +72,6 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return void
 	 */
 	public function __construct(array $cfg = []) {
-		$this->labelSide = \MvcCore\Ext\Forms\IField::LABEL_SIDE_RIGHT;
 		parent::__construct($cfg);
 		static::$templates = (object) array_merge(
 			(array) parent::$templates, 
@@ -92,6 +91,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	public function PreDispatch () {
 		parent::PreDispatch();
 		$this->preDispatchTabIndex();
+		$this->preDispatchChecked();
 	}
 	
 	/**

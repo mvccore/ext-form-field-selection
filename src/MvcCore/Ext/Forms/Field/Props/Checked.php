@@ -79,4 +79,27 @@ trait Checked {
 		}
 		return $checked;
 	}
+
+	/**
+	 * Set up opposite label side than all other fields has.
+	 * Set up render mode by form default fields render mode.
+	 * @return void
+	 */
+	protected function preDispatchChecked () {
+		/** @var $this \MvcCore\Ext\Forms\Field|\MvcCore\Ext\Forms\Field\Props\TabIndex */
+
+		// set opposite label side than default from form.
+		$labelSideDefault = $this->form->GetFieldsLabelSideDefault();
+		$this->labelSide = $labelSideDefault === \MvcCore\Ext\Forms\IField::LABEL_SIDE_LEFT
+			? \MvcCore\Ext\Forms\IField::LABEL_SIDE_RIGHT
+			: \MvcCore\Ext\Forms\IField::LABEL_SIDE_LEFT;;
+
+		// never set up render mode no label for checkbox:
+		$formDefaultFieldRenderMode = $this->form->GetFieldsRenderModeDefault();
+		if ($formDefaultFieldRenderMode === \MvcCore\Ext\IForm::FIELD_RENDER_MODE_LABEL_AROUND) {
+			$this->renderMode = \MvcCore\Ext\IForm::FIELD_RENDER_MODE_LABEL_AROUND;
+		} else {
+			$this->renderMode = \MvcCore\Ext\IForm::FIELD_RENDER_MODE_NORMAL;
+		}
+	}
 }
