@@ -19,6 +19,7 @@ namespace MvcCore\Ext\Forms\Field\Props;
  * Trait contains protected property `checked` with it's getter and setter
  * and public static method to recognize `checked` boolean automatically from 
  * given field `$value`.
+ * @mixin \MvcCore\Ext\Forms\Field
  */
 trait Checked {
 
@@ -40,7 +41,6 @@ trait Checked {
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetChecked ($checked = TRUE) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->checked = $checked;
 		return $this;
 	}

@@ -46,6 +46,55 @@ class MinMaxOptions extends ValueInOptions {
 		'minOptions'	=> NULL, 
 		'maxOptions'	=> NULL, 
 	];
+	
+
+	/**
+	 * Create min./max. options validator instance.
+	 * 
+	 * @param  array $cfg
+	 * Config array with protected properties and it's 
+	 * values which you want to configure, presented 
+	 * in camel case properties names syntax.
+	 * 
+	 * @param  bool  $multiple
+	 * If control is `<input>` with `type` as `file` or `email`,
+	 * this Boolean attribute indicates whether the user can enter 
+	 * more than one value.
+	 * If control is `<input>` with `type` as `range`, there are 
+	 * rendered two connected sliders (range controls) as one control
+	 * to simulate range from and range to. Result value will be array.
+	 * If control is `<select>`, this Boolean attribute indicates 
+	 * that multiple options can be selected in the list. When 
+	 * multiple is specified, most browsers will show a scrolling 
+	 * list box instead of a single line drop down.
+	 * @param  array $options
+	 * Form group control options to render more sub-control attributes for specified
+	 * submitted values (array keys). This property configuration is required.
+	 * 
+	 * @param  int   $minOptions
+	 * Minimum options count to select. Default value is `NULL` to not limit anything.
+	 * @param  int   $maxOptions
+	 * Maximum options count to select. Default value is `NULL` to not limit anything.
+	 * 
+	 * @throws \InvalidArgumentException 
+	 * @return void
+	 */
+	public function __construct(
+		array $cfg = [],
+		$multiple = NULL,
+		array $options = [],
+		$minOptions = NULL,
+		$maxOptions = NULL
+	) {
+		$errorMessages = static::$errorMessages;
+		$this->consolidateCfg($cfg, func_get_args(), func_num_args());
+		parent::__construct($cfg);
+		if (self::$errorMessages !== $errorMessages)
+			static::$errorMessages = array_replace(
+				self::$errorMessages,
+				$errorMessages
+			);
+	}
 
 	/**
 	 * Set up field instance, where is validated value by this 
@@ -56,7 +105,7 @@ class MinMaxOptions extends ValueInOptions {
 	 * @return \MvcCore\Ext\Forms\Validator
 	 */
 	public function SetField (\MvcCore\Ext\Forms\IField $field) {
-		/** @var $this \MvcCore\Ext\Forms\Validator */
+		/** @var \MvcCore\Ext\Forms\Validator $this */
 		$this->field = $field;
 		$this->setUpFieldProps(array_merge(
 			self::$fieldSpecificProperties,

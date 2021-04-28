@@ -47,6 +47,48 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 		'multiple'	=> NULL,
 		'options'	=> NULL,
 	];
+	
+
+	/**
+	 * Create value in options validator instance.
+	 * 
+	 * @param  array $cfg
+	 * Config array with protected properties and it's 
+	 * values which you want to configure, presented 
+	 * in camel case properties names syntax.
+	 * 
+	 * @param  bool  $multiple
+	 * If control is `<input>` with `type` as `file` or `email`,
+	 * this Boolean attribute indicates whether the user can enter 
+	 * more than one value.
+	 * If control is `<input>` with `type` as `range`, there are 
+	 * rendered two connected sliders (range controls) as one control
+	 * to simulate range from and range to. Result value will be array.
+	 * If control is `<select>`, this Boolean attribute indicates 
+	 * that multiple options can be selected in the list. When 
+	 * multiple is specified, most browsers will show a scrolling 
+	 * list box instead of a single line drop down.
+	 * @param  array $options
+	 * Form group control options to render more sub-control attributes for specified
+	 * submitted values (array keys). This property configuration is required.
+	 * 
+	 * @throws \InvalidArgumentException 
+	 * @return void
+	 */
+	public function __construct(
+		array $cfg = [],
+		$multiple = NULL,
+		array $options = []
+	) {
+		$errorMessages = static::$errorMessages;
+		$this->consolidateCfg($cfg, func_get_args(), func_num_args());
+		parent::__construct($cfg);
+		if (self::$errorMessages !== $errorMessages)
+			static::$errorMessages = array_replace(
+				self::$errorMessages,
+				$errorMessages
+			);
+	}
 
 	/**
 	 * Return array with only submitted values from options keys
@@ -82,7 +124,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 */
 	protected function completeSafeValueByOptions ($submittedValue) {
 		if ($this->field instanceof \MvcCore\Ext\Forms\Fields\IOptions) {
-			/** @var $optionsField \MvcCore\Ext\Forms\Fields\IOptions */
+			/** @var \MvcCore\Ext\Forms\Fields\IOptions $optionsField */
 			$optionsField = $this->field;
 			$flattenOptions = $optionsField->GetFlattenOptions();
 		} else {

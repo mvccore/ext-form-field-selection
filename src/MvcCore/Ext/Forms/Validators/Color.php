@@ -24,7 +24,7 @@ class Color extends \MvcCore\Ext\Forms\Validator {
 	 * Error message index(es).
 	 * @var int
 	 */
-	const ERROR_COLOR = 0;
+	const ERROR_COLOR = 3;
 
 	/**
 	 * Validation failure message template definitions.

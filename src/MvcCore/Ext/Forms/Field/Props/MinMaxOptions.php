@@ -19,6 +19,7 @@ namespace MvcCore\Ext\Forms\Field\Props;
  *    - `\MvcCore\Ext\Forms\Fields\CountrySelect`
  * - `\MvcCore\Ext\Forms\CheckboxGroup`
  * - `\MvcCore\Ext\Forms\Validators\MinMaxOptions`
+ * @mixin \MvcCore\Ext\Forms\Field
  */
 trait MinMaxOptions {
 
@@ -70,7 +71,6 @@ trait MinMaxOptions {
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMinOptions ($minOptions) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->minOptions = $minOptions;
 		return $this;
 	}
@@ -91,7 +91,6 @@ trait MinMaxOptions {
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMaxOptions ($maxOptions) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->maxOptions = $maxOptions;
 		return $this;
 	}
@@ -112,7 +111,6 @@ trait MinMaxOptions {
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetRequiredBubbleMessage ($requiredBubbleMessage) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->requiredBubbleMessage = $requiredBubbleMessage;
 		return $this;
 	}
@@ -131,7 +129,6 @@ trait MinMaxOptions {
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMinOptionsBubbleMessage ($minOptionsBubbleMessage) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->minOptionsBubbleMessage = $minOptionsBubbleMessage;
 		return $this;
 	}
@@ -150,7 +147,6 @@ trait MinMaxOptions {
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetMaxOptionsBubbleMessage ($maxOptionsBubbleMessage) {
-		/** @var $this \MvcCore\Ext\Forms\Field */
 		$this->maxOptionsBubbleMessage = $maxOptionsBubbleMessage;
 		return $this;
 	}

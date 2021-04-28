@@ -17,6 +17,7 @@ namespace MvcCore\Ext\Forms\Field\Props;
  * Trait for classes:
  * - `\MvcCore\Ext\Forms\Fields\Select`
  *    - `\MvcCore\Ext\Forms\Fields\CountrySelect`
+ * @mixin \MvcCore\Ext\Forms\Field
  */
 trait NullOptionText {
 
@@ -43,7 +44,6 @@ trait NullOptionText {
 	 * @return void
 	 */
 	protected function preDispatchNullOptionText () {
-		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		if ($this->translate && $this->nullOptionText !== NULL && $this->translateNullOptionText)
 			$this->nullOptionText = $this->form->Translate($this->nullOptionText);
 	}
@@ -58,7 +58,6 @@ trait NullOptionText {
 	 * @return string|NULL
 	 */
 	public function GetNullOptionText () {
-		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		return $this->nullOptionText;
 	}
 	
@@ -74,7 +73,6 @@ trait NullOptionText {
 	 * @return \MvcCore\Ext\Forms\Field
 	 */
 	public function SetNullOptionText ($nullOptionText, $translateNullOptionText = NULL) {
-		/** @var $this \MvcCore\Ext\Forms\Fields\Select */
 		$this->nullOptionText = $nullOptionText;
 		if ($translateNullOptionText !== NULL)
 			$this->translateNullOptionText = $translateNullOptionText;
