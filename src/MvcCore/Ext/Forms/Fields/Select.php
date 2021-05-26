@@ -37,6 +37,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	use \MvcCore\Ext\Forms\Field\Props\MinMaxOptions;
 	use \MvcCore\Ext\Forms\Field\Props\NullOptionText;
 	use \MvcCore\Ext\Forms\Field\Props\Size;
+	use \MvcCore\Ext\Forms\Field\Props\Wrapper;
 	
 	/**
 	 * MvcCore Extension - Form - Field - Selection - version:
@@ -303,6 +304,11 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * the list that should be visible at one time. Browsers are not required to present a select element 
 	 * as a scrolled list box. The default browser`s value is `0`.
 	 * 
+	 * @param  string                                           $wrapper
+	 * Html code wrapper, wrapper has to contain replacement in string 
+	 * form: `{control}`. Around this substring you can wrap any HTML 
+	 * code you want. Default wrapper values is: `'{control}'`.
+	 * 
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */
@@ -342,7 +348,8 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$maxOptions = NULL,
 		$nullOptionText = NULL,
 		$translateNullOptionText = TRUE,
-		$size = NULL
+		$size = NULL,
+		$wrapper = NULL
 	) {
 		$this->consolidateCfg($cfg, func_get_args(), func_num_args());
 		parent::__construct($cfg);
@@ -491,13 +498,14 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$formViewClass = $this->form->GetViewClass();
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
-		return $formViewClass::Format($templates->control, [
+		$result = $formViewClass::Format($templates->control, [
 			'id'		=> $this->id,
 			'name'		=> $name,
 			'size'		=> $size,
 			'options'	=> $optionsStr,
 			'attrs'		=> strlen($attrsStr) > 0 ? ' ' . $attrsStr : '',
 		]);
+		return $this->renderControlWrapper($result);
 	}
 
 	/**

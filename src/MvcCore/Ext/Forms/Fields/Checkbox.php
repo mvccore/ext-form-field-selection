@@ -30,6 +30,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	use \MvcCore\Ext\Forms\Field\Props\VisibleField;
 	use \MvcCore\Ext\Forms\Field\Props\Label;
 	use \MvcCore\Ext\Forms\Field\Props\Checked;
+	use \MvcCore\Ext\Forms\Field\Props\Wrapper;
 
 	/**
 	 * Possible values: `checkbox`.
@@ -207,6 +208,11 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * 
+	 * @param  string                $wrapper
+	 * Html code wrapper, wrapper has to contain replacement in string 
+	 * form: `{control}`. Around this substring you can wrap any HTML 
+	 * code you want. Default wrapper values is: `'{control}'`.
+	 * 
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */
@@ -237,7 +243,8 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$renderMode = NULL,
 		array $labelAttrs = [],
 
-		$checked = NULL
+		$checked = NULL,
+		$wrapper = NULL
 	) {
 		$this->consolidateCfg($cfg, func_get_args(), func_num_args());
 		parent::__construct($cfg);
@@ -284,11 +291,12 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			$valueStr .= '" checked="checked';
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
-		return $viewClass::Format($templates->control, [
+		$result = $viewClass::Format($templates->control, [
 			'id'		=> $this->id,
 			'name'		=> $this->name,
 			'value'		=> $valueStr,
 			'attrs'		=> strlen($attrsStr) > 0 ? ' ' . $attrsStr : '',
 		]);
+		return $this->renderControlWrapper($result);
 	}
 }

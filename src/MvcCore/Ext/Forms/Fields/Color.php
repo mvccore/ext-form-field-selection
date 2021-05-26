@@ -31,6 +31,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	use \MvcCore\Ext\Forms\Field\Props\Label;
 	use \MvcCore\Ext\Forms\Field\Props\AutoComplete;
 	use \MvcCore\Ext\Forms\Field\Props\DataList;
+	use \MvcCore\Ext\Forms\Field\Props\Wrapper;
 	
 	/**
 	 * Possible value: `color`.
@@ -200,6 +201,11 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @param  string     $list
 	 * Element `list` attribute value - the `<list>` element `id` attribute value.
 	 * 
+	 * @param  string     $wrapper
+	 * Html code wrapper, wrapper has to contain replacement in string 
+	 * form: `{control}`. Around this substring you can wrap any HTML 
+	 * code you want. Default wrapper values is: `'{control}'`.
+	 * 
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */
@@ -231,7 +237,8 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		array $labelAttrs = [],
 		
 		$autoComplete = NULL,
-		$list = NULL
+		$list = NULL,
+		$wrapper = NULL
 	) {
 		$this->consolidateCfg($cfg, func_get_args(), func_num_args());
 		parent::__construct($cfg);
@@ -269,12 +276,13 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$formViewClass = $this->form->GetViewClass();
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
-		return $formViewClass::Format($templates->control, [
+		$result = $formViewClass::Format($templates->control, [
 			'id'		=> $this->id,
 			'name'		=> $this->name,
 			'type'		=> $this->type,
 			'value'		=> htmlspecialchars_decode(htmlspecialchars($this->value, ENT_QUOTES), ENT_QUOTES),
 			'attrs'		=> strlen($attrsStr) > 0 ? ' ' . $attrsStr : '',
 		]);
+		return $this->renderControlWrapper($result);
 	}
 }

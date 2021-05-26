@@ -397,6 +397,11 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * the list that should be visible at one time. Browsers are not required to present a select element 
 	 * as a scrolled list box. The default browser`s value is `0`.
 	 * 
+	 * @param  string           $wrapper
+	 * Html code wrapper, wrapper has to contain replacement in string 
+	 * form: `{control}`. Around this substring you can wrap any HTML 
+	 * code you want. Default wrapper values is: `'{control}'`.
+	 * 
 	 * @param  array            $filter
 	 * Filter displayed countries to not show every time all existing 
 	 * countries in the world. Given country codes will be automatically
@@ -442,6 +447,8 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 		$nullOptionText = NULL,
 		$translateNullOptionText = TRUE,
 		$size = NULL,
+
+		$wrapper = NULL,
 
 		$filter = NULL
 	) {
