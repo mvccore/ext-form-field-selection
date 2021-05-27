@@ -98,7 +98,7 @@ trait Checked {
 		$formDefaultFieldRenderMode = $this->form->GetFieldsRenderModeDefault();
 		if ($formDefaultFieldRenderMode === \MvcCore\Ext\IForm::FIELD_RENDER_MODE_LABEL_AROUND) {
 			$this->renderMode = \MvcCore\Ext\IForm::FIELD_RENDER_MODE_LABEL_AROUND;
-		} else {
+		} else if ($this->renderMode !== \MvcCore\Ext\IForm::FIELD_RENDER_MODE_LABEL_AROUND) {
 			$this->renderMode = \MvcCore\Ext\IForm::FIELD_RENDER_MODE_NORMAL;
 		}
 	}
