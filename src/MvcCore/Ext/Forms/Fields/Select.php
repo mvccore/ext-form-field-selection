@@ -376,6 +376,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
+		if ($this->form !== NULL) return $this;
 		parent::SetForm($form);
 		$this->setFormLoadOptions();
 		if (!$this->options && !$this->optionsLoader) 
@@ -541,7 +542,11 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 				} else {
 					// advanced configuration with key, text, cs class, and any other attributes for single option tag
 					$result .= $this->renderControlOptionsAdvanced(
-						isset($value['value']) ? $value['value'] : $key, $value, $valueTypeIsArray
+						isset($value['value']) 
+							? $value['value'] 
+							: $key, 
+						$value, 
+						$valueTypeIsArray
 					);
 				}
 			}

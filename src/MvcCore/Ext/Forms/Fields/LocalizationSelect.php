@@ -614,6 +614,7 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
 		/** @var \MvcCore\Ext\Forms\Fields\LocalizationSelect $this */
+		if ($this->form !== NULL) return $this;
 		if (!$this->options) 
 			$this->options = static::$allOptions;
 		return parent::SetForm($form);

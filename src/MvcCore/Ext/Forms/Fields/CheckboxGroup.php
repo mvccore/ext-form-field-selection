@@ -353,6 +353,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 */
 	public function SetForm (\MvcCore\Ext\IForm $form) {
 		/** @var \MvcCore\Ext\Forms\Fields\CheckboxGroup $this */
+		if ($this->form !== NULL) return $this;
 		parent::SetForm($form);
 		// add minimum/maximum options count validator if necessary
 		$this->setFormMinMaxOptions();
