@@ -58,10 +58,17 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 */
 	protected $value = NULL;
 
+	/**
+	 * `TRUE` if value is array type. It's not the same 
+	 * as multiple attribute, because value could be still `NULL`.
+	 * @var bool
+	 */
 	protected $valueIsArray = FALSE;
 
 	/**
-	 * 
+	 * Internal property to detect selected option for rendering.
+	 * It's array with keys by multiple field values converted into strings 
+	 * (array values are bool `TRUE`) or just scalar value converted into string.
 	 * @var array|string|NULL
 	 */
 	protected $valuesMap = NULL;
