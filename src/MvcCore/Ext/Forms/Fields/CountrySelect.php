@@ -199,41 +199,41 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * If there is record under `filter` key in `$cfg` array argument,
 	 * it's used for method $field->FilterOptions();` method.
 	 * 
-	 * @param  array            $cfg
+	 * @param  array                          $cfg
 	 * Config array with public properties and it's
 	 * values which you want to configure, presented
 	 * in camel case properties names syntax.
 	 * 
-	 * @param  string           $name 
+	 * @param  string                         $name 
 	 * Form field specific name, used to identify submitted value.
 	 * This value is required for all form fields.
-	 * @param  string           $type 
+	 * @param  string                         $type 
 	 * Fixed field order number, null by default.
-	 * @param  int              $fieldOrder
+	 * @param  int                            $fieldOrder
 	 * Form field type, used in `<input type="...">` attribute value.
 	 * Every typed field has it's own string value, but base field type 
 	 * `\MvcCore\Ext\Forms\Field` has `NULL`.
-	 * @param  string|\string[] $value 
+	 * @param  string|\string[]               $value 
 	 * Form field value. It could be string or array, int or float, it depends
 	 * on field implementation. Default value is `NULL`.
-	 * @param  string           $title 
+	 * @param  string                         $title 
 	 * Field title, global HTML attribute, optional.
-	 * @param  string           $translate 
+	 * @param  string                         $translate 
 	 * Boolean flag about field visible texts and error messages translation.
 	 * This flag is automatically assigned from `$field->form->GetTranslate();` 
 	 * flag in `$field->Init();` method.
-	 * @param  string           $translateTitle 
+	 * @param  string                         $translateTitle 
 	 * Boolean to translate title text, `TRUE` by default.
-	 * @param  array            $cssClasses 
+	 * @param  array                          $cssClasses 
 	 * Form field HTML element css classes strings.
 	 * Default value is an empty array to not render HTML `class` attribute.
-	 * @param  array            $controlAttrs 
+	 * @param  array                          $controlAttrs 
 	 * Collection with field HTML element additional attributes by array keys/values.
 	 * Do not use system attributes as: `id`, `name`, `value`, `readonly`, `disabled`, `class` ...
 	 * Those attributes has it's own configurable properties by setter methods or by constructor config array.
 	 * HTML field elements are meant: `<input>, <button>, <select>, <textarea> ...`. 
 	 * Default value is an empty array to not render any additional attributes.
-	 * @param  array            $validators 
+	 * @param  array                          $validators 
 	 * List of predefined validator classes ending names or validator instances.
 	 * Keys are validators ending names and values are validators ending names or instances.
 	 * Validator class must exist in any validators namespace(s) configured by default:
@@ -247,17 +247,17 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * Every typed field has it's own predefined validators, but you can define any
 	 * validator you want and replace them.
 	 * 
-	 * @param  string           $accessKey
+	 * @param  string                         $accessKey
 	 * The access key global attribute provides a hint for generating
 	 * a keyboard shortcut for the current element. The attribute 
 	 * value must consist of a single printable character (which 
 	 * includes accented and other characters that can be generated 
 	 * by the keyboard).
-	 * @param  bool             $autoFocus
+	 * @param  bool                           $autoFocus
 	 * This Boolean attribute lets you specify that a form control should have input
 	 * focus when the page loads. Only one form-associated element in a document can
 	 * have this attribute specified. 
-	 * @param  bool             $disabled
+	 * @param  bool                           $disabled
 	 * Form field attribute `disabled`, determination if field value will be 
 	 * possible to change by user and if user will be graphically informed about it 
 	 * by default browser behaviour or not. Default value is `FALSE`. 
@@ -270,7 +270,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * required is true and if there is no or invalid submitted value, there is no 
 	 * required error and it's used value from server side assigned by 
 	 * `$form->SetValues();` or from session.
-	 * @param  bool             $readOnly
+	 * @param  bool                           $readOnly
 	 * Form field attribute `readonly`, determination if field value will be 
 	 * possible to read only or if value will be possible to change by user. 
 	 * Default value is `FALSE`. This flag is also used for submit checking. 
@@ -282,14 +282,14 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * required is true and if there is invalid submitted value, there is no required 
 	 * error and it's used value from server side assigned by 
 	 * `$form->SetValues();` or from session.
-	 * @param  bool             $required
+	 * @param  bool                           $required
 	 * Form field attribute `required`, determination
 	 * if control will be required to complete any value by user.
 	 * This flag is also used for submit checking. Default value is `NULL`
 	 * to not require any field value. If form has configured it's property
 	 * `$form->GetDefaultRequired()` to `TRUE` and this value is `NULL`, field
 	 * will be automatically required by default form configuration.
-	 * @param  int|string       $tabIndex
+	 * @param  int|string                     $tabIndex
 	 * An integer attribute indicating if the element can take input focus (is focusable), 
 	 * if it should participate to sequential keyboard navigation, and if so, at what 
 	 * position. You can set `auto` string value to get next form tab-index value automatically. 
@@ -306,12 +306,12 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 *   the increasing value of the tab-index. If several elements share the same tab-index, 
 	 *   their relative order follows their relative positions in the document.
 	 * 
-	 * @param  string           $label
+	 * @param  string                         $label
 	 * Control label visible text. If field form has configured any translator, translation 
 	 * will be processed automatically before rendering process. Default value is `NULL`.
-	 * @param  bool             $translateLabel
+	 * @param  bool                           $translateLabel
 	 * Boolean to translate label text, `TRUE` by default.
-	 * @param  string           $labelSide
+	 * @param  string                         $labelSide
 	 * Label side from rendered field - location where label will be rendered.
 	 * By default `$this->labelSide` is configured to `left`.
 	 * If you want to reconfigure it to different side,
@@ -319,7 +319,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * You can use constants:
 	 * - `\MvcCore\Ext\Forms\IField::LABEL_SIDE_LEFT`
 	 * - `\MvcCore\Ext\Forms\IField::LABEL_SIDE_RIGHT`
-	 * @param  int              $renderMode
+	 * @param  int                            $renderMode
 	 * Rendering mode flag how to render field and it's label.
 	 * Default value is `normal` to render label and field, label 
 	 * first or field first by another property `$field->labelSide = 'left' | 'right';`.
@@ -328,20 +328,20 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * - `\MvcCore\Ext\Form::FIELD_RENDER_MODE_NORMAL`       - `<label /><input />`
 	 * - `\MvcCore\Ext\Form::FIELD_RENDER_MODE_LABEL_AROUND` - `<label><input /></label>`
 	 * - `\MvcCore\Ext\Form::FIELD_RENDER_MODE_NO_LABEL`     - `<input />`
-	 * @param  array            $labelAttrs
+	 * @param  array                          $labelAttrs
 	 * Collection with `<label>` HTML element additional attributes by array keys/values.
 	 * Do not use system attributes as: `id`,`for` or `class`, those attributes has it's own 
 	 * configurable properties by setter methods or by constructor config array. Label `class` 
 	 * attribute has always the same css classes as it's field automatically. 
 	 * Default value is an empty array to not render any additional attributes.
 	 * 
-	 * @param  string           $autoComplete 
+	 * @param  string                         $autoComplete 
 	 * Attribute indicates if the input can be automatically completed 
 	 * by the browser, usually by remembering previous values the user 
 	 * has entered. Possible values: `off`, `on`, `name`, `email`, 
 	 * `username`, `country`, `postal-code` and many more...
 	 * 
-	 * @param  bool             $multiple
+	 * @param  bool                           $multiple
 	 * If control is `<input>` with `type` as `file` or `email`,
 	 * this Boolean attribute indicates whether the user can enter 
 	 * more than one value.
@@ -353,41 +353,44 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * multiple is specified, most browsers will show a scrolling 
 	 * list box instead of a single line drop down.
 	 * 
-	 * @param  array            $options
+	 * @param  array                          $options
 	 * Form group control options to render more sub-control attributes for specified
 	 * submitted values (array keys). This property configuration is required.
-	 * @param  bool             $translateOptions
+	 * @param  bool                           $translateOptions
 	 * Boolean about to translate options texts, default `TRUE` to translate.
-	 * @param  array            $optionsLoader
-	 * Definition for method name and context to resolve options loading for complex cases.
-	 * First item is string method name, which has to return options for `$field->SetOptions()` method.
-	 * Second item is context definition int flag, where the method is located, you can use constants:
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_FORM`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_FORM_STATIC`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_CTRL`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_CTRL_STATIC`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_MODEL`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_MODEL_STATIC`
-	 * Last two constants are usefull only for `mvccore/ext-model-form` extension.
+	 * @param  callable|\Closure|array|string $optionsLoader
+	 * Callable or dynamic callable definition to load control options.
+	 * Value could be:
+	 * - Standard PHP callable or `\Closure` function.
+	 * - Dynamic callable definition by array with first item to define context
+	 *   definition int flag, where the method (second array item) is located, 
+	 *   you can use constants:
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_FORM`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_FORM_STATIC`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_CTRL`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_CTRL_STATIC`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_MODEL`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_MODEL_STATIC`
+	 *   Last two constants are usefull only for `mvccore/ext-model-form` extension.
 	 * 
-	 * @param  int              $minOptions
+	 * @param  int                            $minOptions
 	 * Minimum options count to select. 
 	 * Default value is `NULL` to not limit anything.
-	 * @param  int              $maxOptions
+	 * @param  int                            $maxOptions
 	 * Maximum options count to select. 
 	 * Default value is `NULL` to not limit anything.
 	 * 
-	 * @param  string           $nullOptionText 
+	 * @param  string                         $nullOptionText 
 	 * This attribute is a text placeholder for `<select>` controls,
 	 * when no option is selected yet. Typically: `--- please select an option ---`.
 	 * It's rendered every time this placeholder has any text value, doesn't matter,
 	 * if `<select>` tag has already any value selected or not yet . It's rendered usually 
 	 * as first `<option>` sub-element with an empty value, as `disabled` and `selected` 
 	 * `<option>` tag. `NULL` value means no placeholder `<option>` tag will be rendered.
-	 * @param  bool             $translateNullOptionText
+	 * @param  bool                           $translateNullOptionText
 	 * Boolean to translate placeholder text, `TRUE` by default.
 	 * 
-	 * @param  int              $size
+	 * @param  int                            $size
 	 * If the field is `<input>`, this attribute is initial size of the control. Starting in HTML5, 
 	 * this attribute applies only when the `type` attribute is set to `text`, `search`, `tel`, `url`, 
 	 * `email`, or `password`, otherwise it is ignored. The `size` must be an integer greater than zero. 
@@ -397,12 +400,12 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * the list that should be visible at one time. Browsers are not required to present a select element 
 	 * as a scrolled list box. The default browser`s value is `0`.
 	 * 
-	 * @param  string           $wrapper
+	 * @param  string                         $wrapper
 	 * Html code wrapper, wrapper has to contain replacement in string 
 	 * form: `{control}`. Around this substring you can wrap any HTML 
 	 * code you want. Default wrapper values is: `'{control}'`.
 	 * 
-	 * @param  array            $filter
+	 * @param  array                          $filter
 	 * Filter displayed countries to not show every time all existing 
 	 * countries in the world. Given country codes will be automatically
 	 * converted to upper case.

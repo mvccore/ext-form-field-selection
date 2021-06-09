@@ -254,17 +254,20 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * submitted values (array keys). This property configuration is required.
 	 * @param  bool                                             $translateOptions
 	 * Boolean about to translate options texts, default `TRUE` to translate.
-	 * @param  array                                            $optionsLoader
-	 * Definition for method name and context to resolve options loading for complex cases.
-	 * First item is string method name, which has to return options for `$field->SetOptions()` method.
-	 * Second item is context definition int flag, where the method is located, you can use constants:
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_FORM`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_FORM_STATIC`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_CTRL`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_CTRL_STATIC`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_MODEL`
-	 *  - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_MODEL_STATIC`
-	 * Last two constants are usefull only for `mvccore/ext-model-form` extension.
+	 * @param  callable|\Closure|array|string                   $optionsLoader
+	 * Callable or dynamic callable definition to load control options.
+	 * Value could be:
+	 * - Standard PHP callable or `\Closure` function.
+	 * - Dynamic callable definition by array with first item to define context
+	 *   definition int flag, where the method (second array item) is located, 
+	 *   you can use constants:
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_FORM`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_FORM_STATIC`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_CTRL`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_CTRL_STATIC`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_MODEL`
+	 *   - `\MvcCore\Ext\Forms\Fields\IOptions::LOADER_CONTEXT_MODEL_STATIC`
+	 *   Last two constants are usefull only for `mvccore/ext-model-form` extension.
 	 * 
 	 * @param  \string[]                                        $groupLabelCssClasses
 	 * Css class or classes for group label as array of strings.
