@@ -208,6 +208,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
 	 * 
+	 * @param  bool                  $boolMode
+	 * 
+	 * 
 	 * @param  string                $wrapper
 	 * Html code wrapper, wrapper has to contain replacement in string 
 	 * form: `{control}`. Around this substring you can wrap any HTML 
@@ -244,6 +247,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		array $labelAttrs = [],
 
 		$checked = NULL,
+		$boolMode = NULL,
 		$wrapper = NULL
 	) {
 		$this->consolidateCfg($cfg, func_get_args(), func_num_args());
@@ -268,6 +272,31 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$this->preDispatchTabIndex();
 		$this->preDispatchChecked();
 	}
+
+	/**
+	 * @inheritDocs
+	 * @internal
+	 * @template
+	 * @param array $rawRequestParams Raw request params from MvcCore
+	 *                                request object based on raw app
+	 *                                input, `$_GET` or `$_POST`.
+	 * @return bool|string|int|NULL
+	 */
+	public function Submit (array & $rawRequestParams = []) {
+		$result = parent::Submit($rawRequestParams);
+		if ($this->boolMode) {
+			$newValue = FALSE;
+			if (is_bool($result)) {
+				$newValue = $result;
+			} else if (is_string($result)) {
+				$newValue = mb_strtolower($result) === 'true' || $result === '1';
+			} else {
+				$newValue = (bool) $result;
+			}
+			$result = $newValue;
+		}
+		return $result;
+	}
 	
 	/**
 	 * This INTERNAL method is called from `\MvcCore\Ext\Forms\Field\Rendering` 
@@ -285,7 +314,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		if ($this->checked === NULL) 
 			$this->checked = static::GetCheckedByValue($this->value);
 		$valueStr = htmlspecialchars_decode(htmlspecialchars($this->value, ENT_QUOTES), ENT_QUOTES);
-		if (!$valueStr) 
+		if (!$valueStr || $this->boolMode) 
 			$valueStr = 'true';
 		if ($this->checked) 
 			$valueStr .= '" checked="checked';

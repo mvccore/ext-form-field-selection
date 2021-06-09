@@ -33,6 +33,14 @@ trait Checked {
 	protected $checked = NULL;
 
 	/**
+	 * If `TRUE` (default `FALSE`), then there is always return boolean 
+	 * type value after submit and there is rendered value attribute in HTML 
+	 * element always with `true` string.
+	 * @var bool
+	 */
+	protected $boolMode = FALSE;
+
+	/**
 	 * Set `TRUE` to rendered field as checked, `FALSE` otherwise.
 	 * If not set, checked flag will be automatically resolved by field value
 	 * with method `static::GetCheckedByValue($checkbox->GetValue());`
@@ -55,6 +63,28 @@ trait Checked {
 	public function GetChecked () {
 		return $this->checked;
 	}
+	
+	/**
+	 * Set `TRUE` (default `FALSE`) to always return boolean 
+	 * type value after submit and to render value attribute in HTML 
+	 * element always with `true` string.
+	 * @param  bool $boolMode 
+	 * @return \MvcCore\Ext\Forms\Field
+	 */
+	public function SetBoolMode ($boolMode = TRUE) {
+		$this->boolMode = $boolMode;
+		return $this;
+	}
+
+	/**
+	 * Get `TRUE` (default `FALSE`) to always return boolean 
+	 * type value after submit and to render value attribute in HTML 
+	 * element always with `true` string.
+	 * @return bool
+	 */
+	public function GetBoolMode () {
+		return $this->boolMode;
+	}
 
 	/**
 	 * Return `TRUE` for any `array`, `object`, `resource` or `unknown type`,
@@ -64,18 +94,23 @@ trait Checked {
 	 * @return bool
 	 */
 	public static function GetCheckedByValue ($value) {
-		if ($value === NULL) return FALSE;
+		if ($value === NULL) 
+			return FALSE;
 		$checked = TRUE;
 		if (is_bool($value) && $value === FALSE) {
 			$checked = FALSE;
 		} else if (is_string($value)) {
 			$lowerValue = strtolower($value);
-			if ($lowerValue == 'false' || $lowerValue == 'no') 
+			if ($lowerValue == 'false' || $lowerValue == 'no' || $lowerValue == '') 
 				$checked = FALSE;
 		} else if (is_int($value) && $value === 0) {
 			$checked = FALSE;
-		} else if (is_float($value) && $value === 0.0) {
-			$checked = FALSE;
+		} else if (is_float($value)) {
+			$floatEpsilon = defined('PHP_FLOAT_EPSILON')
+				? PHP_FLOAT_EPSILON
+				: floatval('2.220446049250313E-16');
+			if (abs($value - 0.0) < $floatEpsilon)
+				$checked = FALSE;
 		}
 		return $checked;
 	}
