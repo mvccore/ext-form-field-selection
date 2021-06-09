@@ -31,7 +31,7 @@ class Color extends \MvcCore\Ext\Forms\Validator {
 	 * @var array
 	 */
 	protected static $errorMessages = [
-		self::ERROR_COLOR	=> "Field '{0}' requires a valid color in hexadecimal format `#[0-9A-F]{6}`.",
+		self::ERROR_COLOR	=> "Field '{0}' requires a valid color in hexadecimal format '#[0-9A-F]{6}'.",
 	];
 
 	/**
