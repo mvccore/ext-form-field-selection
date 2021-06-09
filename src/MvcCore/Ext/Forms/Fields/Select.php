@@ -57,6 +57,14 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @var string|array|NULL
 	 */
 	protected $value = NULL;
+
+	protected $valueIsArray = FALSE;
+
+	/**
+	 * 
+	 * @var array|string|NULL
+	 */
+	protected $valuesMap = NULL;
 	
 	/**
 	 * Validators: 
@@ -523,33 +531,38 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	public function RenderControlOptions () {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		$result = '';
-		$valueTypeIsArray = is_array($this->value);
+		// prepare value(s) in string form to detect select option:
+		$this->valueIsArray = is_array($this->value);
+		if ($this->valueIsArray) {
+			$this->valuesMap = array_fill_keys(array_map('strval', $this->value), TRUE);
+		} else {
+			$this->valuesMap = (string) $this->value;
+		}
+		// render null options text if necessary:
 		if ($this->nullOptionText !== NULL && mb_strlen((string) $this->nullOptionText) > 0) {
 			// advanced configuration with key, text, css class, and any other attributes for single option tag
-			$result .= $this->renderControlOptionsAdvanced(
-				NULL, [
-					'value'	=> NULL,
-					'text'	=> htmlspecialchars_decode(htmlspecialchars($this->nullOptionText, ENT_QUOTES), ENT_QUOTES),
-					//'attrs'	=> ['disabled' => 'disabled'] // this will cause the browser to select the first allowed option automatically 
-				], $valueTypeIsArray
-			);
+			$result .= $this->renderControlOptionsAdvanced(NULL, [
+				'value'	=> NULL,
+				'text'	=> htmlspecialchars_decode(htmlspecialchars($this->nullOptionText, ENT_QUOTES), ENT_QUOTES),
+				//'attrs'	=> ['disabled' => 'disabled'] // this will cause the browser to select the first allowed option automatically 
+			]);
 		}
+		// render all options:
 		foreach ($this->options as $key => & $value) {
 			if (is_scalar($value)) {
 				// most simple key/value array options configuration
-				$result .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
+				$result .= $this->renderControlOptionKeyValue($key, $value);
 			} else if (is_array($value)) {
 				if (isset($value['options']) && is_array($value['options'])) {
 					// `<optgroup>` options configuration
-					$result .= $this->renderControlOptionsGroup($value, $valueTypeIsArray);
+					$result .= $this->renderControlOptionsGroup($value);
 				} else {
 					// advanced configuration with key, text, cs class, and any other attributes for single option tag
 					$result .= $this->renderControlOptionsAdvanced(
-						isset($value['value']) 
+						array_key_exists('value', $value) 
 							? $value['value'] 
 							: $key, 
-						$value, 
-						$valueTypeIsArray
+						$value
 					);
 				}
 			}
@@ -563,20 +576,16 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * string for visible text.
 	 * @param  string|NULL $value 
 	 * @param  string      $text 
-	 * @param  bool        $valueTypeIsArray 
 	 * @return string
 	 */
-	protected function renderControlOptionKeyValue ($value, & $text, $valueTypeIsArray) {
+	protected function renderControlOptionKeyValue ($value, & $text) {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
-		$selected = $valueTypeIsArray
-			? in_array($value, $this->value, TRUE)
-			: (string) $this->value === (string) $value ;
 		$formViewClass = $this->form->GetViewClass();
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
 		return $formViewClass::Format($templates->option, [
-			'value'		=> htmlspecialchars_decode(htmlspecialchars($value, ENT_QUOTES), ENT_QUOTES),
-			'selected'	=> $selected ? ' selected="selected"' : '',
+			'value'		=> htmlspecialchars_decode(htmlspecialchars((string) $value, ENT_QUOTES), ENT_QUOTES),
+			'selected'	=> $this->getOptionSelected($value) ? ' selected="selected"' : '',
 			'text'		=> htmlspecialchars_decode(htmlspecialchars($text, ENT_QUOTES), ENT_QUOTES),
 			'class'		=> '', // to fill prepared template control place for attribute class with empty string
 			'attrs'		=> '', // to fill prepared template control place for other attributes with empty string
@@ -586,19 +595,18 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	/**
 	 * Render `<optgroup>` tag including it's rendered `<option>` tags.
 	 * @param  array $optionsGroup 
-	 * @param  bool  $valueTypeIsArray 
 	 * @return string
 	 */
-	protected function renderControlOptionsGroup (& $optionsGroup, $valueTypeIsArray) {
+	protected function renderControlOptionsGroup (& $optionsGroup) {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		$optionsStr = '';
 		foreach ($optionsGroup['options'] as $key => & $value) {
 			if (is_scalar($value)) {
 				// most simple key/value array options configuration
-				$optionsStr .= $this->renderControlOptionKeyValue($key, $value, $valueTypeIsArray);
+				$optionsStr .= $this->renderControlOptionKeyValue($key, $value);
 			} else if (is_array($value)) {
 				// advanced configuration with key, text, cs class, and any other attributes for single option tag
-				$optionsStr .= $this->renderControlOptionsAdvanced($key, $value, $valueTypeIsArray);
+				$optionsStr .= $this->renderControlOptionsAdvanced($key, $value);
 			}
 		}
 		$label = isset($optionsGroup['label']) && strlen((string) $optionsGroup['label']) > 0
@@ -628,23 +636,10 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * by given `$value` string and `$optionData` array with additional option configuration data.
 	 * @param  string|NULL $value 
 	 * @param  mixed       $optionData 
-	 * @param  mixed       $valueTypeIsArray 
 	 * @return mixed
 	 */
-	protected function renderControlOptionsAdvanced ($value, $optionData, $valueTypeIsArray) {
+	protected function renderControlOptionsAdvanced ($value, $optionData) {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
-		$valueToRender = isset($optionData['value']) 
-			? $optionData['value'] 
-			: ($value === NULL ? '' : $value);
-		if ($valueTypeIsArray) {
-			if (count($this->value) > 0) {
-				$selected = in_array($valueToRender, $this->value, TRUE);
-			} else {
-				$selected = $valueToRender === NULL;
-			}
-		} else {
-			$selected = $this->value === $valueToRender;
-		}
 		$formViewClass = $this->form->GetViewClass();
 		$classStr = isset($optionData['class']) && strlen((string) $optionData['class'])
 			? ' class="' . $optionData['class'] . '"'
@@ -652,14 +647,32 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$attrsStr = isset($optionData['attrs']) 
 			? ' ' . $formViewClass::RenderAttrs($optionData['attrs']) 
 			: '';
+		$valueToRender = array_key_exists('value', $optionData) 
+			? (string) $optionData['value'] 
+			: (string) $value;
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
 		return $formViewClass::Format($templates->option, [
 			'value'		=> htmlspecialchars_decode(htmlspecialchars($valueToRender, ENT_QUOTES), ENT_QUOTES),
-			'selected'	=> $selected ? ' selected="selected"' : '',
+			'selected'	=> $this->getOptionSelected($value) ? ' selected="selected"' : '',
 			'class'		=> $classStr,
 			'attrs'		=> $attrsStr,
 			'text'		=> htmlspecialchars_decode(htmlspecialchars($optionData['text'], ENT_QUOTES), ENT_QUOTES),
 		]);
+	}
+
+	/**
+	 * Get `TRUE` if option value is the same as field value (not for multiple select)
+	 * or get `TRUE` of option value is between field values (for multiple select).
+	 * @param mixed $optionValue 
+	 * @return bool
+	 */
+	protected function getOptionSelected ($optionValue) {
+		$optionValueStr = (string) $optionValue;
+		if ($this->valueIsArray) {
+			return isset($this->valuesMap[$optionValueStr]);
+		} else {
+			return $optionValueStr === $this->valuesMap;
+		}	
 	}
 }
