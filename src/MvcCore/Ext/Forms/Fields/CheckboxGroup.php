@@ -94,7 +94,8 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * `NULL` by default.
 	 * @var string
 	 */
-	protected $jsSupportingFile = \MvcCore\Ext\IForm::FORM_ASSETS_DIR_REPLACEMENT . '/fields/checkbox-group.js';
+	#protected $jsSupportingFile = \MvcCore\Ext\IForm::FORM_ASSETS_DIR_REPLACEMENT . '/fields/checkbox-group.js';
+	protected $jsSupportingFile = '__MVCCORE_FORM_ASSETS_DIR__/fields/checkbox-group.js'; // PHP 5.4 compatible
 
 	/**
 	 * Maximum options specific css class for supporting javascript code.
