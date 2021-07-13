@@ -96,7 +96,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 * if submitted value is `NULL`. Add error if submitted value
 	 * is not the same as value after existence check.
 	 * @param  string|array          $rawSubmittedValue
-	 * @return string|\string[]|NULL Safe submitted value or `NULL` if not possible to return safe value.
+	 * @return string|\string[]|\int|\int[]|\float|\float[]|NULL Safe submitted value or `NULL` if not possible to return safe value.
 	 */
 	public function Validate ($rawSubmittedValue) {
 		$submittedValue = $this->getSubmittedValueCorrectType($rawSubmittedValue);
@@ -119,7 +119,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 * Return safe value(s), which exist(s) in field options
 	 * and return boolean (`TRUE`) if result is array or not.
 	 * Example: `list($safeValue, $multiple) = $this->completeSafeValueByOptions($submittedValue);`;
-	 * @param  string|\string[] $submittedValue
+	 * @param  string|\string[]|\int|\int[]|\float|\float[]|NULL $submittedValue
 	 * @return array
 	 */
 	protected function completeSafeValueByOptions ($submittedValue) {
@@ -130,16 +130,25 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 		} else {
 			$flattenOptions = $this->GetFlattenOptions($this->options);
 		}
+		$flattenOptionsKeys = array_keys($flattenOptions);
 		if ($this->multiple) {
 			$result = [];
 			foreach ($submittedValue as & $submittedValueItem) {
-				if (array_key_exists($submittedValueItem, $flattenOptions))
-					$result[] = $submittedValueItem;
+				if (array_key_exists($submittedValueItem, $flattenOptions)) {
+					$keyPosition = array_search($submittedValueItem, $flattenOptionsKeys, FALSE);
+					//$result[] = $submittedValueItem;
+					// do not return submitted string but real option key type:
+					$result[] = $flattenOptionsKeys[$keyPosition];
+				}
 			}
 		} else {
 			$result = NULL;
-			if (array_key_exists($submittedValue, $flattenOptions))
-				$result = $submittedValue;
+			if (array_key_exists($submittedValue, $flattenOptions)) {
+				$keyPosition = array_search($submittedValue, $flattenOptionsKeys, FALSE);
+				//$result = $submittedValue;
+				// do not return submitted string but real option key type:
+				$result = $flattenOptionsKeys[$keyPosition];
+			}
 		}
 		return $result;
 	}
