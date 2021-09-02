@@ -310,17 +310,18 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		if (!$this->form->GetFormTagRenderingStatus()) 
 			$attrsStr .= (strlen($attrsStr) > 0 ? ' ' : '')
 				. 'form="' . $this->form->GetId() . '"';
-		$viewClass = $this->form->GetViewClass();
+		$formViewClass = $this->form->GetViewClass();
+		$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
 		if ($this->checked === NULL) 
 			$this->checked = static::GetCheckedByValue($this->value);
-		$valueStr = htmlspecialchars_decode(htmlspecialchars($this->value, ENT_QUOTES), ENT_QUOTES);
+		$valueStr = $view->EscapeAttr($this->value);
 		if (!$valueStr || $this->boolMode) 
 			$valueStr = 'true';
 		if ($this->checked) 
 			$valueStr .= '" checked="checked';
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
-		$result = $viewClass::Format($templates->control, [
+		$result = $formViewClass::Format($templates->control, [
 			'id'		=> $this->id,
 			'name'		=> $this->name,
 			'value'		=> $valueStr,

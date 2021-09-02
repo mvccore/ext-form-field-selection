@@ -44,7 +44,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.1.13';
+	const VERSION = '5.1.14';
 
 	/**
 	 * Possible value: `select`, not used in HTML code for this field.
@@ -548,9 +548,10 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		// render null options text if necessary:
 		if ($this->nullOptionText !== NULL && mb_strlen((string) $this->nullOptionText) > 0) {
 			// advanced configuration with key, text, css class, and any other attributes for single option tag
+			$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
 			$result .= $this->renderControlOptionsAdvanced(NULL, [
 				'value'	=> NULL,
-				'text'	=> htmlspecialchars_decode(htmlspecialchars($this->nullOptionText, ENT_QUOTES), ENT_QUOTES),
+				'text'	=> $view->EscapeHtml($this->nullOptionText),
 				//'attrs'	=> ['disabled' => 'disabled'] // this will cause the browser to select the first allowed option automatically 
 			]);
 		}
@@ -588,12 +589,13 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	protected function renderControlOptionKeyValue ($value, & $text) {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		$formViewClass = $this->form->GetViewClass();
+		$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
 		return $formViewClass::Format($templates->option, [
-			'value'		=> htmlspecialchars_decode(htmlspecialchars((string) $value, ENT_QUOTES), ENT_QUOTES),
+			'value'		=> $view->EscapeAttr((string) $value),
 			'selected'	=> $this->getOptionSelected($value) ? ' selected="selected"' : '',
-			'text'		=> htmlspecialchars_decode(htmlspecialchars($text, ENT_QUOTES), ENT_QUOTES),
+			'text'		=> $view->EscapeHtml($text),
 			'class'		=> '', // to fill prepared template control place for attribute class with empty string
 			'attrs'		=> '', // to fill prepared template control place for other attributes with empty string
 		]);
@@ -621,6 +623,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			: NULL;
 		if (!$optionsStr && !$label) return '';
 		$formViewClass = $this->form->GetViewClass();
+		$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
 		$classStr = isset($optionsGroup['class']) && strlen((string) $optionsGroup['class'])
 			? ' class="' . $optionsGroup['class'] . '"'
 			: '';
@@ -631,7 +634,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$templates = static::$templates;
 		return $formViewClass::Format($templates->optionsGroup, [
 			'options'	=> $optionsStr,
-			'label'		=> ' label="' . $label. '"',
+			'label'		=> ' label="' . $view->EscapeAttr($label) . '"',
 			'class'		=> $classStr,
 			'attrs'		=> $attrsStr
 		]);
@@ -648,6 +651,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	protected function renderControlOptionsAdvanced ($value, $optionData) {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		$formViewClass = $this->form->GetViewClass();
+		$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
 		$classStr = isset($optionData['class']) && strlen((string) $optionData['class'])
 			? ' class="' . $optionData['class'] . '"'
 			: '';
@@ -660,11 +664,11 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
 		return $formViewClass::Format($templates->option, [
-			'value'		=> htmlspecialchars_decode(htmlspecialchars($valueToRender, ENT_QUOTES), ENT_QUOTES),
+			'value'		=> $view->EscapeAttr($valueToRender),
 			'selected'	=> $this->getOptionSelected($value) ? ' selected="selected"' : '',
 			'class'		=> $classStr,
 			'attrs'		=> $attrsStr,
-			'text'		=> htmlspecialchars_decode(htmlspecialchars($optionData['text'], ENT_QUOTES), ENT_QUOTES),
+			'text'		=> $view->EscapeHtml($optionData['text']),
 		]);
 	}
 
