@@ -44,8 +44,8 @@ implements	\MvcCore\Ext\Forms\Fields\IMultiple,
 	 * @var array
 	 */
 	protected static $fieldSpecificProperties = [
-		'multiple'	=> NULL,
-		'options'	=> NULL,
+		'multiple'		=> NULL,
+		'options'		=> NULL,
 	];
 	
 
