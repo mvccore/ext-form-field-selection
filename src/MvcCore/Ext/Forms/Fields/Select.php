@@ -407,22 +407,6 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	}
 
 	/**
-	 * Return field specific data for validator.
-	 * @param  array $fieldPropsDefaultValidValues 
-	 * @return array
-	 */
-	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
-		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
-		$result = [
-			'multiple'		=> $this->multiple, 
-			'options'		=> & $this->options, 
-			'minOptions'	=> $this->minOptions,
-			'maxOptions'	=> $this->maxOptions,
-		];
-		return $result;
-	}
-
-	/**
 	 * This INTERNAL method is called from `\MvcCore\Ext\Form` just before
 	 * field is naturally rendered. It sets up field for rendering process.
 	 * Do not use this method even if you don't develop any form field.
