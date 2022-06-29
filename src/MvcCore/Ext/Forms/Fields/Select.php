@@ -483,7 +483,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	public function RenderControl () {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		$optionsStr = $this->RenderControlOptions();
-		$attrsStr = $this->renderControlAttrsWithFieldVars([
+		$attrsStr = $this->RenderControlAttrsWithFieldVars([
 			'autoComplete',
 		]);
 		if ($this->multiple) {

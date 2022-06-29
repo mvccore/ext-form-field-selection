@@ -454,7 +454,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 		$this->required = FALSE;
 		if ($optionType == 'string') {
 			$itemLabelText = $option ? $option : $key;
-			$labelAttrsStr = $this->renderLabelAttrsWithFieldVars();
+			$labelAttrsStr = $this->RenderLabelAttrsWithFieldVars();
 			$controlAttrsMerged = $this->controlAttrs;
 			if ($this->minOptions !== NULL)
 				$controlAttrsMerged = array_merge($controlAttrsMerged, ['data-min-selected-options' => $this->minOptions,]);
