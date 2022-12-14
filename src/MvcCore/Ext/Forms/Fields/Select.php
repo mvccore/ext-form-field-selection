@@ -44,7 +44,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.1.17';
+	const VERSION = '5.1.18';
 
 	/**
 	 * Possible value: `select`, not used in HTML code for this field.
@@ -425,19 +425,20 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$this->preDispatchNullOptionText();
 		if (!$this->translateOptions) return;
 		$form = $this->form;
-		foreach ($this->options as $key => & $value) {
+		foreach ($this->options as $key => $value) {
 			if (is_scalar($value)) { // string|int|float|bool
 				// most simple key/value array options configuration
 				if ($value) 
-					$options[$key] = $form->Translate((string) $value);
+					$this->options[$key] = $form->Translate((string) $value);
 			} else if (is_array($value)) {
 				if (isset($value['options']) && is_array($value['options'])) {
 					// `<optgroup>` options configuration
 					$this->preDispatchTranslateOptionOptGroup($value);
+					$this->options[$key] = $value;
 				} else {
 					// advanced configuration with key, text, css class, and any other attributes for single option tag
 					$valueText = isset($value['text']) ? $value['text'] : $key;
-					if ($valueText) $value['text'] = $form->Translate((string) $valueText);
+					$this->options[$key]['text'] = $form->Translate((string) $valueText);
 				}
 			}
 		}
@@ -458,7 +459,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$groupOptions = $optionsGroup['options'] 
 			? $optionsGroup['options'] 
 			: [];
-		foreach ($groupOptions as $key => & $groupOption) {
+		foreach ($groupOptions as $key => $groupOption) {
 			if (is_scalar($groupOption)) {
 				// most simple key/value array options configuration
 				if ($groupOption) 
@@ -466,7 +467,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			} else if (is_array($groupOption)) {
 				// advanced configuration with key, text, CSS class, and any other attributes for single option tag
 				$valueText = isset($groupOption['text']) ? $groupOption['text'] : $key;
-				if ($valueText) $groupOption['text'] = $form->Translate((string) $valueText);
+				$optionsGroup['options'][$key]['text'] = $form->Translate((string) $valueText);
 			}
 		}
 	}
