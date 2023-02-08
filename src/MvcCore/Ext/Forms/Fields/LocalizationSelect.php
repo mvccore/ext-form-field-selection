@@ -662,11 +662,12 @@ class LocalizationSelect extends \MvcCore\Ext\Forms\Fields\Select {
 	 * - lower language code
 	 * - (optional alphabetical code in pascal case)
 	 * - upper case country code
-	 * @param  string $rawLocalizationCode 
-	 * @return string
+	 * @param  string|NULL $rawLocalizationCode 
+	 * @return string|NULL
 	 */
 	protected static function normalizeLocalizationCode ($rawLocalizationCode) {
 		/** @var \MvcCore\Ext\Forms\Fields\LocalizationSelect $this */
+		if ($rawLocalizationCode === NULL) return NULL;
 		$explodedValues = explode('_', str_replace('-', '_', $rawLocalizationCode));
 		$explodedValuesCount = count($explodedValues);
 		if ($explodedValuesCount === 3) 

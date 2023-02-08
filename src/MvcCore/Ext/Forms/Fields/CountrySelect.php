@@ -134,7 +134,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 
 	/**
 	 * Return country code in upper case.
-	 * @return string
+	 * @return string|NULL
 	 */
 	public function GetValue () {
 		/** @var \MvcCore\Ext\Forms\Fields\CountrySelect $this */
@@ -143,12 +143,12 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 
 	/**
 	 * Set country code value. Given country code will be automatically converted to upper case.
-	 * @param  string $countryCode 
+	 * @param  string|NULL $countryCode 
 	 * @return \MvcCore\Ext\Forms\Fields\CountrySelect
 	 */
 	public function SetValue ($countryCode) {
 		/** @var \MvcCore\Ext\Forms\Fields\CountrySelect $this */
-		$this->value = strtoupper($countryCode);
+		$this->value = $countryCode !== NULL ? strtoupper($countryCode) : NULL;
 		return $this;
 	}
 
