@@ -44,7 +44,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.1.19';
+	const VERSION = '5.2.0';
 
 	/**
 	 * Possible value: `select`, not used in HTML code for this field.
@@ -361,7 +361,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		$multiple = NULL,
 		array $options = [],
 		$translateOptions = TRUE,
-		array $optionsLoader = [],
+		$optionsLoader = [],
 		$minOptions = NULL,
 		$maxOptions = NULL,
 		$nullOptionText = NULL,

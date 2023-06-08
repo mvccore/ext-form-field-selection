@@ -444,7 +444,7 @@ class CountrySelect extends \MvcCore\Ext\Forms\Fields\Select {
 		$multiple = NULL,
 		array $options = [],
 		$translateOptions = TRUE,
-		array $optionsLoader = [],
+		$optionsLoader = [],
 		$minOptions = NULL,
 		$maxOptions = NULL,
 		$nullOptionText = NULL,

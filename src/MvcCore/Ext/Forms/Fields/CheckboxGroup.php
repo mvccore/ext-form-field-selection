@@ -322,7 +322,7 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 
 		array $options = [],
 		$translateOptions = TRUE,
-		array $optionsLoader = [],
+		$optionsLoader = [],
 
 		array $groupLabelCssClasses = [],
 

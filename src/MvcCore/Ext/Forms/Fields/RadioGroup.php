@@ -277,7 +277,7 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 
 		array $options = [],
 		$translateOptions = TRUE,
-		array $optionsLoader = [],
+		$optionsLoader = [],
 
 		array $groupLabelCssClasses = [],
 
