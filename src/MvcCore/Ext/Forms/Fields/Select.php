@@ -44,7 +44,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.2.0';
+	const VERSION = '5.2.1';
 
 	/**
 	 * Possible value: `select`, not used in HTML code for this field.
@@ -484,12 +484,13 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	public function RenderControl () {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		$optionsStr = $this->RenderControlOptions();
-		$attrsStr = $this->RenderControlAttrsWithFieldVars([
-			'autoComplete',
-		]);
+		$attrsStrItems = [
+			$this->RenderControlAttrsWithFieldVars([
+				'autoComplete',
+			])
+		];
 		if ($this->multiple) {
-			$attrsStr .= (strlen($attrsStr) > 0 ? ' ' : '')
-				. 'multiple="multiple"';
+			$attrsStrItems[] = 'multiple="multiple"';
 			$name = $this->name . '[]';
 			$size = $this->size !== NULL ? ' size="' . $this->size . '"' : '';
 		} else {
@@ -497,8 +498,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			$size = '';
 		}
 		if (!$this->form->GetFormTagRenderingStatus()) 
-			$attrsStr .= (strlen($attrsStr) > 0 ? ' ' : '')
-				. 'form="' . $this->form->GetId() . '"';
+			$attrsStrItems[] = 'form="' . $this->form->GetId() . '"';
 		$formViewClass = $this->form->GetViewClass();
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
@@ -507,7 +507,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			'name'		=> $name,
 			'size'		=> $size,
 			'options'	=> $optionsStr,
-			'attrs'		=> strlen($attrsStr) > 0 ? ' ' . $attrsStr : '',
+			'attrs'		=> count($attrsStrItems) > 0 ? ' ' . implode(' ', $attrsStrItems) : '',
 		]);
 		return $this->renderControlWrapper($result);
 	}
@@ -613,7 +613,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			? ' class="' . $optionsGroup['class'] . '"'
 			: '';
 		$attrsStr = isset($optionsGroup['attrs']) 
-			? ' ' . $formViewClass::RenderAttrs($optionsGroup['attrs']) 
+			? ' ' . $formViewClass::RenderAttrs($optionsGroup['attrs'], $view->EscapeAttr) 
 			: '';
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
@@ -641,7 +641,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			? ' class="' . $optionData['class'] . '"'
 			: '';
 		$attrsStr = isset($optionData['attrs']) 
-			? ' ' . $formViewClass::RenderAttrs($optionData['attrs']) 
+			? ' ' . $formViewClass::RenderAttrs($optionData['attrs'], $view->EscapeAttr) 
 			: '';
 		$valueToRender = array_key_exists('value', $optionData) 
 			? (string) $optionData['value'] 

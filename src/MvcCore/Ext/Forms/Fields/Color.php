@@ -266,13 +266,14 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return string
 	 */
 	public function RenderControl () {
-		$attrsStr = $this->RenderControlAttrsWithFieldVars([
-			'list',
-			'autoComplete',
-		]);
+		$attrsStrItems = [
+			$this->RenderControlAttrsWithFieldVars([
+				'list',
+				'autoComplete',
+			])
+		];
 		if (!$this->form->GetFormTagRenderingStatus()) 
-			$attrsStr .= (strlen($attrsStr) > 0 ? ' ' : '')
-				. 'form="' . $this->form->GetId() . '"';
+			$attrsStrItems[] = 'form="' . $this->form->GetId() . '"';
 		$formViewClass = $this->form->GetViewClass();
 		$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
 		/** @var \stdClass $templates */
@@ -282,7 +283,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			'name'		=> $this->name,
 			'type'		=> $this->type,
 			'value'		=> $view->EscapeAttr($this->value),
-			'attrs'		=> strlen($attrsStr) > 0 ? ' ' . $attrsStr : '',
+			'attrs'		=> count($attrsStrItems) > 0 ? ' ' . implode(' ', $attrsStrItems) : '',
 		]);
 		return $this->renderControlWrapper($result);
 	}
