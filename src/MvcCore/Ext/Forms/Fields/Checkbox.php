@@ -274,7 +274,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	}
 
 	/**
-	 * @inheritDocs
+	 * @inheritDoc
 	 * @internal
 	 * @template
 	 * @param array $rawRequestParams Raw request params from MvcCore
