@@ -396,6 +396,8 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		if ($this->form !== NULL) return $this;
 		parent::SetForm($form);
+		if ($this->translateOptions === NULL && $this->translate !== NULL) 
+			$this->translateOptions = $this->translate;
 		$this->setFormLoadOptions();
 		if (!$this->options && !$this->optionsLoader) 
 			$this->throwNewInvalidArgumentException(
@@ -424,24 +426,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		if (!$this->translate) return;
 		$this->preDispatchNullOptionText();
 		if (!$this->translateOptions) return;
-		$form = $this->form;
-		foreach ($this->options as $key => $value) {
-			if (is_scalar($value)) { // string|int|float|bool
-				// most simple key/value array options configuration
-				if ($value) 
-					$this->options[$key] = $form->Translate((string) $value);
-			} else if (is_array($value)) {
-				if (isset($value['options']) && is_array($value['options'])) {
-					// `<optgroup>` options configuration
-					$this->preDispatchTranslateOptionOptGroup($value);
-					$this->options[$key] = $value;
-				} else {
-					// advanced configuration with key, text, css class, and any other attributes for single option tag
-					$valueText = isset($value['text']) ? $value['text'] : $key;
-					$this->options[$key]['text'] = $form->Translate((string) $valueText);
-				}
-			}
-		}
+		$this->preDispatchOptions(TRUE);
 	}
 
 	/**
@@ -522,7 +507,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 */
 	public function RenderControlOptions () {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
-		$result = '';
+		$result = [];
 		// prepare value(s) in string form to detect select option:
 		$this->valueIsArray = is_array($this->value);
 		if ($this->valueIsArray) {
@@ -534,24 +519,24 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		if ($this->nullOptionText !== NULL && mb_strlen((string) $this->nullOptionText) > 0) {
 			// advanced configuration with key, text, css class, and any other attributes for single option tag
 			$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
-			$result .= $this->renderControlOptionsAdvanced(NULL, [
+			$result[] = $this->renderControlOptionsAdvanced(NULL, [
 				'value'	=> NULL,
 				'text'	=> $view->EscapeHtml($this->nullOptionText),
 				//'attrs'	=> ['disabled' => 'disabled'] // this will cause the browser to select the first allowed option automatically 
 			]);
 		}
 		// render all options:
-		foreach ($this->options as $key => & $value) {
+		foreach ($this->options as $key => $value) {
 			if (is_scalar($value)) {
 				// most simple key/value array options configuration
-				$result .= $this->renderControlOptionKeyValue($key, $value);
+				$result[] = $this->renderControlOptionKeyValue($key, $value);
 			} else if (is_array($value)) {
 				if (isset($value['options']) && is_array($value['options'])) {
 					// `<optgroup>` options configuration
-					$result .= $this->renderControlOptionsGroup($value);
+					$result[] = $this->renderControlOptionsGroup($value);
 				} else {
 					// advanced configuration with key, text, cs class, and any other attributes for single option tag
-					$result .= $this->renderControlOptionsAdvanced(
+					$result[] = $this->renderControlOptionsAdvanced(
 						array_key_exists('value', $value) 
 							? $value['value'] 
 							: $key, 
@@ -560,7 +545,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 				}
 			}
 		}
-		return $result;
+		return implode('', $result);
 	}
 	
 	/**
