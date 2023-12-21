@@ -22,6 +22,8 @@ namespace MvcCore\Ext\Forms\Fields;
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 
+	use \MvcCore\Ext\Forms\Field\Props\Wrapper;
+
 	/**
 	 * Possible values: `radio`.
 	 * @var string
@@ -245,6 +247,11 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 	 * Any additional attributes for group label, defined
 	 * as key (for attribute name) and value (for attribute value).
 	 * 
+	 * @param  string                                           $wrapper
+	 * Html code wrapper, wrapper has to contain replacement in string 
+	 * form: `{control}`. Around this substring you can wrap any HTML 
+	 * code you want. Default wrapper values is: `'{control}'`.
+	 * 
 	 * @throws \InvalidArgumentException
 	 * @return void
 	 */
@@ -281,7 +288,9 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 
 		array $groupLabelCssClasses = [],
 
-		array $groupLabelAttrs = []
+		array $groupLabelAttrs = [],
+
+		$wrapper = NULL
 	) {
 		$this->consolidateCfg($cfg, func_get_args(), func_num_args());
 		parent::__construct($cfg);
@@ -289,6 +298,15 @@ class RadioGroup extends \MvcCore\Ext\Forms\FieldsGroup {
 			(array) parent::$templates, 
 			(array) self::$templates
 		);
+	}
+
+	/**
+	 * @inheritDoc
+	 * @internal
+	 * @return string
+	 */
+	public function RenderControl () {
+		return $this->renderControlWrapper(parent::RenderControl());
 	}
 
 }

@@ -28,6 +28,7 @@ class		CheckboxGroup
 extends		\MvcCore\Ext\Forms\FieldsGroup 
 implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 
+	use \MvcCore\Ext\Forms\Field\Props\Wrapper;
 	use \MvcCore\Ext\Forms\Field\Props\MinMaxOptions;
 	
 	/**
@@ -277,6 +278,11 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 	 * Any additional attributes for group label, defined
 	 * as key (for attribute name) and value (for attribute value).
 	 * 
+	 * @param  string                                           $wrapper
+	 * Html code wrapper, wrapper has to contain replacement in string 
+	 * form: `{control}`. Around this substring you can wrap any HTML 
+	 * code you want. Default wrapper values is: `'{control}'`.
+	 * 
 	 * @param  int                                              $minOptions
 	 * Minimum options count to select. 
 	 * Default value is `NULL` to not limit anything.
@@ -327,6 +333,8 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 		array $groupLabelCssClasses = [],
 
 		array $groupLabelAttrs = [],
+		
+		$wrapper = NULL,
 
 		$minOptions = NULL,
 		$maxOptions = NULL,
@@ -433,6 +441,15 @@ implements	\MvcCore\Ext\Forms\Fields\IMinMaxOptions {
 				$this->maxOptionsClassName
 			]
 		);
+	}
+	
+	/**
+	 * @inheritDoc
+	 * @internal
+	 * @return string
+	 */
+	public function RenderControl () {
+		return $this->renderControlWrapper(parent::RenderControl());
 	}
 
 	/**
