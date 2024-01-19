@@ -199,7 +199,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * `username`, `country`, `postal-code` and many more...
 	 * 
 	 * @param  string     $list
-	 * Element `list` attribute value - the `<list>` element `id` attribute value.
+	 * `DataList` form instance or `DataList` field unique name.
 	 * 
 	 * @param  string     $wrapper
 	 * Html code wrapper, wrapper has to contain replacement in string 
@@ -257,6 +257,22 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		parent::PreDispatch();
 		$this->preDispatchTabIndex();
 	}
+	
+	/**
+	 * Return field specific data for validator.
+	 * @param  array $fieldPropsDefaultValidValues 
+	 * @return array
+	 */
+	public function & GetValidatorData ($fieldPropsDefaultValidValues = []) {
+		$result = [];
+		if ($this->list !== NULL) {
+			$result['list'] = $this->list;
+			$listField = $this->form->GetField($this->list);
+			if ($listField instanceof \MvcCore\Ext\Forms\Fields\IOptions) 
+				$result['options'] = $listField->GetOptions();
+		}
+		return $result;
+	}
 
 	/**
 	 * This INTERNAL method is called from `\MvcCore\Ext\Forms\Field\Rendering` 
@@ -266,12 +282,18 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return string
 	 */
 	public function RenderControl () {
+		$listBefore = NULL;
+		if ($this->list !== NULL) {
+			$listBefore = $this->list;
+			$this->list = $this->form->GetField($this->list)->GetId();
+		}
 		$attrsStrItems = [
 			$this->RenderControlAttrsWithFieldVars([
 				'list',
 				'autoComplete',
 			])
 		];
+		$this->list = $listBefore;
 		if (!$this->form->GetFormTagRenderingStatus()) 
 			$attrsStrItems[] = 'form="' . $this->form->GetId() . '"';
 		$formViewClass = $this->form->GetViewClass();
