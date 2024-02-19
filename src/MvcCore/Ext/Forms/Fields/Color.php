@@ -242,6 +242,8 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	) {
 		$this->consolidateCfg($cfg, func_get_args(), func_num_args());
 		parent::__construct($cfg);
+		if ($this->list !== NULL)
+			$this->SetList($this->list);
 	}
 
 	/**
