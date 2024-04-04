@@ -594,11 +594,12 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		if (!$optionsStr && !$label) return '';
 		$formViewClass = $this->form->GetViewClass();
 		$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
+		$escAttrMethod = new \ReflectionMethod($view, 'EscapeAttr');
 		$classStr = isset($optionsGroup['class']) && strlen((string) $optionsGroup['class'])
 			? ' class="' . $optionsGroup['class'] . '"'
 			: '';
 		$attrsStr = isset($optionsGroup['attrs']) 
-			? ' ' . $formViewClass::RenderAttrs($optionsGroup['attrs'], $view->EscapeAttr) 
+			? ' ' . $formViewClass::RenderAttrs($optionsGroup['attrs'], $escAttrMethod->getClosure($view)) 
 			: '';
 		/** @var \stdClass $templates */
 		$templates = static::$templates;
@@ -622,11 +623,12 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		$formViewClass = $this->form->GetViewClass();
 		$view = $this->form->GetView() ?: $this->form->GetController()->GetView();
+		$escAttrMethod = new \ReflectionMethod($view, 'EscapeAttr');
 		$classStr = isset($optionData['class']) && strlen((string) $optionData['class'])
 			? ' class="' . $optionData['class'] . '"'
 			: '';
 		$attrsStr = isset($optionData['attrs']) 
-			? ' ' . $formViewClass::RenderAttrs($optionData['attrs'], $view->EscapeAttr) 
+			? ' ' . $formViewClass::RenderAttrs($optionData['attrs'], $escAttrMethod->getClosure($view)) 
 			: '';
 		$valueToRender = array_key_exists('value', $optionData) 
 			? (string) $optionData['value'] 
