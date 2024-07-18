@@ -268,9 +268,9 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @return void
 	 */
 	public function PreDispatch () {
+		$this->preDispatchChecked();
 		parent::PreDispatch();
 		$this->preDispatchTabIndex();
-		$this->preDispatchChecked();
 	}
 
 	/**
