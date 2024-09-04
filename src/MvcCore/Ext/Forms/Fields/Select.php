@@ -44,7 +44,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.2.7';
+	const VERSION = '5.2.8';
 
 	/**
 	 * Possible value: `select`, not used in HTML code for this field.
@@ -399,7 +399,7 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 		if ($this->translateOptions === NULL && $this->translate !== NULL) 
 			$this->translateOptions = $this->translate;
 		$this->setFormLoadOptions();
-		if (!$this->options && !$this->optionsLoader) 
+		if (!$this->options && !$this->optionsLoader && $this->nullOptionText === NULL) 
 			$this->throwNewInvalidArgumentException(
 				'No `options` property or `optionsLoader` defined.'
 			);
@@ -526,22 +526,24 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			]);
 		}
 		// render all options:
-		foreach ($this->options as $key => $value) {
-			if (is_scalar($value)) {
-				// most simple key/value array options configuration
-				$result[] = $this->renderControlOptionKeyValue($key, $value);
-			} else if (is_array($value)) {
-				if (isset($value['options']) && is_array($value['options'])) {
-					// `<optgroup>` options configuration
-					$result[] = $this->renderControlOptionsGroup($value);
-				} else {
-					// advanced configuration with key, text, cs class, and any other attributes for single option tag
-					$result[] = $this->renderControlOptionsAdvanced(
-						array_key_exists('value', $value) 
-							? $value['value'] 
-							: $key, 
-						$value
-					);
+		if ($this->options !== NULL) {
+			foreach ($this->options as $key => $value) {
+				if (is_scalar($value)) {
+					// most simple key/value array options configuration
+					$result[] = $this->renderControlOptionKeyValue($key, $value);
+				} else if (is_array($value)) {
+					if (isset($value['options']) && is_array($value['options'])) {
+						// `<optgroup>` options configuration
+						$result[] = $this->renderControlOptionsGroup($value);
+					} else {
+						// advanced configuration with key, text, cs class, and any other attributes for single option tag
+						$result[] = $this->renderControlOptionsAdvanced(
+							array_key_exists('value', $value) 
+								? $value['value'] 
+								: $key, 
+							$value
+						);
+					}
 				}
 			}
 		}
