@@ -57,21 +57,6 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	 * @var string|array|NULL
 	 */
 	protected $value = NULL;
-
-	/**
-	 * `TRUE` if value is array type. It's not the same 
-	 * as multiple attribute, because value could be still `NULL`.
-	 * @var bool
-	 */
-	protected $valueIsArray = FALSE;
-
-	/**
-	 * Internal property to detect selected option for rendering.
-	 * It's array with keys by multiple field values converted into strings 
-	 * (array values are bool `TRUE`) or just scalar value converted into string.
-	 * @var array|string|NULL
-	 */
-	protected $valuesMap = NULL;
 	
 	/**
 	 * Validators: 
@@ -508,13 +493,6 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 	public function RenderControlOptions () {
 		/** @var \MvcCore\Ext\Forms\Fields\Select $this */
 		$result = [];
-		// prepare value(s) in string form to detect select option:
-		$this->valueIsArray = is_array($this->value);
-		if ($this->valueIsArray) {
-			$this->valuesMap = array_fill_keys(array_map('strval', $this->value), TRUE);
-		} else {
-			$this->valuesMap = (string) $this->value;
-		}
 		// render null options text if necessary:
 		if ($this->nullOptionText !== NULL && mb_strlen((string) $this->nullOptionText) > 0) {
 			// advanced configuration with key, text, css class, and any other attributes for single option tag
@@ -644,20 +622,5 @@ implements	\MvcCore\Ext\Forms\Fields\IVisibleField,
 			'attrs'		=> $attrsStr,
 			'text'		=> $view->EscapeHtml($optionData['text']),
 		]);
-	}
-
-	/**
-	 * Get `TRUE` if option value is the same as field value (not for multiple select)
-	 * or get `TRUE` of option value is between field values (for multiple select).
-	 * @param mixed $optionValue 
-	 * @return bool
-	 */
-	protected function getOptionSelected ($optionValue) {
-		$optionValueStr = (string) $optionValue;
-		if ($this->valueIsArray) {
-			return isset($this->valuesMap[$optionValueStr]);
-		} else {
-			return $optionValueStr === $this->valuesMap;
-		}	
 	}
 }
