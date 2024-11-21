@@ -41,8 +41,8 @@
 	}],
 	"require": {
 		"php": ">=5.4.0",
-		"mvccore/mvccore": "^5.2.28",
-		"mvccore/ext-form": "^5.2.28"
+		"mvccore/mvccore": "^5.3",
+		"mvccore/ext-form": "^5.3"
 	},
 	"autoload": {
 		"classmap": [
